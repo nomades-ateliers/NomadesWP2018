@@ -37,6 +37,11 @@ export class AppConfigService {
     return this._http.get(this._wpBase + 'config')
     .toPromise()
     .then((data: any) => this.config = data)
+    .then(config =>  {
+      // console.log('wp' + config.template_directory.split('/wp')[1]);
+      config.template_directory = 'wp' + config.template_directory.split('/wp')[1];
+      return config;
+    })
     // .then(_ => this.loadRoutes())
     .catch((err: any) => Promise.reject(err));
   }
