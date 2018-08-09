@@ -1,9 +1,21 @@
-<div class="site-branding">
-  <p class="site-title"><a href="{{config?.site_url}}" rel="home">{{config?.site_title}}</a></p>
-  <p class="site-description">{{config?.site_description}}</p>
-</div>
 <nav>
   <div id="primary-menu" class="menu">
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+            <h1>{{config?.site_title}}</h1>
+          </ion-col>
+          <ion-col col-2>
+            <img src="{{config?.template_directory}}/imgs/logo-nomades.png" alt="">
+          </ion-col>
+          <ion-col>
+            <span class="titre_right">{{config?.site_description}}</span>
+          </ion-col>
+        </ion-row>
+      <ion-row>
+
+      </ion-row>
+    </ion-grid>
     <ul class="menu">
       <li (click)="goPage({url: 'index'})">Index</li>
       <li *ngFor="let item of menu" (click)="goPage(item)">{{ item.title }}</li>
