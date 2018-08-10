@@ -1,4 +1,4 @@
-nav {
+#app-header {
   position:relative;
   display: block;
   width: 100%;
@@ -20,9 +20,9 @@ nav {
     font-size: 18px;
     font-family: "AkzidenzGrotesk-Light",Arial,Helvetica,sans-serif;
     line-height: 1.5em;
-    border-left: 1px solid #c33a32;
-    padding-left: 30px;
-    padding-bottom: 2px;
+    // border-left: 1px solid #c33a32;
+    // padding-left: 30px;
+    // padding-bottom: 2px;
     position: relative;
     letter-spacing: 0.01em;
     margin-left: 0px;
@@ -43,6 +43,24 @@ nav {
   .nav_container {
     min-height: 48px;
   }
+
+  .nav-header {
+    color: #c33a32;
+    margin-bottom: 1rem;
+    ion-col.border {
+      border-left: 1px solid #c33a32;
+    }    
+  }
+  .nav-primary {
+    padding-bottom: 2rem;
+    ion-col.border {
+      border-left: 1px solid #717073;
+    }    
+  }
+
+
+
+
   .nav_menu {
     //z-index: 9999;
     //transition: 300ms all ease-in-out;

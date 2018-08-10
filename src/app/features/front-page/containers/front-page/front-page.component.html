@@ -1,7 +1,6 @@
-<ion-header>
-  <app-menu-nav></app-menu-nav>
-</ion-header>
 <ion-content>
+  <app-menu-nav></app-menu-nav>
+  <app-header-people [baseUrl]="baseUrl"></app-header-people>
   front page 
   <div *ngIf="data$ | async as front;">
     <h1 [innerHTML]="front?.title?.rendered"></h1>

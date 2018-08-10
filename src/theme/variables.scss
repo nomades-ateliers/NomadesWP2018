@@ -87,3 +87,8 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
   --ion-color-dark-shade: #1e1e1e;
   --ion-color-dark-tint: #383838;
 }
+
+
+.header-md::after {
+  background: none;
+}

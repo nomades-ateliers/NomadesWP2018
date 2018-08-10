@@ -205,3 +205,6 @@ add_filter( "rest_post_collection_params", function($query_params, $post_type){
                 );
                 return $query_params;
             }, 10, 2);
+
+
+require get_template_directory() . '/inc/api_formations.php';

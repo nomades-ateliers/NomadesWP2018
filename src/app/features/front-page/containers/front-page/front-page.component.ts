@@ -11,7 +11,7 @@ import { WpApiService } from '@app/shared/services';
 export class FrontPageComponent implements OnInit {
 
   public data$: Observable<any>;
-
+  baseUrl = 'https://nomades.ch/wp-content/themes/theme_nomades';
   constructor(private _wpApi: WpApiService) { }
 
   ngOnInit() {

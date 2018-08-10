@@ -1,24 +1,55 @@
-<nav>
+<div id="app-header">
   <div id="primary-menu" class="menu">
     <ion-grid>
-        <ion-row>
-          <ion-col>
-            <h1>{{config?.site_title}}</h1>
-          </ion-col>
-          <ion-col col-2>
-            <img src="{{config?.template_directory}}/imgs/logo-nomades.png" alt="">
-          </ion-col>
-          <ion-col>
-            <span class="titre_right">{{config?.site_description}}</span>
-          </ion-col>
-        </ion-row>
-      <ion-row>
+
+      <ion-row class="nav-header">
+        <ion-col class="border">
+          <h1>{{config?.site_title}}</h1>
+        </ion-col>
+        <ion-col col-2>
+          <img src="{{config?.template_directory}}/imgs/logo-nomades.png" alt="">
+        </ion-col>
+        <ion-col class="border">
+          <span>{{config?.site_description}}</span>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="nav-primary">
+        <ion-col class="border">
+            formations diplômantes
+        </ion-col>
+        <ion-col class="border">
+            projets
+        </ion-col>
+        <ion-col class="border">
+            workshops
+        </ion-col>
+        <ion-col class="border">
+            contact
+        </ion-col>
+
+        <!-- <ion-col class="nav_container">
+          <nav class="navigation nav_menu">
+            <ul class="_L_larger_site content_menu clearfix">
+              <li><a #link href="#formations">formations diplômantes</a>
+                <ul>
+                  <li><a #link href="##front-end"> intégrateur web | front-end developer</a></li>
+                  <li><a #link href="##back-end"> back-end developer | mobile applications developer</a></li>
+                </ul>
+              </li>
+              <li class="link_projets"><a #link href="#students-projects">projets</a></li>
+              <li><a #link href="#workshops">workshops</a></li>
+              <li class="link_contact"><a #link href="#contact">contact</a></li>
+            </ul>
+          </nav>
+        </ion-col> -->
 
       </ion-row>
+
     </ion-grid>
-    <ul class="menu">
+    <!-- <ul class="menu">
       <li (click)="goPage({url: 'index'})">Index</li>
       <li *ngFor="let item of menu" (click)="goPage(item)">{{ item.title }}</li>
-    </ul>
+    </ul> -->
   </div>
-</nav><!-- #site-navigation -->
+</div><!-- #site-navigation -->

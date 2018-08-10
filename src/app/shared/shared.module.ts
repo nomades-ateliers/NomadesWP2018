@@ -4,9 +4,11 @@ import { PipesModule } from './pipes';
 import { WpApiService } from './services';
 import { CommonModule } from '@angular/common';
 import { MenuNavModule } from './menu-nav/menu-nav.module';
+import { HeaderPeopleComponent } from './components/header-people/header-people.component';
 
 const SHARED_COMPONENTS: any[] = [
   // add your shared component here
+  HeaderPeopleComponent
 ];
 const SHARED_SERVICES: any[] = [
   // add your shared services here
@@ -33,7 +35,7 @@ const SHARED_EXPORT_MODULES: any[] = [
     ...SHARED_SERVICES
   ],
   declarations: [
-    ...SHARED_COMPONENTS
+    ...SHARED_COMPONENTS,
   ],
   exports: [
     ...SHARED_EXPORT_MODULES
