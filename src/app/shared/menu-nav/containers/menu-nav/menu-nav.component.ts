@@ -1,11 +1,12 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { AppConfig } from '@app/app.module';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-nav',
   templateUrl: './menu-nav.component.html',
-  styleUrls: ['./menu-nav.component.scss']
+  styleUrls: ['./menu-nav.component.scss'],
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class MenuNavComponent implements OnInit {
 

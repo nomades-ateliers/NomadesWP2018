@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { WpApiService } from '@app/shared/services';
@@ -6,7 +6,8 @@ import { WpApiService } from '@app/shared/services';
 @Component({
   selector: 'app-front-page',
   templateUrl: './front-page.component.html',
-  styleUrls: ['./front-page.component.scss']
+  styleUrls: ['./front-page.component.scss'],
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class FrontPageComponent implements OnInit {
 
