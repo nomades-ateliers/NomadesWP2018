@@ -1,9 +1,8 @@
 {
   "/wp": {
     "target": {
-        "host": "localhost",
-        "protocol": "http:",
-        "port": 8888
+        "host": "nomades.ch",
+        "protocol": "https:"
     },
     "secure": false,
     "changeOrigin": true

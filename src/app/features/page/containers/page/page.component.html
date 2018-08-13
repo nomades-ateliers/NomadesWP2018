@@ -2,8 +2,22 @@
   <app-menu-nav></app-menu-nav>
 </ion-header>
 <ion-content>
-  <p>
-    page single works!
-  </p>
+  page single works!
+  <div *ngIf="data$ | async as page;">
+    <section>
+      <figure *ngIf="page?.featured_image_src_large">
+        <picture>
+          <img [src]="page?.featured_image_src_large" alt="{{page?.title?.rendered}}" title="{{page?.title?.rendered}}">
+        </picture>
+      </figure>
+      <header class="entry-header">
+        <h1 [innerHTML]="page?.title?.rendered"></h1>
+        <div class="entry-meta"></div><!-- .entry-meta -->
+      </header><!-- .entry-header -->
+      <div [innerHTML]="page?.content?.rendered"></div>
+  
+    </section>
+  
+  </div>
 </ion-content>
 

@@ -38,6 +38,9 @@ export function configServiceFactory(injector: Injector, configService: AppConfi
     .then(res => {
       const router: Router = injector.get(Router);
       console.log(configService.getConfig());
+      if (!res) {
+        return;
+      }
       const configRoutes = (configService.getConfig().pages)
       .filter((item: any) => !routes.map(r => r.path).includes(item.slug))
       .map(

@@ -7,15 +7,20 @@
           <h1>{{config?.site_title}}</h1>
         </ion-col>
         <ion-col col-2>
-          <img src="{{config?.template_directory}}/imgs/logo-nomades.png" alt="">
+          <!-- <img src="{{config?.template_directory}}/imgs/logo-nomades.png" alt=""> -->
+          <img src="https://nomades.ch/wp-content/themes/theme_nomades/images/logo-nomades.png" alt="">
         </ion-col>
         <ion-col class="border">
           <span>{{config?.site_description}}</span>
         </ion-col>
       </ion-row>
 
+      <!-- {{menu|json}} -->
       <ion-row class="nav-primary">
-        <ion-col class="border">
+        <ion-col *ngFor="let item of menu" (click)="goPage(item)" class="border">
+            {{item?.title}}
+        </ion-col>
+        <!-- <ion-col class="border">
             formations diplômantes
         </ion-col>
         <ion-col class="border">
@@ -26,7 +31,7 @@
         </ion-col>
         <ion-col class="border">
             contact
-        </ion-col>
+        </ion-col> -->
 
         <!-- <ion-col class="nav_container">
           <nav class="navigation nav_menu">
