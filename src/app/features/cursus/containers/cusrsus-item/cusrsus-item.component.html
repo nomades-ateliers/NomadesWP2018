@@ -1,0 +1,55 @@
+<ion-content>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+          <app-menu-nav></app-menu-nav>
+          <app-header-people [baseUrl]="baseUrl"></app-header-people>
+          <app-adress></app-adress>
+          <app-slogan></app-slogan>
+          <div *ngIf="data$ | async as front;">
+            <div [innerHTML]="front?.content?.rendered|safeHtml "></div>
+          </div>
+      </ion-col>
+    </ion-row>
+    <div class="cursus" *ngFor="let c of cursus$|async">
+      <ion-row justify-content-start>
+        <ion-col align-self-start [ngClass]="{
+            col: true,
+            front: c?.name.toLowerCase().includes('front'),
+            back: c?.name.toLowerCase().includes('back'),
+            active: c.link.split('cursus/').reverse()[0] === currentRoute
+        }" (click)="go(c.link.split('cursus/').reverse()[0])">{{c?.name}}</ion-col>
+      </ion-row> 
+      <div *ngIf="c.link.split('cursus/').reverse()[0] === currentRoute">
+        <ion-row margin-bottom margin-top justify-content-start *ngFor="let f of (currentRoute.includes('front')) ? (frontEndFormations$|async) : (backEndFormations$|async);">
+          <ion-grid fixed margin-bottom>
+                <ion-row padding margin-top justify-content-start>
+                  <ion-col align-self-start text-start>
+                    <span>{{f?.t_formation_b1}}</span>
+                    <h2>{{f?.title?.rendered}}</h2>
+                  </ion-col>            
+                </ion-row>
+                <ion-row margin-bottom>
+                  <ion-col size-xs="12" size-md="6" size-lg="3" *ngIf="f?.content_block_formation_1.length > 0">
+                      <app-item-card [curcus]="{title: {rendered: f?.content_block_formation_1 }}"></app-item-card>
+                  </ion-col>
+                  <ion-col size-xs="12" size-md="6" size-lg="3" *ngIf="f?.content_block_formation_2.length > 0">
+                      <app-item-card [curcus]="{title: {rendered: f?.content_block_formation_2 }}"></app-item-card>
+                  </ion-col>
+                  <ion-col size-xs="12" size-md="6" size-lg="3" *ngIf="f?.content_block_formation_3.length > 0">
+                      <app-item-card [curcus]="{title: {rendered: f?.content_block_formation_3 }}"></app-item-card>
+                  </ion-col>
+                  <ion-col size-xs="12" size-md="6" size-lg="3" *ngIf="f?.content_block_formation_4.length > 0">
+                      <app-item-card [curcus]="{title: {rendered: f?.content_block_formation_4 }}"></app-item-card>
+                  </ion-col>
+                  <ion-col size-xs="12" size-md="6" size-lg="3" *ngIf="!f?.content_block_formation_4.length > 0">
+                      <p>Prochaines dates:</p>
+                  </ion-col>
+                </ion-row>
+          </ion-grid>
+        </ion-row>        
+      </div>
+    </div>
+
+  </ion-grid>
+</ion-content>

@@ -5,6 +5,8 @@ import { AppConfigService } from '@app/app-config.service';
 const routes: Routes = [
   { path: '', redirectTo: 'index', pathMatch: 'full' },
   { path: 'index', loadChildren: './features/front-page/front-page.module#FrontPageModule'},
+  { path: 'formations', loadChildren: './features/formations/formations.module#FormationsModule'},
+  { path: 'cursus', loadChildren: './features/cursus/cursus.module#CursusModule'},
   { path: 'blog', loadChildren: './features/blog/blog.module#BlogModule'},
   { path: 'page', loadChildren: './features/page/page.module#PageModule'},
   { path: '404', loadChildren: './features/not-found/not-found.module#NotFoundModule'},

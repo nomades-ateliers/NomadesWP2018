@@ -62,9 +62,21 @@ export class AppConfigService {
         .pipe(map((res: Response) => res))
         .toPromise()
         .then(async (data: any) => {
-          this.config.pages = data;
+          this.config.pages = [...(this.config.pages || []), ...data];
           this._promiseDone = true;
           return await this.config;
+        })
+        .then(config => {
+          this.config.pages = [
+            ...(this.config.pages || []),
+            {
+                slug: 'cursus', title: {
+                rendered: 'Cursus'
+              }
+            }
+          ];
+
+          return config;
         })
         .catch((err: any) => { this._promiseDone = true; return Promise.resolve(); });
     return this._promise;

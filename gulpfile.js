@@ -43,7 +43,11 @@ gulp.task('php', function () {
 });
 // Task to copy reste of WP files in desDir
 gulp.task('wpfile', function () {
-  return gulp.src(['./**/*.pot', './screenshot.png'])
+  return gulp.src([
+    './**/*.pot',
+    './screenshot.png',
+    './wordpress/**/*.css',
+  ])
     .pipe(gulp.dest(desDir))
 });
 

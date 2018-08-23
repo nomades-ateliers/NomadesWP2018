@@ -5,7 +5,7 @@
   "homepage": "https://nomades.ch/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json -o & npm run gulp:dev",
+    "start": "ng serve --proxy-config proxy.conf.json & npm run gulp:dev",
     "build": "ng build --prod --deploy-url='wp-content/themes/NomadesWP2018/js/' --output-hashing none && npm run gulp:prod",
     "gulp:dev": "gulp dev",
     "gulp:prod": "gulp",

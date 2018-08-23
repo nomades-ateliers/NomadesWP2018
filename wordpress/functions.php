@@ -175,10 +175,19 @@ require get_template_directory() . '/inc/template-functions.php';
  */
 require get_template_directory() . '/inc/wp-api.php';
 
+require get_template_directory() . '/inc/formation.php';
+
 /**
  * Require demo custompost type
  */
 require get_template_directory() . '/inc/demo.custom_post.php';
+/**
+ * Require custompost type
+ */
+require get_template_directory() . '/inc/custom-post.php';
+
+
+require get_template_directory() . '/theme-config.php';
 
 /**
  * Customizer additions.
@@ -191,30 +200,3 @@ require get_template_directory() . '/inc/demo.custom_post.php';
 // if ( defined( 'JETPACK__VERSION' ) ) {
 // 	require get_template_directory() . '/inc/jetpack.php';
 // }
-
-/* display all post_type in $WP_Query */
-function add_custom_post_type_to_wp_query($query) {
-    if(
-        empty($query->query['post_type'])
-        or $query->query['post_type'] === 'post'
-    ){
-        $query->set('post_type', array('post_type' => 'any'));
-    }
-}
-add_action('pre_get_posts', 'add_custom_post_type_to_wp_query');
-
-
-/// Bof - Remove Tags prefix in the_archive_title and more...
-add_filter( 'get_the_archive_title', function ($title) {
-    if ( is_category() ) {
-        $title = single_cat_title( '', false );
-    }
-		elseif ( is_tag() ) {
-        $title = single_tag_title( '', false );
-    }
-		elseif ( is_author() ) {
-        $title = '<span class="vcard">' . get_the_author() . '</span>' ;
-    }
-    return $title;
-});
-/// Eof - Remove Tags prefix

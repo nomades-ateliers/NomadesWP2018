@@ -6,11 +6,15 @@ import { CommonModule } from '@angular/common';
 import { MenuNavModule } from './menu-nav/menu-nav.module';
 import { HeaderPeopleComponent } from './components/header-people/header-people.component';
 import { AdressComponent } from './components/adress/adress.component';
+import { ItemCardComponent } from './components/item-card/item-card.component';
+import { SloganComponent } from './components/slogan/slogan.component';
 
 const SHARED_COMPONENTS: any[] = [
   // add your shared component here
   HeaderPeopleComponent,
-  AdressComponent
+  AdressComponent,
+  ItemCardComponent,
+  SloganComponent,
 ];
 const SHARED_SERVICES: any[] = [
   // add your shared services here

@@ -5,10 +5,17 @@
           <app-menu-nav></app-menu-nav>
           <app-header-people [baseUrl]="baseUrl"></app-header-people>
           <app-adress></app-adress>
-          <div *ngIf="data$ | async as front;">
-            <div [innerHTML]="front?.content?.rendered|safeHtml "></div>
+          <div *ngIf="data$ | async as frontPage;">
+            <div [innerHTML]="frontPage?.content?.rendered|safeHtml "></div>
           </div>
       </ion-col>
+    </ion-row>
+    <ion-row class="cursus" *ngFor="let c of cursus$|async">
+      <ion-col [ngClass]="{
+        col: true,
+        front: c?.name.toLowerCase().includes('front'),
+        back: c?.name.toLowerCase().includes('back')
+      }" (click)="go(c.link.split('cursus/').reverse()[0])">{{c?.name}}</ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

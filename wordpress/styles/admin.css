@@ -1,0 +1,115 @@
+
+@font-face {
+	font-family: 'AkzidenzGrotesk-Roman';
+	src: url('../fonts/AkzidenzGrotesk-Roman.eot');
+	src: local('â˜º'), /*url('../fonts/AkzidenzGrotesk-Roman.woff') format('woff'), */url('../fonts/AkzidenzGrotesk-Roman.ttf') format('truetype'), url('../fonts/AkzidenzGrotesk-Roman.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'AkzidenzGrotesk-Light';
+	src: url('../fonts/AkzidenzGrotesk-Light.eot');
+	src: local('â˜º'), /*url('../fonts/AkzidenzGrotesk-Light.woff') format('woff'), */url('../fonts/AkzidenzGrotesk-Light.ttf') format('truetype'), url('../fonts/AkzidenzGrotesk-Light.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'AkzidenzGrotesk-Bold';
+	src: url('../fonts/AkzidenzGrotesk-Bold.eot');
+	src: local('â˜º'), /*url('../fonts/AkzidenzGrotesk-Bold.woff') format('woff'), */url('../fonts/AkzidenzGrotesk-Bold.ttf') format('truetype'), url('../fonts/AkzidenzGrotesk-Bold.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'AkzidenzGrotesk-Black';
+	src: url('../fonts/AkzidenzGrotesk-Black.eot');
+	src: local('â˜º'), /*url('../fonts/AkzidenzGrotesk-Black.woff') format('woff'), */url('../fonts/AkzidenzGrotesk-Black.ttf') format('truetype'), url('../fonts/AkzidenzGrotesk-Black.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+
+.admin_font, .titre_niveau{
+	font-family: "AkzidenzGrotesk-Light",Arial,Helvetica,sans-serif;
+	font-size: 15px;
+	line-height:1.3em;
+	
+}
+
+.titre_niveau input{
+	font-size:15px;
+}
+
+.admin_font label, .titre_niveau label{
+	font-family: 'AkzidenzGrotesk-Black',Arial,Helvetica,sans-serif;
+	font-size:14px;
+	display: inline-block;
+	margin-bottom: 5px;
+
+}
+
+.tab_formation_complete textarea, .voir_resume textarea{
+    min-height: 84px;
+    width: 170px;
+     resize:none;
+     color:#717073;
+     padding:0px;
+}
+
+.block_admin_pm{
+	display: inline-block;
+	margin-right:10px;
+	padding:5px;
+	vertical-align: top;
+	background:#efefef;
+	margin-bottom: 10px;
+}
+
+.block_admin_pm.grand{
+	display: block;
+}
+
+
+.block_admin_pm h3{
+	font-family: 'AkzidenzGrotesk-Bold';
+	font-weight: normal;
+	border-bottom:1px solid #C33A32;
+}
+
+
+.infos_nomades-admin{
+	background: #efefef;
+	padding:5px;
+	border-bottom:1px solid #C33A32;
+	margin-right:10px;
+}
+.no_marge_bottom{
+	margin-bottom: 0px;
+}
+.no_marge_top{
+	margin-top:0px;
+}
+
+
+.precision_admin{
+	font-family: "AkzidenzGrotesk-Light",Arial,Helvetica,sans-serif;
+	font-size:12px;
+	display: block;
+	margin-top:5px;
+}
+
+.voir_resume textarea{
+	height:60px;
+	font-size:14px;
+	width:226px;
+	padding:2px;
+}
+
+
+
+
+
+
+
