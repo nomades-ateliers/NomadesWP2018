@@ -51,4 +51,9 @@ export class CusrsusItemComponent implements OnInit {
     console.log(link);
     this._router.navigate(['/cursus/' + link]);
   }
+
+  getdetail(u: string) {
+    const w = window.open('https://nomades.ch/wp-content/' + u.split('/wp-content').reverse()[0], '_blank');
+    w.focus();
+  }
 }

@@ -1,0 +1,22 @@
+app-footer {
+    ion-grid {
+        margin: 1rem auto 3rem; 
+    }
+
+    ion-row{ 
+        background: #333;
+        color: #fff;
+        margin: 0.25rem 0.35rem;
+        padding: 0 1rem;
+        font-weight: 400;
+        
+    }
+    ion-col {
+        border-left: solid 0.05rem #fff;
+    }
+    .red {
+        background: #c33931;
+        color: #fff;
+        border-left: solid 0.05rem #fff;
+    }
+}

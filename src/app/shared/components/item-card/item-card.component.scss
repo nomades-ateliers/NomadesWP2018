@@ -1,5 +1,13 @@
 ion-card.hydrated {
     height: 100%;
+    border-bottom: solid 0.3rem transparent;
+    box-shadow: none;
+    padding: 0;
+    border-radius: 0;
+
+    .card-content.hydrated {
+        padding:0;
+    }
 }
 article {
     height:  100%;

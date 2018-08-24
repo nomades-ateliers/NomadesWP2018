@@ -8,6 +8,7 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 })
 export class ItemCardComponent implements OnInit {
 
+  @Input() color: string;
   @Input() curcus: any = {title: {rendered: 'default title'}};
   constructor() { }
 

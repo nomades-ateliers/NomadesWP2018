@@ -29,6 +29,18 @@
     color: #fff;
     border: solid 1px #0078AE;
 }
-:host ion-grid {
+.alignWithCard {
     padding: 0;
 }
+.cursus img {
+    margin: 1rem 0;
+    max-width: 40px;
+    cursor: pointer;
+}
+.block4Inline {
+    padding: 0;
+    margin: 0;
+}
+// :host ion-grid {
+//     padding: 0;
+// }

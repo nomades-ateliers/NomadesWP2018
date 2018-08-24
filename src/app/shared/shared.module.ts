@@ -8,6 +8,7 @@ import { HeaderPeopleComponent } from './components/header-people/header-people.
 import { AdressComponent } from './components/adress/adress.component';
 import { ItemCardComponent } from './components/item-card/item-card.component';
 import { SloganComponent } from './components/slogan/slogan.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 const SHARED_COMPONENTS: any[] = [
   // add your shared component here
@@ -15,6 +16,7 @@ const SHARED_COMPONENTS: any[] = [
   AdressComponent,
   ItemCardComponent,
   SloganComponent,
+  FooterComponent
 ];
 const SHARED_SERVICES: any[] = [
   // add your shared services here

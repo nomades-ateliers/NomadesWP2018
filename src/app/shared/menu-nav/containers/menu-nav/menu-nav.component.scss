@@ -9,12 +9,15 @@
     height: 51px;
   }
   img {
-    margin:auto;
     top: 7px;
     width: 60px;
+    margin: auto;
+    display: block;
+    transform: translateY(2rem);
   }
   h1 {
-    margin-top:0px;
+    margin-top:0;
+    margin-bottom:0;
     color: #c33a32;
     font-weight: 400;
     font-size: 1.3rem;

@@ -94,6 +94,20 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
   --ion-color-green-contrast-rgb: 255,255,255;
   --ion-color-green-shade: #2a5c20;
   --ion-color-green-tint: #479b36;
+  u {
+    text-decoration: none;
+    border-style: solid;
+    padding-bottom: 0.15rem;
+    border-width: 0px 0px 1px 0px;
+  }
+  // u:after {
+  //   content: '';
+  //   width: 100%;
+  //   position: absolute;
+  //   left: 0;
+  //   bottom: 1px;
+
+  // }
 }
 
 
