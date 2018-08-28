@@ -1,59 +1,61 @@
-<div id="app-header">
-  <div id="primary-menu" class="menu">
-    <img src="https://nomades.ch/wp-content/themes/theme_nomades/images/logo-nomades.png" alt="">
-
-    <ion-grid>
-
-      <ion-row class="nav-header">
-        <ion-col class="border">
-          <h1>{{config?.site_title}}</h1>
-        </ion-col>
-
-        <!-- <ion-col class="border">
-          <span>{{config?.site_description}}</span>
-        </ion-col> -->
-      </ion-row>
-
-      <!-- {{menu|json}} -->
-      <ion-row class="nav-primary">
-        <ion-col *ngFor="let item of menu" (click)="goPage(item)" class="border">
-            {{item?.title}}
-        </ion-col>
-        <!-- <ion-col class="border">
-            formations diplômantes
-        </ion-col>
-        <ion-col class="border">
-            projets
-        </ion-col>
-        <ion-col class="border">
-            workshops
-        </ion-col>
-        <ion-col class="border">
-            contact
-        </ion-col> -->
-
-        <!-- <ion-col class="nav_container">
-          <nav class="navigation nav_menu">
-            <ul class="_L_larger_site content_menu clearfix">
-              <li><a #link href="#formations">formations diplômantes</a>
-                <ul>
-                  <li><a #link href="##front-end"> intégrateur web | front-end developer</a></li>
-                  <li><a #link href="##back-end"> back-end developer | mobile applications developer</a></li>
-                </ul>
-              </li>
-              <li class="link_projets"><a #link href="#students-projects">projets</a></li>
-              <li><a #link href="#workshops">workshops</a></li>
-              <li class="link_contact"><a #link href="#contact">contact</a></li>
-            </ul>
-          </nav>
-        </ion-col> -->
-
-      </ion-row>
-
-    </ion-grid>
-    <!-- <ul class="menu">
-      <li (click)="goPage({url: 'index'})">Index</li>
-      <li *ngFor="let item of menu" (click)="goPage(item)">{{ item.title }}</li>
-    </ul> -->
-  </div>
-</div><!-- #site-navigation -->
+<ion-show-when size="md">
+  <div id="app-header">
+    <div id="primary-menu" class="menu">
+      <img src="https://nomades.ch/wp-content/themes/theme_nomades/images/logo-nomades.png" alt="">
+  
+      <ion-grid>
+  
+        <ion-row class="nav-header">
+          <ion-col class="border">
+            <h1>{{config?.site_title}}</h1>
+          </ion-col>
+  
+          <!-- <ion-col class="border">
+            <span>{{config?.site_description}}</span>
+          </ion-col> -->
+        </ion-row>
+  
+        <!-- {{menu|json}} -->
+        <ion-row class="nav-primary">
+          <ion-col size-xs="12" size-sm="6" size-md="3" *ngFor="let item of menu" (click)="goPage(item)" class="border">
+              {{item?.title}}
+          </ion-col>
+          <!-- <ion-col class="border">
+              formations diplômantes
+          </ion-col>
+          <ion-col class="border">
+              projets
+          </ion-col>
+          <ion-col class="border">
+              workshops
+          </ion-col>
+          <ion-col class="border">
+              contact
+          </ion-col> -->
+  
+          <!-- <ion-col class="nav_container">
+            <nav class="navigation nav_menu">
+              <ul class="_L_larger_site content_menu clearfix">
+                <li><a #link href="#formations">formations diplômantes</a>
+                  <ul>
+                    <li><a #link href="##front-end"> intégrateur web | front-end developer</a></li>
+                    <li><a #link href="##back-end"> back-end developer | mobile applications developer</a></li>
+                  </ul>
+                </li>
+                <li class="link_projets"><a #link href="#students-projects">projets</a></li>
+                <li><a #link href="#workshops">workshops</a></li>
+                <li class="link_contact"><a #link href="#contact">contact</a></li>
+              </ul>
+            </nav>
+          </ion-col> -->
+  
+        </ion-row>
+  
+      </ion-grid>
+      <!-- <ul class="menu">
+        <li (click)="goPage({url: 'index'})">Index</li>
+        <li *ngFor="let item of menu" (click)="goPage(item)">{{ item.title }}</li>
+      </ul> -->
+    </div>
+  </div><!-- #site-navigation -->
+</ion-show-when>

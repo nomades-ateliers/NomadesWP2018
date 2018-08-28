@@ -1,23 +1,35 @@
-<ion-header>
-  <app-menu-nav></app-menu-nav>
-</ion-header>
 <ion-content>
-  page single works!
-  <div *ngIf="data$ | async as page;">
-    <section>
-      <figure *ngIf="page?.featured_image_src_large">
-        <picture>
-          <img [src]="page?.featured_image_src_large" alt="{{page?.title?.rendered}}" title="{{page?.title?.rendered}}">
-        </picture>
-      </figure>
-      <header class="entry-header">
-        <h1 [innerHTML]="page?.title?.rendered"></h1>
-        <div class="entry-meta"></div><!-- .entry-meta -->
-      </header><!-- .entry-header -->
-      <div [innerHTML]="page?.content?.rendered"></div>
-  
-    </section>
-  
-  </div>
-</ion-content>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+          <app-menu-nav></app-menu-nav>
+          <app-header-people [baseUrl]="baseUrl"></app-header-people>
+          <app-adress></app-adress>
+          <app-slogan></app-slogan>
+          <div *ngIf="data$ | async as data;" margin>
+            <div [innerHTML]="data?.content?.rendered|safeHtml "></div>
+          </div>
+      </ion-col>
+    </ion-row>
 
+    <div [ngSwitch]="currentUrl">
+      <!-- <div *ngSwitchCase="'/workshops'"><app-workshops></app-workshops></div> -->
+      <!-- <app-workshops  *ngSwitchCase="'/workshops'"></app-workshops> -->
+      <ng-template [ngSwitchCase]="'/workshops'">
+        <app-workshops></app-workshops>
+      </ng-template>
+      <ng-template [ngSwitchCase]="'/projets'">
+        projets...
+      </ng-template>
+      <ng-template [ngSwitchCase]="'/contact'">
+        contact...
+      </ng-template>
+      <ng-template ngSwitchDefault>
+        page template default
+      </ng-template>
+    </div>
+
+    
+  </ion-grid>
+  <app-footer></app-footer>
+</ion-content>

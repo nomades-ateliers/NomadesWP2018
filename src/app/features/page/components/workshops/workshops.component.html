@@ -1,0 +1,27 @@
+<!-- front -->
+<ion-row class="wks">
+  <ion-col padding  class="front" (click)="go('front')">
+    <section>Front-end development</section>
+  </ion-col>
+</ion-row>
+<!-- mobile -->
+<ion-row class="wks">
+  <ion-col padding class="mobile" (click)="go('mobile')">
+    <section>Mobile applications development</section>
+  </ion-col>
+</ion-row>
+<!-- back -->
+<ion-row class="wks">
+  <ion-col padding class="back" (click)="go('back')">
+    <section>Back-end development</section>
+  </ion-col>
+</ion-row>
+
+<!-- <ion-row>
+  <ion-col>
+    <div class="workshops" *ngFor="let w of data$|async">
+      {{w?.titre_workshop_cour}}
+    </div>
+  </ion-col>
+</ion-row> -->
+

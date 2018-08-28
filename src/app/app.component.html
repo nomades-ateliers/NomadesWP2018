@@ -1,5 +1,19 @@
 <ion-app>
-  <main>
+    <!--  our side menu  -->
+    <ion-show-when size="sm">
+      <ion-menu [disabled]="mobileNavigation" contentId="content">
+        <ion-content>
+          logo <br>
+          list items...
+        </ion-content>
+      </ion-menu>      
+    </ion-show-when>
+
+  
+    <!-- the main content -->
+    <ion-router-outlet swipeBackEnabled="false" id="content" animated="{{mobileNavigation}}" main></ion-router-outlet>
+
+  <!-- <main>
       <ion-router-outlet animated="{{mobileNavigation}}"></ion-router-outlet>
-  </main>
+  </main> -->
 </ion-app>

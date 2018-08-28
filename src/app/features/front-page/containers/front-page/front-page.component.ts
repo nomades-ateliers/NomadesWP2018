@@ -9,7 +9,7 @@ import { WpApiService } from '@app/shared/services';
   selector: 'app-front-page',
   templateUrl: './front-page.component.html',
   styleUrls: ['./front-page.component.scss'],
-  encapsulation: ViewEncapsulation.ShadowDom
+  encapsulation: ViewEncapsulation.None
 })
 export class FrontPageComponent implements OnInit {
 

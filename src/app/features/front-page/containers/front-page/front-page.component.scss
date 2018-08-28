@@ -1,44 +1,46 @@
-h1 {
-    background: #77226c;
-    color: #fff;
-    padding: 0.4rem;
-    font-weight: 400;
-    font-size: 1.3rem;
-    letter-spacing: 0.1rem;
-    margin: 0 !important;
-}
-
-.cursus {
-    padding: 0.4rem;
-    font-weight: 300;
-    font-size: 1.3rem;
-    letter-spacing: 0.1rem;
-    margin: 0;
-    cursor: pointer;
-}
-.cursus .col {
-    transition: 250ms ease-in-out;
-}
-.cursus .col.front {
-    background: #fff;
-    color: #387c2b;
-    border: solid 1px #387c2b;
-}
-.cursus .col.front:hover{
-    background: #387c2b;
-    color: #fff;
-    border: solid 1px #387c2b;
-}
-.cursus .col.back{
-    background: #fff;
-    color: #0078AE;
-    border: solid 1px #0078AE;
-}
-.cursus .col.back:hover{
-    background: #0078AE;
-    color: #fff;
-    border: solid 1px #0078AE;
-}
-:host ion-grid {
-    padding: 0;
+app-front-page {
+    h1 {
+        background: #77226c;
+        color: #fff;
+        padding: 0.4rem;
+        font-weight: 400;
+        font-size: 1.3rem;
+        letter-spacing: 0.1rem;
+        margin: 0 !important;
+    }
+    
+    .cursus {
+        padding: 0.4rem;
+        font-weight: 300;
+        font-size: 1.3rem;
+        letter-spacing: 0.1rem;
+        margin: 0;
+        cursor: pointer;
+    }
+    .cursus .col {
+        transition: 250ms ease-in-out;
+    }
+    .cursus .col.front {
+        background: #fff;
+        color: #387c2b;
+        border: solid 1px #387c2b;
+    }
+    .cursus .col.front:hover{
+        background: #387c2b;
+        color: #fff;
+        border: solid 1px #387c2b;
+    }
+    .cursus .col.back{
+        background: #fff;
+        color: #0078AE;
+        border: solid 1px #0078AE;
+    }
+    .cursus .col.back:hover{
+        background: #0078AE;
+        color: #fff;
+        border: solid 1px #0078AE;
+    }
+    ion-grid {
+        padding: 0;
+    }
 }
