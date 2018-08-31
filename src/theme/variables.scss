@@ -64,12 +64,12 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
   --ion-color-danger-tint: #f65050;
 
   /** light **/
-  --ion-color-light: #f4f4f4;
-  --ion-color-light-rgb: 244,244,244;
+  --ion-color-light: #fff;
+  --ion-color-light-rgb: 255, 255, 255;
   --ion-color-light-contrast: #000;
   --ion-color-light-contrast-rgb: 0,0,0;
-  --ion-color-light-shade: #d7d7d7;
-  --ion-color-light-tint: #f5f5f5;
+  --ion-color-light-shade: #fff;
+  --ion-color-light-tint: #fff;
 
   /** medium **/
   --ion-color-medium: #989aa2;
@@ -118,6 +118,27 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
   //   bottom: 1px;
 
   // }
+  .logoSplitPan {
+    margin: 3rem auto;
+    padding-top: 2rem;
+    width: 100%;
+    max-width: 100px;
+    display: block;
+  }
+  .menuItemSpliPan {
+    border-left: solid 5px;
+    transition: 125ms ease-in-out;
+    
+    ion-label.hydrated {
+      font-size: 1.2rem;
+    }
+  }
+  .menuItemSpliPan:hover, .menuItemSpliPan:focus, .menuItemSpliPan:active {
+    border-left: solid 12px;
+  }
+  .menuItemSpliPan[ng-reflect-router-link-active="true"] {
+    border-left: solid 12px #c33931 !important;
+  }
 }
 
 

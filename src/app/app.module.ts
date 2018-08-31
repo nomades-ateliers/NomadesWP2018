@@ -10,8 +10,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppConfigService } from '@app/app-config.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AppConfig } from '@app/app-config.token';
 
-export let AppConfig = new InjectionToken<Array<() => void>>('app.config');
 export function AppConfigServiceFactory(config: AppConfigService): Function {
   return () => config.load();
 }

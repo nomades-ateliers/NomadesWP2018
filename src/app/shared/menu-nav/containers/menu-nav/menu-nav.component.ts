@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
-import { AppConfig } from '@app/app.module';
+import { AppConfig } from '@app/app-config.token';
 import { Router } from '@angular/router';
 
 @Component({

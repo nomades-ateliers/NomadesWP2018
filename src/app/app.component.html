@@ -1,13 +1,27 @@
-<ion-app>
+<ion-app [config]="ionConfig">
     <!--  our side menu  -->
-    <ion-show-when size="sm">
+    <ion-hide-when size="md">
       <ion-menu [disabled]="mobileNavigation" contentId="content">
         <ion-content>
-          logo <br>
-          list items...
+
+          <img class="logoSplitPan" src="https://nomades.ch/wp-content/themes/theme_nomades/images/logo-nomades.png" alt="">
+          <ion-list mode="md">
+            <ion-item 
+              class="menuItemSpliPan"
+              mode="md"
+              lines="none"
+              (click)="menuCtl?.close()"
+              *ngFor="let item of menuItems"
+              routerLink="{{item?.url.split('/').reverse()[0]}}"
+              routerLinkActive="{{((('/'+item?.url.split('/').reverse()[0]) === '/') ? '/index' : ('/'+item?.url.split('/').reverse()[0])).includes(currentUrl)}}">
+              <ion-label text-wrap>
+                {{item?.title}}
+              </ion-label>
+            </ion-item>
+          </ion-list>
         </ion-content>
       </ion-menu>      
-    </ion-show-when>
+    </ion-hide-when>
 
   
     <!-- the main content -->

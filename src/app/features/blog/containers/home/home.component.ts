@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { WpApiService } from '@app/shared/services';
-import { AppConfig } from '@app/app.module';
+import { AppConfig } from '@app/app-config.token';
 
 @Component({
   selector: 'app-home',
