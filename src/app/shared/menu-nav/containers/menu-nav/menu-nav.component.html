@@ -1,12 +1,12 @@
 <ion-show-when size="md">
   <div id="app-header">
     <div id="primary-menu" class="menu">
-      <img src="https://nomades.ch/wp-content/themes/theme_nomades/images/logo-nomades.png" alt="">
+      <img (click)="goPage()" src="https://nomades.ch/wp-content/themes/theme_nomades/images/logo-nomades.png" alt="">
   
       <ion-grid>
   
         <ion-row class="nav-header">
-          <ion-col class="border">
+          <ion-col class="border" (click)="goPage()">
             <h1>{{config?.site_title}}</h1>
           </ion-col>
   
@@ -17,7 +17,14 @@
   
         <!-- {{menu|json}} -->
         <ion-row class="nav-primary">
-          <ion-col size-xs="12" size-sm="6" size-md="3" *ngFor="let item of menu" (click)="goPage(item)" class="border">
+          <ion-col
+            class="border"
+            size-xs="12"
+            size-sm="6"
+            size-md="3"
+            *ngFor="let item of menu"
+            (click)="goPage(item)"
+            [ngClass]="{active: ((('/'+item?.url.split('/').reverse()[0]) === '/') ? '/index' : ('/'+item?.url.split('/').reverse()[0])).includes(currentUrl)}">
               {{item?.title}}
           </ion-col>
           <!-- <ion-col class="border">

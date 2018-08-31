@@ -13,6 +13,7 @@
     width: 60px;
     margin: auto;
     display: block;
+    cursor: pointer;
     // transform: translateY(2rem);
   }
   h1 {
@@ -30,6 +31,7 @@
     letter-spacing: 0.01em;
     margin-left: 0px;
     margin-right: 29px;
+    cursor: pointer;
   }
   .titre_right {
     display: inline-block;
@@ -52,13 +54,21 @@
     margin-bottom: 1rem;
     ion-col.border {
       border-left: 1px solid #c33a32;
-    }    
+    }   
   }
   .nav-primary {
     padding-bottom: 2rem;
     ion-col.border {
       border-left: 1px solid #717073;
-    }    
+    } 
+    ion-col {
+      color: #717073;
+      transition: color 250ms ease-in-out;
+      cursor: pointer;
+    }  
+    ion-col:hover, ion-col:active, ion-col:focus, ion-col.border.active{
+      color: #c33a32;
+    }  
   }
 
 
@@ -68,6 +78,7 @@
     //z-index: 9999;
     //transition: 300ms all ease-in-out;
 
+    
     ul {
         list-style: none;
         padding:0px;

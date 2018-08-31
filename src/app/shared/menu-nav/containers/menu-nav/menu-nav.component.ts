@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Inject, Input, ViewEncapsulation } from '@angular/core';
 import { AppConfig } from '@app/app-config.token';
 import { Router } from '@angular/router';
 
@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class MenuNavComponent implements OnInit {
 
   public menu: any;
+  @Input() currentUrl: string;
 
   constructor(
     @Inject(AppConfig) public readonly config: any,
@@ -22,7 +23,10 @@ export class MenuNavComponent implements OnInit {
     this.menu = this.config.menu;
   }
 
-  goPage(page: any) {
+  goPage(page: any = null) {
+    if (!page) {
+      return this.router.navigate(['/']);
+    }
     // console.log('page url slug-> ', page.url);
     const url =  `/${(page.url) ? page.url.split('/').reverse()[0] || 'index' : 'index'}`;
     console.log('url', url);

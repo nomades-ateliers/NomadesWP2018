@@ -53,7 +53,7 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.menuItems = this.config.menu;
-      this.mobileNavigation = !(this.platform.width() < 766);
+      this.mobileNavigation = false; // !(this.platform.width() < 766);
       console.log('this.mobileNavigation', this.mobileNavigation);
       //   this.mobileNavigation,
       // );
