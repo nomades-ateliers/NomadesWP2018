@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { DemocatRoutingModule } from './democat-routing.module';
 import { DemocatComponent } from './containers/democat/democat.component';

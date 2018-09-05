@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { FrontPageRoutingModule } from './front-page.routing';
 import { FrontPageComponent } from './containers/front-page/front-page.component';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
   imports: [

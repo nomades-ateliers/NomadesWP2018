@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 
 @Component({
   selector: 'app-slogan',
@@ -6,4 +6,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./slogan.component.scss'],
   encapsulation: ViewEncapsulation.ShadowDom
 })
-export class SloganComponent {}
+export class SloganComponent {
+  @Input() slogan = '';
+}

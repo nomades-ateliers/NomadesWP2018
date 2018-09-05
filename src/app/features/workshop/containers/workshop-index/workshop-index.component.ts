@@ -6,12 +6,13 @@ import { map, tap } from 'rxjs/operators';
 import { WpApiService } from '@app/shared/services';
 
 @Component({
-  selector: 'app-page',
-  templateUrl: './page.component.html',
-  styleUrls: ['./page.component.scss'],
+  selector: 'app-workshop-index',
+  templateUrl: './workshop-index.component.html',
+  styleUrls: ['./workshop-index.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class PageComponent implements OnInit {
+export class WorkshopIndexComponent implements OnInit {
+
 
   public data$: Observable<any>;
   public currentUrl: any;

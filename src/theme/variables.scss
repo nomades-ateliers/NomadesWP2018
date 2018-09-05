@@ -139,6 +139,122 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
   .menuItemSpliPan[ng-reflect-router-link-active="true"] {
     border-left: solid 12px #c33931 !important;
   }
+
+  .wks, .wksCat {
+    padding: 0.4rem;
+
+    ion-col {
+        text-transform: uppercase;
+        padding: 0.4rem;
+        font-weight: 300;
+        font-size: 1.3rem;
+        letter-spacing: 0.1rem;        
+        margin: 0;
+        transition: 250ms ease-in-out;
+        cursor: pointer;
+
+        p.section {
+            padding: 0;
+            margin: 0;
+        }
+
+        article {
+          text-transform: initial;
+          font-size: initial;
+          letter-spacing: initial; 
+          color: initial; 
+          background: #f1f1f1;
+          padding: 0.5rem;
+          margin: 1rem 0;
+          border: solid 1px #f1f1f1;
+          transition: border ease-in-out 225ms;
+
+          h2 {
+            font-size: 1.3rem;
+          }
+          p {
+            color: initial;
+          }
+        }
+    }
+
+    .front {
+      color: #387c2b;;
+    }
+    .front.text:hover {
+      color: #387c2b;
+    }
+    .front.col {
+        background: #fff;
+        border: solid 1px #387c2b;
+    }
+    .front:hover, .front.active {
+      color: #fff;
+    }
+    .front.col:hover, .front.col.active {
+      background: #387c2b;
+      border: solid 1px #387c2b;
+    }
+    article.front:hover, article.front:focus, article.front:active, article.front.active {
+      border: solid 1px #387c2b;
+    }
+
+    .mobile {
+        color: #f6a01a;
+    }
+    .mobile.text:hover {
+      color: #f6a01a;
+    }
+    .mobile.col {
+      background: #fff;
+      border: solid 1px #f6a01a;
+    }
+    .mobile:hover, .mobile.active {
+      color: #fff;
+    }
+    .mobile.col:hover, .mobile.col.active {
+      background: #f6a01a;
+      border: solid 1px #f6a01a;
+    } 
+
+    .back {
+        color: #0078AE;
+    }    
+    .back.text:hover {
+      color: #0078AE;
+    }
+    .back.col {
+      background: #fff;
+      border: solid 1px #0078AE;
+    }
+    .back:hover, .back.active {
+        color: #fff;
+    }
+    .back.col:hover, .back.col.active {
+      background: #0078AE;
+      border: solid 1px #0078AE;
+    }
+
+}
+.titre_WORKSHOP{
+    margin-top:60px!important;
+    font-size: 11vw;
+    text-align: center;
+    letter-spacing: 0.028em;
+    color: #000;
+    font-family: "Helvnul","AkzidenzGrotesk-Light",Arial,Helvetica,sans-serif;
+    margin-bottom: 40px;
+
+  }
+  .rouge {
+      color: #c33a32;
+  }
+  .bleu {
+      color: #0078ae;
+  }
+  .vert {
+      color: #387c2b;
+  }
 }
 
 

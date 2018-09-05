@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { WpApiService } from '@app/shared/services';
 import { map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-workshops',
@@ -11,18 +12,25 @@ import { map, tap } from 'rxjs/operators';
 })
 export class WorkshopsComponent implements OnInit {
 
-  @Input() data$: any;
+  public data$: Observable<any>;
+
   constructor(
     private _router: Router,
     private _wpApi: WpApiService
   ) { }
 
   ngOnInit() {
-    this.data$ = this._wpApi.getRemoteData({path: 'workshop', slug: ``}).pipe(
+    this.data$ = this._wpApi.getRemoteData({path: 'parcours', slug: ``}).pipe(
       map(res => (res.length === 1 ) ? res[0] : res),
-      map(w => w.sort((wk: any) => wk.wk_position).reverse())
+      map(ps => ps.filter(p => p.parent === 0)),
+      map(ps => ps.sort((p: any) => p._id))
       // tap(data => (!data.type) ? window.location.href = '404' : null)
     );
+  }
+
+  go(url: string) {
+    console.log('go: ', url);
+    this._router.navigate(['/workshops/' + url]);
   }
 
 }

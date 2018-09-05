@@ -1,27 +1,31 @@
-<!-- front -->
-<ion-row class="wks">
+<!-- <pre>
+  {{data$|async|json}}
+</pre> -->
+<ion-row class="wksCat" *ngFor="let p of data$|async">
+  <ion-col padding (click)="go(p?.slug || 'index')" [ngClass]="{
+    col: true,
+    front: p?.name.toLowerCase().includes('front'),
+    back: p?.name.toLowerCase().includes('back'),
+    mobile: p?.name.toLowerCase().includes('mobile')
+  }">
+    <p class="section">{{p?.name}}</p>
+  </ion-col>
+</ion-row>
+
+<!-- <ion-row class="wks">
   <ion-col padding  class="front" (click)="go('front')">
     <section>Front-end development</section>
   </ion-col>
 </ion-row>
-<!-- mobile -->
 <ion-row class="wks">
   <ion-col padding class="mobile" (click)="go('mobile')">
     <section>Mobile applications development</section>
   </ion-col>
 </ion-row>
-<!-- back -->
 <ion-row class="wks">
   <ion-col padding class="back" (click)="go('back')">
     <section>Back-end development</section>
   </ion-col>
-</ion-row>
-
-<!-- <ion-row>
-  <ion-col>
-    <div class="workshops" *ngFor="let w of data$|async">
-      {{w?.titre_workshop_cour}}
-    </div>
-  </ion-col>
 </ion-row> -->
+
 

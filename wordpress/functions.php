@@ -174,6 +174,7 @@ require get_template_directory() . '/inc/template-functions.php';
  * Require custom WP API Theming.
  */
 require get_template_directory() . '/inc/wp-api.php';
+require get_template_directory() . '/inc/wp-api-filter.php';
 
 require get_template_directory() . '/inc/formation.php';
 

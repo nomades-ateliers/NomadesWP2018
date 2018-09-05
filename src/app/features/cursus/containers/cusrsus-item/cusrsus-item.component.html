@@ -6,7 +6,7 @@
           <app-menu-nav [currentUrl]="'/index'"></app-menu-nav>
           <app-header-people [baseUrl]="baseUrl"></app-header-people>
           <app-adress></app-adress>
-          <app-slogan></app-slogan>
+          <app-slogan [slogan]="'FORMATIONS DIPLMANTES DANS LES METIERS DU WEB'"></app-slogan>
           <div *ngIf="data$ | async as front;">
             <div [innerHTML]="front?.content?.rendered|safeHtml "></div>
           </div>

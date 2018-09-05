@@ -1,0 +1,45 @@
+<app-header-app></app-header-app>
+<ion-content>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+          <app-menu-nav [currentUrl]="currentUrl"></app-menu-nav>
+          <app-header-people [baseUrl]="baseUrl"></app-header-people>
+          <app-adress></app-adress>
+          <app-slogan [slogan]="'WORKSHOPS'"></app-slogan>
+          <!-- <pre>
+            {{(data$|async)?.programme_workshop|json}}
+          </pre> -->
+      </ion-col>
+    </ion-row>
+    <div *ngIf="data$ | async as data;">
+      <div class="wks" >
+        <ion-row>
+          <ion-col [ngClass]="{
+            col: true,
+            active: true,
+            front: currentUrl.toLowerCase().includes('front'),
+            back: currentUrl.toLowerCase().includes('back'),
+            mobile: currentUrl.toLowerCase().includes('mobile')
+          }">
+           xxx
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <h2 [ngClass]="{
+                text: true,
+                front: currentUrl.toLowerCase().includes('front'),
+                back: currentUrl.toLowerCase().includes('back'),
+                mobile: currentUrl.toLowerCase().includes('mobile')
+              }">{{data?.title?.rendered}}</h2>
+            <div class="programme" [innerHTML]="data?.programme_workshop|safeHtml "></div>
+          </ion-col>
+        </ion-row>                
+      </div>
+
+    </div>
+    <!-- <app-workshops></app-workshops>  -->
+  </ion-grid>
+  <app-footer></app-footer>
+</ion-content>

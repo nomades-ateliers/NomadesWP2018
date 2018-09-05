@@ -1,15 +1,15 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { PipesModule } from './pipes';
-import { WpApiService } from './services';
+import { PipesModule } from '@app/shared/pipes';
+import { WpApiService } from '@app/shared/services';
 import { CommonModule } from '@angular/common';
-import { MenuNavModule } from './menu-nav/menu-nav.module';
-import { HeaderPeopleComponent } from './components/header-people/header-people.component';
-import { AdressComponent } from './components/adress/adress.component';
-import { ItemCardComponent } from './components/item-card/item-card.component';
-import { SloganComponent } from './components/slogan/slogan.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { HeaderAppComponent } from './components/header-app/header-app.component';
+import { MenuNavModule } from '@app/shared/menu-nav/menu-nav.module';
+import { HeaderPeopleComponent } from '@app/shared/components/header-people/header-people.component';
+import { AdressComponent } from '@app/shared/components/adress/adress.component';
+import { ItemCardComponent } from '@app/shared/components/item-card/item-card.component';
+import { SloganComponent } from '@app/shared/components/slogan/slogan.component';
+import { FooterComponent } from '@app/shared/components/footer/footer.component';
+import { HeaderAppComponent } from '@app/shared/components/header-app/header-app.component';
 
 const SHARED_COMPONENTS: any[] = [
   // add your shared component here
