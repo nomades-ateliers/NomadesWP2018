@@ -24,7 +24,11 @@
             size-md="3"
             *ngFor="let item of menu"
             (click)="goPage(item)"
-            [ngClass]="{active: ((('/'+item?.url.split('/').reverse()[0]) === '/') ? '/index' : ('/'+item?.url.split('/').reverse()[0])).includes(currentUrl)}">
+            [ngClass]="{
+              active: (currentUrl.includes('index'))
+                ? item.url.split('/').reverse()[0] === ''
+                : currentUrl.includes(item?.title.toLowerCase())
+            }">
               {{item?.title}}
           </ion-col>
           <!-- <ion-col class="border">

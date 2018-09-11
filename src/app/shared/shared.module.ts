@@ -10,6 +10,7 @@ import { ItemCardComponent } from '@app/shared/components/item-card/item-card.co
 import { SloganComponent } from '@app/shared/components/slogan/slogan.component';
 import { FooterComponent } from '@app/shared/components/footer/footer.component';
 import { HeaderAppComponent } from '@app/shared/components/header-app/header-app.component';
+import { RouterModule } from '../../../node_modules/@angular/router';
 
 const SHARED_COMPONENTS: any[] = [
   // add your shared component here
@@ -29,7 +30,8 @@ const SHARED_IMPORT_MODULES: any[] = [
   MenuNavModule,
   CommonModule,
   PipesModule,
-  IonicModule
+  IonicModule,
+  RouterModule
 ];
 const SHARED_EXPORT_MODULES: any[] = [
   // add your item available to export here

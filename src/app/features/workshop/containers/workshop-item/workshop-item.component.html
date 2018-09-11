@@ -7,36 +7,143 @@
           <app-header-people [baseUrl]="baseUrl"></app-header-people>
           <app-adress></app-adress>
           <app-slogan [slogan]="'WORKSHOPS'"></app-slogan>
-          <!-- <pre>
-            {{(data$|async)?.programme_workshop|json}}
-          </pre> -->
+
       </ion-col>
     </ion-row>
-    <div *ngIf="data$ | async as data;">
-      <div class="wks" >
-        <ion-row>
-          <ion-col [ngClass]="{
-            col: true,
-            active: true,
-            front: currentUrl.toLowerCase().includes('front'),
-            back: currentUrl.toLowerCase().includes('back'),
-            mobile: currentUrl.toLowerCase().includes('mobile')
-          }">
-           xxx
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <h2 [ngClass]="{
-                text: true,
-                front: currentUrl.toLowerCase().includes('front'),
-                back: currentUrl.toLowerCase().includes('back'),
-                mobile: currentUrl.toLowerCase().includes('mobile')
-              }">{{data?.title?.rendered}}</h2>
-            <div class="programme" [innerHTML]="data?.programme_workshop|safeHtml "></div>
-          </ion-col>
-        </ion-row>                
+    <div *ngIf="workshops$ | async as wks">
+      <div *ngIf="allParcours$ | async as allParcours;">
+        <div class="wksCat" *ngIf="data$ | async as data;">
+          <div *ngFor="let p of allParentParcour">
+            <ion-row class="parcourTitleRow" (click)="goParcour($event, p)">
+              <ion-col padding [ngClass]="{
+                col: true,
+                front: p?.name.toLowerCase().includes('front'),
+                back: p?.name.toLowerCase().includes('back'),
+                mobile: p?.name.toLowerCase().includes('mobile'),
+                active: parentParcour.id === p.id
+              }">
+                <p class="section">{{p?.name}}</p>
+              </ion-col>
+            </ion-row>
+  
+            <div *ngIf="parentParcour.id === p.id">
+              <article>
+                <ion-row class="styled">
+                  <ion-col
+                    size="8"
+                    sizeXs="12"
+                    sizeSm="12"
+                    sizeMd="8"
+                    sizeLg="8"
+                    margin-top>
+                      <header>
+                        <p class="subTitle">{{currentParcour?.name}}</p>
+                        <h1 [ngClass]="{
+                            text: true,
+                            front: currentUrl.toLowerCase().includes('front'),
+                            back: currentUrl.toLowerCase().includes('back'),
+                            mobile: currentUrl.toLowerCase().includes('mobile')
+                          }">{{data?.title?.rendered}}</h1>
+                      </header>
+                  </ion-col>
+                  <ion-col
+                    size="4"
+                    sizeXs="12"
+                    sizeSm="12"
+                    sizeMd="4"
+                    sizeLg="4"
+                    margin-top></ion-col>
+                </ion-row>    
+                <ion-row>
+                  <ion-col
+                    size="6"
+                    sizeXs="12"
+                    sizeSm="12"
+                    sizeMd="6"
+                    sizeLg="6">
+                    <h2>Programme</h2>
+                    <div class="programme" [innerHTML]="data?.programme_workshop|safeHtml "></div>
+                  </ion-col>
+                  <ion-col
+                    size="6"
+                    sizeXs="12"
+                    sizeSm="12"
+                    sizeMd="6"
+                    sizeLg="6">
+                    <div class="detailListItem">
+                      <h2>Objectifs</h2>
+                      <div class="programme">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit odit iusto minus maxime sed nulla error iure minima, magni neque porro voluptate natus similique. Porro quis laboriosam pariatur fugit dolorem.</div>    
+                    </div>
+                    <div class="detailListItem">
+                      <h2>Informations</h2>
+                      <p>Prochaines dates: <span>{{data?.date_session_1_du}} - {{data?.date_session_1_au}}</span></p>
+                      <p>Durée: <span [innerHTML]="data?.desc_resume_workshop|safeHtml"></span></p>
+                    </div>
+                    <div class="detailListItem">
+                      <h2>Public cible</h2>
+                      <div class="programme">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</div>    
+                    </div>
+                  </ion-col>
+                </ion-row>                
+              </article>
+              
+              <aside>
+                <ion-row margin-top >
+                  <ion-col>
+                    <h2 [ngClass]="{
+                      text: true,
+                      front: currentUrl.toLowerCase().includes('front'),
+                      back: currentUrl.toLowerCase().includes('back'),
+                      mobile: currentUrl.toLowerCase().includes('mobile')
+                    }">Workshops similaires:</h2>  
+                  </ion-col>
+                </ion-row> 
+                <ion-row margin-bottom padding-bottom>
+                  <ion-col 
+                    size="4"
+                    sizeXs="12"
+                    sizeSm="12"
+                    sizeMd="4"
+                    sizeLg="4"  
+                    *ngFor="let wk of wks">
+                      <article (click)="go($event, wk)">
+                        <h2 [ngClass]="{
+                          text: true,
+                          front: currentUrl.split('workshops/')[1].split('/')[0].toLowerCase().includes('front'),
+                          back: currentUrl.split('workshops/')[1].split('/')[0].toLowerCase().includes('back'),
+                          mobile: currentUrl.split('workshops/')[1].split('/')[0].toLowerCase().includes('mobile')
+                        }">{{wk?.title.rendered}}</h2>
+                        <p>
+                          Dates: {{ wk?.date_session_1_du }} - {{ wk?.date_session_1_au }}
+                            <!-- <br/>
+                          <span [innerHtml]="workshop?.desc_resume_workshop"></span> -->
+                        </p>
+                      </article>
+      
+                  </ion-col>
+                </ion-row>
+              </aside>
+        
+
+            </div>
+          </div>
+
+          <!-- <ion-row>
+            <ion-col [ngClass]="{
+              col: true,
+              active: true,
+              front: currentUrl.toLowerCase().includes('front'),
+              back: currentUrl.toLowerCase().includes('back'),
+              mobile: currentUrl.toLowerCase().includes('mobile')
+            }">
+            {{parentParcour?.name}}
+            </ion-col>
+          </ion-row> -->
+       
+
+        </div>        
       </div>
+
 
     </div>
     <!-- <app-workshops></app-workshops>  -->

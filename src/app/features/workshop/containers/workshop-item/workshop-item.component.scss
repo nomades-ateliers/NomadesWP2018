@@ -8,4 +8,46 @@ app-workshop-item {
     ion-grid {
         padding: 0;
     }
+    header {
+        padding: 3rem 0 2rem;
+    }
+    ion-row.parcourTitleRow {
+        padding: 0 0 0.8rem ;
+    }
+    ion-row.styled ion-col {
+        border-bottom: solid 1px #9a9a9a;
+        margin-bottom: 2rem !important;
+        padding-bottom: 3rem !important;
+    }
+    h1 {
+        // font-size: 1.2rem;
+        font-weight: 400;
+        margin: 0.25rem 0 0.25rem;
+    }
+    h2 {
+        font-size: 1rem;
+        font-weight: 400;
+    }
+    p {
+        font-weight: 300;
+    }
+    p.subTitle {
+        text-transform: none;
+        color: #8f8f8f;
+        margin: 1rem 0 0.25rem;
+    }
+    .detailListItem {
+        h2 {
+            font-size: 1rem;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+        font-size: initial;
+        text-transform: none;
+        letter-spacing: initial;
+        padding-bottom: 1rem;
+    }
+    article {
+        margin: 0 !important;
+    }
  }
