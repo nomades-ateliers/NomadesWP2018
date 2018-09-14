@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'cursus', loadChildren: './features/cursus/cursus.module#CursusModule'},
   { path: 'blog', loadChildren: './features/blog/blog.module#BlogModule'},
   { path: 'page', loadChildren: './features/page/page.module#PageModule'},
+  { path: 'inscription', loadChildren: './features/inscription/inscription.module#InscriptionModule'},
   { path: '404', loadChildren: './features/not-found/not-found.module#NotFoundModule'},
   { path: '**', redirectTo: '404', pathMatch: 'full' }
 ];

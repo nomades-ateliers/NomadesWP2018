@@ -28,7 +28,7 @@
   
             <div *ngIf="parentParcour.id === p.id">
               <article>
-                <ion-row class="styled">
+                <ion-row  align-items-center>
                   <ion-col
                     size="8"
                     sizeXs="12"
@@ -54,7 +54,7 @@
                     sizeLg="4"
                     margin-top></ion-col>
                 </ion-row>    
-                <ion-row>
+                <ion-row class="styled">
                   <ion-col
                     size="6"
                     sizeXs="12"
@@ -84,11 +84,21 @@
                       <div class="programme">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</div>    
                     </div>
                   </ion-col>
-                </ion-row>                
+                </ion-row> 
+                <ion-row>
+                  <ion-col>
+                    <ion-button
+                      color="primary"
+                      margin-top
+                      (click)="inscription(data)">
+                      pré-inscription
+                    </ion-button> 
+                  </ion-col>
+                </ion-row>               
               </article>
               
               <aside>
-                <ion-row margin-top >
+                <ion-row class="styled">
                   <ion-col>
                     <h2 [ngClass]="{
                       text: true,

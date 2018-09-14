@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { AlertController } from '@ionic/angular';
 
 import { WpApiService } from '@app/shared/services';
 
@@ -27,6 +28,7 @@ export class WorkshopItemComponent implements OnInit {
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,
+    public alertController: AlertController,
     private _wpApi: WpApiService) { }
 
   ngOnInit() {
@@ -76,5 +78,38 @@ export class WorkshopItemComponent implements OnInit {
     const url = `./${this.currentUrl.split('/')[1]}/${this.currentUrl.split('/')[2]}/${item.slug}`;
     // console.log(url, item.slug);
     this._router.navigate([url]);
+  }
+
+  async inscription(item) {
+    console.log(item);
+    const alert = await this.alertController.create({
+      header: item.title.rendered,
+      subHeader: 'Pré-inscription',
+      message: `Vous allez être rediriger vers la page des inscriptions`,
+      buttons: [
+        {
+          text: `Annuler` ,
+          role: 'cancel',
+          handler: () => {
+            console.log('cancel', item.id);
+          }
+        },
+        {
+          text: `Continuer`,
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm', item.id);
+            let data = JSON.parse(localStorage.getItem('nomades_workshop') || '[]');
+            if (!data.find(i => i.id === item.id)) {
+              data = [...data, item];
+            }
+            localStorage.setItem('nomades_workshop', JSON.stringify(data));
+            this._router.navigate(['./inscription']);
+          }
+        },
+      ]
+    });
+
+    await alert.present();
   }
 }
