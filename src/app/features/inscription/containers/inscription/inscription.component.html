@@ -85,7 +85,7 @@
     <ion-row>
       <ion-col>
         <div text-left>
-          <ion-button [disabled]="!form.dirty && form.valid" (click)="submit()" >Envoyer inscription</ion-button>
+          <ion-button [disabled]="!(form.dirty === true && form.valid === true)" (click)="submit()" >Envoyer inscription</ion-button>
         </div>
       </ion-col>
     </ion-row>

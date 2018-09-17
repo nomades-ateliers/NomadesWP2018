@@ -16,7 +16,7 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
-  --ion-color-primary: #c33931;
+  --ion-color-primary: #B71C1C;
   --ion-color-primary-rgb: 195, 57, 49;
   --ion-color-primary-contrast: #fff;
   --ion-color-primary-contrast-rgb: 255,255,255;
@@ -88,7 +88,7 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
   --ion-color-dark-tint: #383838;
 
 
-  --ion-color-green: #387c2b;
+  --ion-color-green: #388E3C;
   --ion-color-green-rgb: 56, 124, 43;
   --ion-color-green-contrast: #fff;
   --ion-color-green-contrast-rgb: 255,255,255;
@@ -137,7 +137,7 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
     border-left: solid 12px;
   }
   .menuItemSpliPan[ng-reflect-router-link-active="true"] {
-    border-left: solid 12px #c33931 !important;
+    border-left: solid 12px #B71C1C !important;
   }
 
   .wks, .wksCat {
@@ -179,60 +179,60 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
     }
 
     .front {
-      color: #387c2b;;
+      color: #388E3C;;
     }
     .front.text:hover {
-      color: #387c2b;
+      color: #388E3C;
     }
     .front.col {
         background: #fff;
-        border: solid 1px #387c2b;
+        border: solid 1px #388E3C;
     }
     .front:hover, .front.active {
       color: #fff;
     }
     .front.col:hover, .front.col.active {
-      background: #387c2b;
-      border: solid 1px #387c2b;
+      background: #388E3C;
+      border: solid 1px #388E3C;
     }
     article.front:hover, article.front:focus, article.front:active, article.front.active {
-      border: solid 1px #387c2b;
+      border: solid 1px #388E3C;
     }
 
     .mobile {
-        color: #f6a01a;
+        color: #FFA000;
     }
     .mobile.text:hover {
-      color: #f6a01a;
+      color: #FFA000;
     }
     .mobile.col {
       background: #fff;
-      border: solid 1px #f6a01a;
+      border: solid 1px #FFA000;
     }
     .mobile:hover, .mobile.active {
       color: #fff;
     }
     .mobile.col:hover, .mobile.col.active {
-      background: #f6a01a;
-      border: solid 1px #f6a01a;
+      background: #FFA000;
+      border: solid 1px #FFA000;
     } 
 
     .back {
-        color: #0078AE;
+        color: #0288D1;
     }    
     .back.text:hover {
-      color: #0078AE;
+      color: #0288D1;
     }
     .back.col {
       background: #fff;
-      border: solid 1px #0078AE;
+      border: solid 1px #0288D1;
     }
     .back:hover, .back.active {
         color: #fff;
     }
     .back.col:hover, .back.col.active {
-      background: #0078AE;
-      border: solid 1px #0078AE;
+      background: #0288D1;
+      border: solid 1px #0288D1;
     }
 
 }
@@ -250,10 +250,10 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
       color: #c33a32;
   }
   .bleu {
-      color: #0078ae;
+      color: #0288D1;
   }
   .vert {
-      color: #387c2b;
+      color: #388E3C;
   }
 }
 

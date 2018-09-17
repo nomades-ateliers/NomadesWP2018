@@ -6,30 +6,28 @@
           <app-menu-nav [currentUrl]="currentUrl"></app-menu-nav>
           <app-header-people [baseUrl]="baseUrl"></app-header-people>
           <app-adress></app-adress>
-          <app-slogan></app-slogan>
+          <app-slogan [slogan]="(data$ | async)?.title?.rendered"></app-slogan>
           <div *ngIf="data$ | async as data;" margin>
             <div [innerHTML]="data?.content?.rendered|safeHtml "></div>
           </div>
       </ion-col>
     </ion-row>
 
-    <div [ngSwitch]="currentUrl">
-      <!-- <div *ngSwitchCase="'/workshops'"><app-workshops></app-workshops></div> -->
-      <!-- <app-workshops  *ngSwitchCase="'/workshops'"></app-workshops> -->
-      <ng-template [ngSwitchCase]="'/workshops'">
-        <!-- <app-workshops></app-workshops> -->
-        old comp.
-      </ng-template>
-      <ng-template [ngSwitchCase]="'/projets'">
-        projets...
-      </ng-template>
-      <ng-template [ngSwitchCase]="'/contact'">
-        contact...
-      </ng-template>
-      <ng-template ngSwitchDefault>
-        page template default
-      </ng-template>
-    </div>
+    <ion-row [ngSwitch]="currentUrl">
+      <ion-col>
+        <div *ngSwitchCase="'/workshops'">
+          <!-- <app-workshops></app-workshops> -->
+          workshops...
+        </div>
+        <div *ngSwitchCase="'/projets'">
+          projets...
+        </div>
+        <app-contact-page *ngSwitchCase="'/contact'"></app-contact-page>
+        <ng-template ngSwitchDefault>
+          page template default
+        </ng-template>        
+      </ion-col>
+    </ion-row>
 
     
   </ion-grid>

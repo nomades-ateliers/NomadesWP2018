@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-inscription',
@@ -27,30 +27,34 @@ export class InscriptionComponent implements OnInit {
   }
 
   ionViewWillLeave() {
-    this.form.patchValue({workshops: []});
+    this._buildForm();
+    console.log('form:', this.form.value.workshops);
   }
+
   ionViewWillEnter() {
-    console.log('enter...', JSON.parse(localStorage.getItem('nomades_workshop') || '[]'));
-    this.form.patchValue({workshops: []});
-    this.wksList = JSON.parse(localStorage.getItem('nomades_workshop') || '[]');
-    this.wksList.map(c => this.getControl().push(this._formBuilder.control(c)));
-    this.form.patchValue({workshops: this.wksList});
-    this.wksList.map(i => {
-      this.totalEcolage = this.totalEcolage + (+i.ecolage_wk);
-      return i;
+    // extract data from localstorage
+    const workshops = JSON.parse(localStorage.getItem('nomades_workshop') || '[]');
+    // build form control with correct object data
+    // + calculate total amount
+    workshops.map(c => {
+      this.totalEcolage = this.totalEcolage + (+c.ecolage_wk);
+      return this.getControl().push(this._formBuilder.control(c));
     });
+    // patch value to the form
+    this.form.patchValue({workshops});
+    console.log('form', this.form.value);
   }
 
   private _buildForm() {
     this.form = this._formBuilder.group({
-      name: [],
-      firstname: [],
-      bday: [],
-      job: [],
-      email: [],
-      adress: [],
-      npa: [],
-      city: [],
+      name: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      firstname: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      bday: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      job: [''],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      adress: [''],
+      npa: [''],
+      city: [''],
       workshops: this._formBuilder.array([])
     });
   }
@@ -80,5 +84,9 @@ export class InscriptionComponent implements OnInit {
     console.log(this.form.valid, this.form.value);
     // to prevent multiple sending action
     this.form.markAsPristine();
+    // rebuild form with initial data
+    this._buildForm();
+    // clear localstorage
+    localStorage.removeItem('nomades_workshop');
   }
 }

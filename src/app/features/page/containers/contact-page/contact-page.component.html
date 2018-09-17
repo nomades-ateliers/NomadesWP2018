@@ -1,0 +1,35 @@
+<form [formGroup]="form">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Nom:</ion-label>
+        <ion-input
+          ngDefaultControl
+          formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Prénom:</ion-label>
+        <ion-input
+          ngDefaultControl
+          formControlName="firstname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Email:</ion-label>
+        <ion-input
+          ngDefaultControl
+          formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Objet:</ion-label>
+        <ion-input
+          ngDefaultControl
+          formControlName="subject"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Message:</ion-label>
+        <ion-input
+          ngDefaultControl
+          formControlName="message"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button [disabled]="!(form.dirty === true && form.valid === true)" (click)="submit()" >Envoyer</ion-button>
+</form>
