@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { WpApiService } from '@app/shared/services';
+import { fadeAnim } from '@app/shared/animations/fade.animation';
+
 
 @Component({
   selector: 'app-cusrsus-item',
   templateUrl: './cusrsus-item.component.html',
-  styleUrls: ['./cusrsus-item.component.scss']
+  styleUrls: ['./cusrsus-item.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: [...fadeAnim]
 })
 export class CusrsusItemComponent implements OnInit {
 

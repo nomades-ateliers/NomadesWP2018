@@ -1,0 +1,27 @@
+<ng-container *ngIf="(projects$|async) as projects">
+  <ion-grid>
+    <div [@listAnimation]="(projects).length || 0">
+      <ion-row>
+          <ion-col 
+            size="4"
+            sizeXs="12"
+            sizeSm="12"
+            sizeMd="4"
+            sizeLg="4"
+            *ngFor="let projet of projects">
+            <article (click)="debug(projet)">
+              <a rel="noopener" href="{{ projet?.link_projet }}" target="_blank">
+                <figure>
+                  <img src="{{ projet?.featured_image_src_medium  }}" alt="">
+                  <figcaption>
+                    <h3>{{ projet?.title?.rendered }}</h3>
+                    <time>{{ projet?.project_year }}</time>
+                  </figcaption>
+                </figure>
+              </a>
+            </article>
+          </ion-col>
+        </ion-row>
+    </div>
+  </ion-grid>
+</ng-container>

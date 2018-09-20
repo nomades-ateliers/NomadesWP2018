@@ -15,7 +15,7 @@
         <p><b>Liste des workshops séléctionnés:</b></p>
         <form [formGroup]="form">
           <ion-list formArrayName="workshops">
-            <ion-item #wks[i] *ngFor="let wk of form.get('workshops').controls; let i = index" >
+            <ion-item #wks[i] *ngFor="let wk of form?.get('workshops')?.controls; let i = index" >
                 <ion-label>{{ form?.get('workshops').value[i]?.title?.rendered }} - <small><i>CHF {{form?.get('workshops').value[i]?.ecolage_wk}}.-</i></small></ion-label>
                 <ion-button slot="end" fill="clear" color="dark" (click)="removeItem(i)">
                     <ion-icon name="close-circle"></ion-icon>

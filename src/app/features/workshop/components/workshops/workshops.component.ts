@@ -29,7 +29,7 @@ export class WorkshopsComponent implements OnInit {
   }
 
   go(url: string) {
-    console.log('go: ', url);
+    console.log('...go: ', url);
     this._router.navigate(['/workshops/' + url]);
   }
 

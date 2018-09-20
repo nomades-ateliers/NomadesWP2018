@@ -31,5 +31,12 @@
           formControlName="message"></ion-input>
       </ion-item>
     </ion-list>
-    <ion-button [disabled]="!(form.dirty === true && form.valid === true)" (click)="submit()" >Envoyer</ion-button>
+    <ion-button
+    [disabled]="!(form.dirty === true && form.valid === true)"
+    class="g-recaptcha"
+    data-sitekey="6LdU2nAUAAAAAAmWbTeiV8ITYmrT_DPdaG4JF0JV"
+    data-callback="submit()">
+      Envoyer
+    </ion-button>
+    <!-- <ion-button [disabled]="!(form.dirty === true && form.valid === true)" (click)="submit()" >Envoyer</ion-button> -->
 </form>

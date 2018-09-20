@@ -19,9 +19,7 @@
           <!-- <app-workshops></app-workshops> -->
           workshops...
         </div>
-        <div *ngSwitchCase="'/projets'">
-          projets...
-        </div>
+        <app-projects-page *ngSwitchCase="'/projets'"></app-projects-page>
         <app-contact-page *ngSwitchCase="'/contact'"></app-contact-page>
         <ng-template ngSwitchDefault>
           page template default

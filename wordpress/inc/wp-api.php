@@ -204,5 +204,21 @@ add_filter( "rest_post_collection_params", function($query_params, $post_type){
                     'readonly'    => true,
                 );
                 return $query_params;
-            }, 10, 2);
+			}, 10, 2);
+			
+function getProjetLink() {
+	global $post;
+	$a = $post->ID;
+	$b = get_option('lien_projet');
+	// print_r(wp_api_theming_get_post_terms( $a ));
+	return wp_get_post_terms( $a );
+}
 
+register_rest_field( array( 'projet', 'page' ), 'link_projet', array(
+	'schema'       => array(
+		'type'        => 'array',
+		'description' => 'check if is home page.',
+		'context'     => array( 'view' ),
+	),
+	'get_callback' => 'getProjetLink',
+) );

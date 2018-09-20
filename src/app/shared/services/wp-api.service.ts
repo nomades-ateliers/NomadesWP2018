@@ -20,4 +20,8 @@ export class WpApiService {
   getRemoteData(query: {path: string, slug: string}) {
     return  this.http.get<any[]>('https://nomades.ch/wp-json/wp/v2/' + query.path + `?${query.slug}`);
   }
+
+  getProjectsData(query: {path: string, slug: string}) {
+    return  this.http.get<any[]>('https://nomades-projets.ch/wp-json/wp/v2/' + query.path + `?${query.slug}`);
+  }
 }

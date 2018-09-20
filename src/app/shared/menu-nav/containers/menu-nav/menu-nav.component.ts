@@ -24,10 +24,11 @@ export class MenuNavComponent implements OnInit {
   }
 
   goPage(page: any = null) {
+    console.log('goPage: ', page);
     if (!page) {
       return this.router.navigate(['/']);
     }
-    // console.log('page url slug-> ', page.url);
+    console.log('page url slug-> ', page.url);
     const url =  `/${(page.url) ? page.url.split('/').reverse()[0] || 'index' : 'index'}`;
     console.log('url', url);
     this.router.navigate([url]);

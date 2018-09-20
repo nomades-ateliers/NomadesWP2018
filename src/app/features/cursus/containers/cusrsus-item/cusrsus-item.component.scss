@@ -1,46 +1,48 @@
-.cursus {
-    padding: 0.4rem;
-    font-weight: 300;
-    font-size: 1.3rem;
-    letter-spacing: 0.1rem;
-    margin: 0;
-}
-.cursus .col {
-    transition: 250ms ease-in-out;
-    cursor: pointer;
-}
-.cursus .col.front{
-    background: #fff;
-    color: #388E3C;
-    border: solid 1px #388E3C;
-}
-.cursus .col.front:hover, .cursus .col.front.active{
-    background: #388E3C;
-    color: #fff;
-    border: solid 1px #388E3C;
-}
-.cursus .col.back{
-    background: #fff;
-    color: #0288D1;
-    border: solid 1px #0288D1;
-}
-.cursus .col.back:hover, .cursus .col.back.active{
-    background: #0288D1;
-    color: #fff;
-    border: solid 1px #0288D1;
-}
-.alignWithCard {
-    padding: 0;
-}
-.cursus img {
-    margin: 1rem 0;
-    max-width: 40px;
-    cursor: pointer;
-}
-.block4Inline {
-    padding: 0;
-    margin: 0;
-}
-:host ion-grid {
-    padding: 0;
+app-cusrsus-item {
+    .cursus {
+        padding: 0.4rem;
+        font-weight: 300;
+        font-size: 1.3rem;
+        letter-spacing: 0.1rem;
+        margin: 0;
+    }
+    .cursus .col {
+        transition: 250ms ease-in-out;
+        cursor: pointer;
+    }
+    .cursus .col.front{
+        background: #fff;
+        color: #388E3C;
+        border: solid 1px #388E3C;
+    }
+    .cursus .col.front:hover, .cursus .col.front.active{
+        background: #388E3C;
+        color: #fff;
+        border: solid 1px #388E3C;
+    }
+    .cursus .col.back{
+        background: #fff;
+        color: #0288D1;
+        border: solid 1px #0288D1;
+    }
+    .cursus .col.back:hover, .cursus .col.back.active{
+        background: #0288D1;
+        color: #fff;
+        border: solid 1px #0288D1;
+    }
+    .alignWithCard {
+        padding: 0;
+    }
+    .cursus img {
+        margin: 1rem 0;
+        max-width: 40px;
+        cursor: pointer;
+    }
+    .block4Inline {
+        padding: 0;
+        margin: 0;
+    }
+    ion-grid {
+        padding: 0;
+    }    
 }
