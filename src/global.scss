@@ -1,9 +1,8 @@
 // http://ionicframework.com/docs/theming/
+@import "~@ionic/angular/css/core.css";
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
-@import "~@ionic/angular/css/typography.css";
-@import "~@ionic/angular/css/colors.css";
-
+@import "~@ionic/angular/css/typography.css"; // TODO: for ionic-beta6 or ulterior, rename colors.css to core.css and move it as first line
 @import "~@ionic/angular/css/padding.css";
 @import "~@ionic/angular/css/float-elements.css";
 @import "~@ionic/angular/css/text-alignment.css";

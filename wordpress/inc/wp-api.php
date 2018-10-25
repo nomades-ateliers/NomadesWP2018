@@ -111,6 +111,13 @@ function check_isHomePage( $object ) {
 	return ($a == $b)?true:false;
 
 }
+function getProjetLink() {
+	global $post;
+	$a = $post->ID;
+	$b = get_option('lien_projet');
+	// print_r(wp_api_theming_get_post_terms( $a ));
+	return $b;
+}
 // add function to wp-api
 add_action( 'rest_api_init', function () {
   // add Menu endpoint
@@ -177,6 +184,17 @@ add_action( 'rest_api_init', function () {
 		),
 		'get_callback' => 'check_isHomePage',
 	) );
+  	// add custom post fielt to wp api
+  	function getProjetLinkWork() {
+		global $post;
+		$get_all_meta_values = get_post_custom($post->ID);
+		return $get_all_meta_values["lien_projet"][0];
+	}
+	register_rest_field( array( 'projet', 'page' ), 'link_projet', 		array(
+		'get_callback'    => 'getProjetLinkWork',
+		'update_callback' => null,
+		'schema'          => null,
+	) );
   // register_rest_route( 'wp/v2', 'get-by-slug', array(
   //   'methods' => 'GET',
   //   'callback' => 'my_theme_get_content_by_slug',
@@ -206,19 +224,6 @@ add_filter( "rest_post_collection_params", function($query_params, $post_type){
                 return $query_params;
 			}, 10, 2);
 			
-function getProjetLink() {
-	global $post;
-	$a = $post->ID;
-	$b = get_option('lien_projet');
-	// print_r(wp_api_theming_get_post_terms( $a ));
-	return wp_get_post_terms( $a );
-}
 
-register_rest_field( array( 'projet', 'page' ), 'link_projet', array(
-	'schema'       => array(
-		'type'        => 'array',
-		'description' => 'check if is home page.',
-		'context'     => array( 'view' ),
-	),
-	'get_callback' => 'getProjetLink',
-) );
+
+

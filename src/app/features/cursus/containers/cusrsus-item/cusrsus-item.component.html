@@ -1,14 +1,14 @@
 <app-header-app></app-header-app>
 <ion-content>
-  <ion-grid fixed>
+  <ion-grid fixed margin-bottom>
     <ion-row>
       <ion-col>
           <app-menu-nav [currentUrl]="'/index'"></app-menu-nav>
-          <app-header-people [baseUrl]="baseUrl"></app-header-people>
+          <app-header-people [baseUrl]="currentRoute?.toLowerCase()?.includes('front') ? baseUrl[0] : baseUrl[1]"></app-header-people>
           <app-adress></app-adress>
-          <app-slogan [slogan]="'FORMATIONS DIPLÔMANTES DANS LES METIERS DU WEB'"></app-slogan>
+          <app-slogan [slogan]="'FORMATIONS DIPLÔMANTES DANS LES METIERS DU WEB'" [link]="'./index'"></app-slogan>
           <div *ngIf="data$ | async as front;">
-            <div [innerHTML]="front?.content?.rendered|safeHtml "></div>
+            <div [innerHTML]="front?.content?.rendered|replaceBy|safeHtml"></div>
           </div>
       </ion-col>
     </ion-row>
@@ -20,84 +20,117 @@
             back: c?.name.toLowerCase().includes('back'),
             active: c.link.split('cursus/').reverse()[0] === currentRoute
         }" (click)="go(c.link.split('cursus/').reverse()[0])">{{c?.name}}</ion-col>
-      </ion-row> 
-
-      <div *ngIf="c.link.split('cursus/').reverse()[0] === currentRoute">
-        <ng-container *ngIf="(currentRoute.includes('front')) ? (frontEndFormations$|async) : (backEndFormations$|async) as dataToList;else spinner">
-          <ion-row  
-            margin-top 
-            justify-content-start 
-            *ngFor="let f of (currentRoute.includes('front')) ? (frontEndFormations$|async) : (backEndFormations$|async)">
-            <ion-grid>
-              <ion-row padding justify-content-start>
-                <ion-col class=" alignWithCard" align-self-start text-start>
-                  <span>{{f?.t_formation_b1}}</span>
-                  <h2 [ngStyle]="{
-                    color: (currentRoute.includes('front')) ? '#388E3C' : '#0288D1'
-                  }">{{f?.title?.rendered}}</h2>
-                </ion-col>
-                <ion-col size-xs="12" size-md="3" *ngIf="f?.content_block_formation_4.length > 0">
-                    <ion-card class="block4Inline">
-                      <ion-card-content>
-                        <p>
-                          <u>Prochaines dates</u>: <br/>
-                          {{f?.date_formation_du}} - {{f?.date_formation_au}}
-                        </p> 
-                        <!-- <ion-icon name="download"></ion-icon>   -->
-                        <img (click)="getdetail(f?.wp_custom_attachment?.url)" src="https://nomades.ch/wp-content/themes/theme_nomades/images/logo-acrobat-reader.jpg" alt="">
-                      </ion-card-content>
-                    </ion-card>
-                </ion-col>            
-              </ion-row>
-              <div [@listAnimation]="(dataToList).length || 0" >
-                <ion-row 
-                  
-                  margin-bottom
-                  class="row">
-                    <ion-col class="fadeSlow" size-xs="12" size-md="6" size-lg="3" *ngIf="f?.content_block_formation_1.length > 0">
-                        <app-item-card [color]="(c?.name.toLowerCase().includes('front')) ? '#388E3C' : '#0288D1'" [curcus]="{title: {rendered: f?.content_block_formation_1 }}"></app-item-card>
-                    </ion-col>
-                    <ion-col class="fadeSlow" size-xs="12" size-md="6" size-lg="3" *ngIf="f?.content_block_formation_2.length > 0">
-                        <app-item-card [color]="(c?.name.toLowerCase().includes('front')) ? '#388E3C' : '#0288D1'" [curcus]="{title: {rendered: f?.content_block_formation_2 }}"></app-item-card>
-                    </ion-col>
-                    <ion-col class="fadeSlow" size-xs="12" size-md="6" size-lg="3" *ngIf="f?.content_block_formation_3.length > 0">
-                        <app-item-card [color]="(c?.name.toLowerCase().includes('front')) ? '#388E3C' : '#0288D1'" [curcus]="{title: {rendered: f?.content_block_formation_3 }}"></app-item-card>
-                    </ion-col>
-                    <ion-col class="fadeSlow" size-xs="12" size-md="6" size-lg="3" *ngIf="f?.content_block_formation_4.length > 0">
-                        <app-item-card [color]="(c?.name.toLowerCase().includes('front')) ? '#388E3C' : '#0288D1'" [curcus]="{title: {rendered: f?.content_block_formation_4 }}"></app-item-card>
-                    </ion-col>
-                    <ion-col class="fadeSlow" size-xs="12" size-md="6" size-lg="3" *ngIf="!f?.content_block_formation_4.length > 0">
-                        <ion-card>
-                          <ion-card-content>
-                            <p>
-                              <u>Prochaines dates</u>: <br/>
-                              {{f?.date_formation_du}} - {{f?.date_formation_au}}
-                            </p> 
-                            <!-- <ion-icon name="download"></ion-icon>   -->
-                            <img (click)="getdetail(f?.wp_custom_attachment?.url)" src="https://nomades.ch/wp-content/themes/theme_nomades/images/logo-acrobat-reader.jpg" alt="">                    
-                          </ion-card-content>
-                        </ion-card>
-
-                    </ion-col>              
-                </ion-row>
-
-              </div>
-            </ion-grid>
-          </ion-row>  
-        </ng-container>
-        <ng-template #spinner>
-          <ion-grid>
-            <ion-row>
-              <ion-col text-center margin>
-                  <ion-spinner color="primary"></ion-spinner>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ng-template>
-      
-      </div>
-      
+      </ion-row>       
     </div>
+
+    <div class="cursus">
+      <ng-container *ngIf="(currentRoute.includes('front')) ? (frontEndFormations$|async) : (backEndFormations$|async) as dataToList;else spinner">
+        <ion-row  
+          margin-vertical 
+          justify-content-start 
+          *ngFor="let f of (currentRoute.includes('front')) ? (frontEndFormations$|async) : (backEndFormations$|async)">
+          <ion-grid margin-top>
+            <ion-row padding justify-content-start>
+              <ion-col class="alignWithCard" 
+                align-self-start 
+                text-start
+                size-xs="12" 
+                size-sm="12"
+                size-md="10"
+                size-lg="8">
+                <span>{{f?.t_formation_b1|replaceBy}}</span>
+                <h2 [ngStyle]="{
+                  color: (currentRoute.includes('front')) ? '#388E3C' : '#0288D1'
+                }">{{f?.title?.rendered|replaceBy}}</h2>
+              </ion-col>
+              <ion-col class="alignWithCard" 
+                align-self-start
+                text-right
+                size-xs="2" 
+                size-sm="6"
+                size-md="2"
+                size-lg="1" push-xs="10"  push-sm="1" push-md="0">
+                <img (click)="getdetail(f?.wp_custom_attachment?.url)" src="https://nomades.ch/wp-content/themes/theme_nomades/images/logo-acrobat-reader.jpg" alt="">
+              </ion-col>
+              <ion-col class="alignWithCard" 
+                align-self-start
+                size-xs="10" 
+                size-sm="6"
+                size-md="12"
+                size-lg="3" pull-xs="2" pull-sm="6" pull-md="0">
+                  <p class="nextTime">
+                    <u>Prochaines dates</u> <br/>
+                    {{f?.date_formation_du}} - {{f?.date_formation_au}}
+                  </p>     
+
+              </ion-col>
+              <!-- <ion-col size-xs="12" size-md="3" *ngIf="f?.content_block_formation_4.length > 0">
+                  <ion-card class="block4Inline">
+                    <ion-card-content>
+                      <p>
+                        <u>Prochaines dates</u>: <br/>
+                        {{f?.date_formation_du}} - {{f?.date_formation_au}}
+                      </p> 
+                      <img (click)="getdetail(f?.wp_custom_attachment?.url)" src="https://nomades.ch/wp-content/themes/theme_nomades/images/logo-acrobat-reader.jpg" alt="">
+                    </ion-card-content>
+                  </ion-card>
+              </ion-col>             -->
+            </ion-row>
+            <div [@listAnimation]="(dataToList).length || 0" >
+              <ion-row 
+                
+                margin-bottom
+                class="row">
+                  <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3" *ngIf="f?.content_block_formation_1.length > 0">
+                      <app-item-card [color]="(currentRoute.toLowerCase().includes('front')) ? '#388E3C' : '#0288D1'" [curcus]="{title: {rendered: f?.content_block_formation_1|replaceBy }}"></app-item-card>
+                  </ion-col>
+                  <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3" *ngIf="f?.content_block_formation_2.length > 0">
+                      <app-item-card [color]="(currentRoute.toLowerCase().includes('front')) ? '#388E3C' : '#0288D1'" [curcus]="{title: {rendered: f?.content_block_formation_2|replaceBy }}"></app-item-card>
+                  </ion-col>
+                  <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3" *ngIf="f?.content_block_formation_3.length > 0">
+                      <app-item-card [color]="(currentRoute.toLowerCase().includes('front')) ? '#388E3C' : '#0288D1'" [curcus]="{title: {rendered: f?.content_block_formation_3|replaceBy}}"></app-item-card>
+                  </ion-col>
+                  <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3" *ngIf="f?.content_block_formation_4.length > 0">
+                      <app-item-card [color]="(currentRoute.toLowerCase().includes('front')) ? '#388E3C' : '#0288D1'" [curcus]="{title: {rendered: f?.content_block_formation_4|replaceBy }}"></app-item-card>
+                  </ion-col>
+                  <!-- <ion-col class="fadeSlow" size-xs="12" size-md="6" size-lg="3" *ngIf="!f?.content_block_formation_4.length > 0">
+                      <ion-card>
+                        <ion-card-content>
+                          <p>
+                            <u>Prochaines dates</u>: <br/>
+                            {{f?.date_formation_du}} - {{f?.date_formation_au}}
+                          </p> 
+                          <img (click)="getdetail(f?.wp_custom_attachment?.url)" src="https://nomades.ch/wp-content/themes/theme_nomades/images/logo-acrobat-reader.jpg" alt="">                    
+                        </ion-card-content>
+                      </ion-card>
+
+                  </ion-col>               -->
+              </ion-row>
+
+            </div>
+          </ion-grid>
+        </ion-row>  
+ 
+        <ion-row margin-bottom class="timeline">
+          <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>10 jours</span></ion-col>
+          <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>20 jours</span></ion-col>
+          <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>30 jours</span></ion-col>
+          <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>40 jours</span></ion-col>
+        </ion-row>
+
+      </ng-container>
+      <ng-template #spinner>
+        <ion-grid>
+          <ion-row>
+            <ion-col text-center margin>
+                <ion-spinner color="primary"></ion-spinner>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ng-template>
+    
+    </div>
+
   </ion-grid>
   <app-footer></app-footer>
 </ion-content>

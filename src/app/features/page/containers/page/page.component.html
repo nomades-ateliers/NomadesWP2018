@@ -7,22 +7,23 @@
           <app-header-people [baseUrl]="baseUrl"></app-header-people>
           <app-adress></app-adress>
           <app-slogan [slogan]="(data$ | async)?.title?.rendered"></app-slogan>
-          <div *ngIf="data$ | async as data;" margin>
-            <div [innerHTML]="data?.content?.rendered|safeHtml "></div>
+          <div *ngIf="currentUrl !== '/nomades'">
+            <div *ngIf="data$ | async as data" margin>
+              <div [innerHTML]="data?.content?.rendered|replaceBy|safeHtml "></div>
+            </div>          
           </div>
+
       </ion-col>
     </ion-row>
 
     <ion-row [ngSwitch]="currentUrl">
       <ion-col>
-        <div *ngSwitchCase="'/workshops'">
-          <!-- <app-workshops></app-workshops> -->
-          workshops...
-        </div>
         <app-projects-page *ngSwitchCase="'/projets'"></app-projects-page>
         <app-contact-page *ngSwitchCase="'/contact'"></app-contact-page>
         <ng-template ngSwitchDefault>
-          page template default
+          <div *ngIf="(data$ | async) as data;" margin>
+            <div [innerHTML]="data?.content?.rendered|replaceBy|safeHtml "></div>
+          </div>
         </ng-template>        
       </ion-col>
     </ion-row>

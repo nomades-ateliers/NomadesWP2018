@@ -4,8 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+// import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+// import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -43,11 +43,13 @@ export const APP_CONFIG_PROVIDER = [
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    IonicModule.forRoot()
+    IonicModule.forRoot({
+      mode: 'md'
+    })
   ],
   providers: [
-    StatusBar,
-    SplashScreen,
+    // StatusBar,
+    // SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ...APP_CONFIG_PROVIDER
   ],

@@ -5,13 +5,16 @@
     <ion-row>
       <ion-col>
           <app-menu-nav [currentUrl]="currentUrl"></app-menu-nav>
-          <app-header-people [baseUrl]="baseUrl"></app-header-people>
+          <app-header-people *ngIf="currentUrl?.toLowerCase()?.includes('front')" [baseUrl]="baseUrl[0]"></app-header-people>
+          <app-header-people *ngIf="currentUrl?.toLowerCase()?.includes('back')" [baseUrl]="baseUrl[2]"></app-header-people>
+          <app-header-people *ngIf="currentUrl?.toLowerCase()?.includes('mobile')" [baseUrl]="baseUrl[1]"></app-header-people>
           <app-adress></app-adress>
-          <app-slogan [slogan]="'WORKSHOPS'"></app-slogan>
+          <app-slogan [slogan]="'WORKSHOPS'" [link]="'./workshops'"></app-slogan>
       </ion-col>
     </ion-row>
 
     <div *ngIf="data$|async as data;" >
+      <!-- block Workshop type -->
       <div class="wksCat" *ngFor="let c of parcours">
           <ion-row justify-content-start>
             <ion-col align-self-start [ngClass]="{
@@ -22,49 +25,57 @@
                 active: c.link.split('parcours/').reverse()[0] === currentUrl.split('workshops/').reverse()[0]
             }" (click)="go(c.link.split('parcours/').reverse()[0])">{{c?.name}}</ion-col>
           </ion-row> 
-          <div *ngIf="c.link.split('parcours/').reverse()[0] === currentUrl.split('workshops/').reverse()[0]">
-            <ion-row class="wks">
-                <ion-col
-                  size="4"
-                  sizeXs="12"
-                  sizeSm="12"
-                  sizeMd="4"
-                  sizeLg="4"   
-                  *ngFor="let d of data">
-                    <ng-container *ngIf="(workshops$|async|filterBy:{prop: 'parcours', value: d?.id}) as workshops">
-                      <section [@listAnimation]="(workshops).length || 0">
-                        <h1>{{d?.name}}</h1>
-                        <!-- <pre>{{d|json}}</pre> -->
-                        <!-- LOOP ALL ITEMS WITH SAME CAT ID -->
-                        <article [ngClass]="{
+      </div>
+
+      <!-- bof new -->
+      <!-- <pre>{{data|json}}</pre> -->
+      <div>
+        <ion-row class="wks">
+            <ion-col
+              size="4"
+              sizeXs="12"
+              sizeSm="12"
+              sizeMd="4"
+              sizeLg="4"   
+              *ngFor="let d of data" [ngClass]="{
+                    front: currentUrl.toLowerCase().includes('front'),
+                    back: currentUrl.toLowerCase().includes('back'),
+                    mobile: currentUrl.toLowerCase().includes('mobile')
+                  }">
+                <ng-container *ngIf="(workshops$|async|filterBy:{prop: 'parcours', value: d?.id}) as workshops">
+                  <!-- <section [@listAnimation]="(workshops).length || 0"> -->
+                  <section>
+                    <h1>{{d?.name|replaceBy}}</h1>
+                    <!-- <pre>{{d|json}}</pre> -->
+                    <!-- LOOP ALL ITEMS WITH SAME CAT ID -->
+                    <article [ngClass]="{
+                          text: true,
+                          front: c?.name.toLowerCase().includes('front'),
+                          back: c?.name.toLowerCase().includes('back'),
+                          mobile: c?.name.toLowerCase().includes('mobile')
+                      }" 
+                      (click)="displayDetail(workshop)" 
+                      *ngFor="let workshop of (workshops)">
+                      <div>
+                        <h2 [ngClass]="{
                               text: true,
                               front: c?.name.toLowerCase().includes('front'),
                               back: c?.name.toLowerCase().includes('back'),
                               mobile: c?.name.toLowerCase().includes('mobile')
-                          }" 
-                          (click)="displayDetail(workshop)" 
-                          *ngFor="let workshop of (workshops)">
-                          <div>
-                            <h2 [ngClass]="{
-                                  text: true,
-                                  front: c?.name.toLowerCase().includes('front'),
-                                  back: c?.name.toLowerCase().includes('back'),
-                                  mobile: c?.name.toLowerCase().includes('mobile')
-                              }">{{workshop?.title.rendered}}</h2>
-                            <p>
-                              Dates: {{ workshop?.date_session_1_du }} - {{ workshop?.date_session_1_au }}
-                              <!-- <br/>
-                              <span [innerHtml]="workshop?.desc_resume_workshop"></span> -->
-                            </p>
-                          </div>
-                        </article>
-                      </section>
+                          }">{{workshop?.title.rendered|replaceBy}}</h2>
+                        <p>
+                          Dates: {{ workshop?.date_session_1_du }} - {{ workshop?.date_session_1_au }}
+                          <!-- <br/>
+                          <span [innerHtml]="workshop?.desc_resume_workshop"></span> -->
+                        </p>
+                      </div>
+                    </article>
+                  </section>
 
-                    </ng-container>
-                  
-                </ion-col>
-              </ion-row>
-          </div>
+                </ng-container>
+              
+            </ion-col>
+          </ion-row>
       </div>
 
     </div>

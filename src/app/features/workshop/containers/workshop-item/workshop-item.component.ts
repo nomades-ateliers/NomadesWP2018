@@ -23,8 +23,12 @@ export class WorkshopItemComponent implements OnInit {
   public allParentParcour: any[];
   public workshops$: Observable<any>;
   public currentUrl: any;
-  baseUrl = 'https://nomades.ch/wp-content/themes/theme_nomades';
-
+  public baseUrl = [
+    'https://nomades.ch/wp-content/uploads/2018/10/nomade04-.png', // vert
+    'https://nomades.ch/wp-content/uploads/2018/10/nomade02-.png', // default => TODO: replace by yellow
+    'https://nomades.ch/wp-content/uploads/2018/10/nomade03-.png' // bleu
+  ];
+  
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,

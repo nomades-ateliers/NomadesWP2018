@@ -1,0 +1,17 @@
+
+<ion-list>
+
+
+  <ion-item (click)="navigate(element)" *ngFor="let element of fileElements"> 
+    <ion-title>
+      {{element?.name}}
+    </ion-title>
+    <ion-icon slot="start" name="{{(element?.isFolder ? 'folder' : 'document')}}"></ion-icon>
+  </ion-item>      
+
+</ion-list>
+
+
+
+
+ 

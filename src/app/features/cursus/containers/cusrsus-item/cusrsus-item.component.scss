@@ -1,12 +1,31 @@
 app-cusrsus-item {
+
     .cursus {
+        span {
+            font-weight: 300;
+        }
+        p {
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
         padding: 0.4rem;
-        font-weight: 300;
         font-size: 1.3rem;
-        letter-spacing: 0.1rem;
+        // letter-spacing: 0.1rem;
         margin: 0;
+
+        .alignWithCard {
+            span {
+                color: #575757;
+            }
+            h2 {
+                margin-top: 0.2rem;
+            }
+  
+        }
     }
     .cursus .col {
+        font-weight: 300;
         transition: 250ms ease-in-out;
         cursor: pointer;
     }
@@ -33,9 +52,23 @@ app-cusrsus-item {
     .alignWithCard {
         padding: 0;
     }
-    .cursus img {
-        margin: 1rem 0;
-        max-width: 40px;
+    p.nextTime {
+        font-size: 1rem;
+        line-height: 1.8rem;
+        margin: 0;
+        margin-top: -5px;
+        padding-left: 1.6rem;
+    }
+    @media screen and (max-width: 991px) {
+        p.nextTime {
+            padding-left: 0;
+        }
+    }
+    .cursus ion-col img {
+        margin: 0;
+        width: 3.5rem;
+        padding-right: 10px;
+        // max-width: 80px;
         cursor: pointer;
     }
     .block4Inline {
@@ -44,5 +77,21 @@ app-cusrsus-item {
     }
     ion-grid {
         padding: 0;
-    }    
+    }   
+    .timeline {
+        .fadeSlow {
+            max-height: 1.2rem;
+            padding: 0 1rem;
+             span {
+                text-align: right;
+                border-bottom: 1px solid;
+                border-left: 1px solid;
+                border-color: #333;
+                padding: 0 0 0.3rem 1rem;
+                width: 100%;
+                display: inline-block;
+                font-size: 1rem;
+             }
+        }
+    } 
 }

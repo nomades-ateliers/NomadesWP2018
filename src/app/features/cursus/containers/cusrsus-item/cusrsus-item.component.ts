@@ -24,7 +24,11 @@ export class CusrsusItemComponent implements OnInit {
   public frontEndFormations$: Observable<any[]>;
   public backEndFormations$: Observable<any[]>;
 
-  baseUrl = 'https://nomades.ch/wp-content/themes/theme_nomades';
+  baseUrl = [
+    'https://nomades.ch/wp-content/uploads/2018/10/nomade01-.png',
+    'https://nomades.ch/wp-content/uploads/2018/10/nomade03-.png',
+  ]
+
   constructor(
     private _wpApi: WpApiService,
     private _route: ActivatedRoute,

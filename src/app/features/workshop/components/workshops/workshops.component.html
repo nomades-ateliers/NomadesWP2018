@@ -8,7 +8,7 @@
     back: p?.name.toLowerCase().includes('back'),
     mobile: p?.name.toLowerCase().includes('mobile')
   }">
-    <p class="section">{{p?.name}}</p>
+    <p class="section">{{p?.name|replaceBy}}</p>
   </ion-col>
 </ion-row>
 

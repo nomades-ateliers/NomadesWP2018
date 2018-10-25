@@ -6,9 +6,11 @@
           <app-menu-nav [currentUrl]="'/index'"></app-menu-nav>
           <app-header-people [baseUrl]="baseUrl"></app-header-people>
           <app-adress></app-adress>
-          <div *ngIf="data$ | async as frontPage;">
-            <div [innerHTML]="frontPage?.content?.rendered|safeHtml "></div>
-          </div>
+          <app-slogan [slogan]="'FORMATIONS DIPLÔMANTES DANS LES METIERS DU WEB'"></app-slogan>
+
+          <!-- <div *ngIf="data$ | async as frontPage;">
+            <div [innerHTML]="frontPage?.content?.rendered|replaceBy|safeHtml "></div>
+          </div> -->
       </ion-col>
     </ion-row>
     <ion-row class="cursus" *ngFor="let c of cursus$|async">

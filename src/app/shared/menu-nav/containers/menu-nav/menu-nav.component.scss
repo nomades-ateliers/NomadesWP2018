@@ -33,18 +33,7 @@
     margin-right: 29px;
     cursor: pointer;
   }
-  .titre_right {
-    display: inline-block;
-    color: #c33a32;
-    font-size: 1.3rem;
-    font-family: "AkzidenzGrotesk-Light",Arial,Helvetica,sans-serif;
-    line-height: 1.5em;
-    padding-left: 30px;
-    padding-bottom: 2px;
-    position: relative;
-    letter-spacing: 0.01em;
-    border-left: 1px solid #c33a32;
-  }
+
   .nav_container {
     min-height: 48px;
   }
@@ -151,6 +140,9 @@
         }
       }
     }
+  }
+  .titre_right {
+    text-align: right;
   }
   .nav_menu.fixed::before {
       content: '';

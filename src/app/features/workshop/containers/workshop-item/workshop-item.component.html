@@ -4,9 +4,11 @@
     <ion-row>
       <ion-col>
           <app-menu-nav [currentUrl]="currentUrl"></app-menu-nav>
-          <app-header-people [baseUrl]="baseUrl"></app-header-people>
+          <app-header-people *ngIf="currentUrl?.toLowerCase()?.includes('front')" [baseUrl]="baseUrl[0]"></app-header-people>
+          <app-header-people *ngIf="currentUrl?.toLowerCase()?.includes('back')" [baseUrl]="baseUrl[2]"></app-header-people>
+          <app-header-people *ngIf="currentUrl?.toLowerCase()?.includes('mobile')" [baseUrl]="baseUrl[1]"></app-header-people>
           <app-adress></app-adress>
-          <app-slogan [slogan]="'WORKSHOPS'"></app-slogan>
+          <app-slogan [slogan]="'WORKSHOPS'" [link]="'./workshops'"></app-slogan>
 
       </ion-col>
     </ion-row>
@@ -22,7 +24,7 @@
                 mobile: p?.name.toLowerCase().includes('mobile'),
                 active: parentParcour.id === p.id
               }">
-                <p class="section">{{p?.name}}</p>
+                <p class="section">{{p?.name|replaceBy}}</p>
               </ion-col>
             </ion-row>
   
@@ -37,13 +39,13 @@
                     sizeLg="8"
                     margin-top>
                       <header>
-                        <p class="subTitle">{{currentParcour?.name}}</p>
+                        <p class="subTitle">{{currentParcour?.name|replaceBy}}</p>
                         <h1 [ngClass]="{
                             text: true,
                             front: currentUrl.toLowerCase().includes('front'),
                             back: currentUrl.toLowerCase().includes('back'),
                             mobile: currentUrl.toLowerCase().includes('mobile')
-                          }">{{data?.title?.rendered}}</h1>
+                          }">{{data?.title?.rendered|replaceBy}}</h1>
                       </header>
                   </ion-col>
                   <ion-col
@@ -62,7 +64,7 @@
                     sizeMd="6"
                     sizeLg="6">
                     <h2>Programme</h2>
-                    <div class="programme" [innerHTML]="data?.programme_workshop|safeHtml "></div>
+                    <div class="programme" [innerHTML]="data?.programme_workshop|replaceBy|safeHtml "></div>
                   </ion-col>
                   <ion-col
                     size="6"
@@ -77,7 +79,7 @@
                     <div class="detailListItem">
                       <h2>Informations</h2>
                       <p>Prochaines dates: <span>{{data?.date_session_1_du}} - {{data?.date_session_1_au}}</span></p>
-                      <p>Durée: <span [innerHTML]="data?.desc_resume_workshop|safeHtml"></span></p>
+                      <p>Durée: <span [innerHTML]="data?.desc_resume_workshop|replaceBy|safeHtml"></span></p>
                     </div>
                     <div class="detailListItem">
                       <h2>Public cible</h2>
@@ -122,7 +124,7 @@
                           front: currentUrl.split('workshops/')[1].split('/')[0].toLowerCase().includes('front'),
                           back: currentUrl.split('workshops/')[1].split('/')[0].toLowerCase().includes('back'),
                           mobile: currentUrl.split('workshops/')[1].split('/')[0].toLowerCase().includes('mobile')
-                        }">{{wk?.title.rendered}}</h2>
+                        }">{{wk?.title.rendered|replaceBy}}</h2>
                         <p>
                           Dates: {{ wk?.date_session_1_du }} - {{ wk?.date_session_1_au }}
                             <!-- <br/>

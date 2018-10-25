@@ -11,13 +11,14 @@ app-front-page {
     
     .cursus {
         padding: 0.4rem;
-        font-weight: 300;
+        // font-weight: 300;
         font-size: 1.3rem;
-        letter-spacing: 0.1rem;
+        // letter-spacing: 0.1rem;
         margin: 0;
         cursor: pointer;
     }
     .cursus .col {
+        font-weight: 300;
         transition: 250ms ease-in-out;
     }
     .cursus .col.front {

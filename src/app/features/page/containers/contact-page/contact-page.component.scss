@@ -1,0 +1,16 @@
+app-contact-page {
+    .contactContainer {
+        background: #333;   
+        padding: 1rem 0;
+        ion-label { 
+            color: #fff;
+        }
+        ion-input, ion-textarea {
+            background: #fff;   
+            color: #333;   
+        }
+        ion-list {
+            background: transparent;
+        }
+    }
+}

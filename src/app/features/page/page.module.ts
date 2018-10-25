@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@app/shared/shared.module';
@@ -8,6 +8,7 @@ import { PageComponent } from './containers/page/page.component';
 import { ContactPageComponent } from './containers/contact-page/contact-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProjectsPageComponent } from './containers/projects-page/projects-page.component';
+
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { ProjectsPageComponent } from './containers/projects-page/projects-page.
     ContactPageComponent,
     ProjectsPageComponent,
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class PageModule { }

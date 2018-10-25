@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, forwardRef } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { PipesModule } from '@app/shared/pipes';
 import { WpApiService } from '@app/shared/services';
@@ -19,11 +19,11 @@ const SHARED_COMPONENTS: any[] = [
   ItemCardComponent,
   SloganComponent,
   HeaderAppComponent,
-  FooterComponent
+  FooterComponent,
 ];
 const SHARED_SERVICES: any[] = [
   // add your shared services here
-  WpApiService
+  WpApiService,
 ];
 const SHARED_IMPORT_MODULES: any[] = [
   // add your import available to export here

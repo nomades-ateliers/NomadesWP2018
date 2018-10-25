@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-header-people',
   templateUrl: './header-people.component.html',
-  styleUrls: ['./header-people.component.scss']
+  styleUrls: ['./header-people.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HeaderPeopleComponent implements OnInit {
 

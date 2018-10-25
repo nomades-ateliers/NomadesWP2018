@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 export class InscriptionComponent implements OnInit {
 
   currentUrl: any;
-  baseUrl = 'https://nomades.ch/wp-content/themes/theme_nomades';
+  baseUrl = 'https://nomades.ch/wp-content/uploads/2018/10/nomade02-.png';
   form: FormGroup;
   wksList: any[];
   totalEcolage = 0;

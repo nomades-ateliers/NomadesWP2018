@@ -1,5 +1,18 @@
-<div>
-  <div>
-    <h1>{{slogan}}</h1>
+<div class="stdBlock">
+  <div *ngIf="link; else simple">
+    <div>
+      <h1 class="cursor" (click)="go()">{{slogan}}</h1>
+    </div>
   </div>
+  <ng-template #simple>
+    <div>
+      <div>
+        <h1>{{slogan}}</h1>
+      </div>
+    </div>
+  </ng-template>
 </div>
+
+<!-- <div class="lightBlock">
+  <h1>{{slogan}}</h1>
+</div> -->

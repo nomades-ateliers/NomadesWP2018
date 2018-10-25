@@ -1,7 +1,14 @@
 app-workshop-category {
-  
+    .wks {
+      opacity: 0;
+      transition: all 250ms ease !important;
+    }
    
-
+    article {
+      min-height: 130px;
+      height: 100%;
+      transition: all 250ms ease !important;
+    }
     h1 {
       font-size: 1.2rem;
       font-weight: 300;

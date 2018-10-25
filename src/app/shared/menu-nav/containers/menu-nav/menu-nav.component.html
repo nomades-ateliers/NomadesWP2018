@@ -6,10 +6,19 @@
       <ion-grid>
   
         <ion-row class="nav-header">
-          <ion-col class="border" (click)="goPage()">
+          <ion-col
+            size-xs="12"
+            size-sm="9"
+            size-md="9" class="border" (click)="goPage()">
             <h1>{{config?.site_title}}</h1>
           </ion-col>
-  
+          <!-- <ion-col
+            size-xs="12"
+            size-sm="3"
+            size-md="3" class="border" (click)="goPage({url: '/auth'})">
+            <p>espace élève</p>
+          </ion-col>   -->
+          
           <!-- <ion-col class="border">
             <span>{{config?.site_description}}</span>
           </ion-col> -->

@@ -1,8 +1,6 @@
 import { Component, Inject, ViewEncapsulation } from '@angular/core';
 
 import { Platform , MenuController} from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router, ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { AppConfig } from '@app/app-config.token';
@@ -22,8 +20,6 @@ export class AppComponent {
   constructor(
     @Inject(AppConfig) public readonly config: any,
     private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
     public _router: Router,
     public menuCtl: MenuController
   ) {
@@ -47,11 +43,11 @@ export class AppComponent {
       if (this.platform.is('ios')) {
           console.log('running on iOS device!');
       }
-      if (this.platform.is('mobileweb')) {
-          console.log('running in a browser on mobile!');
-      }
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      // if (this.platform.is('mobileweb')) {
+      //     console.log('running in a browser on mobile!');
+      // }
+      // this.statusBar.styleDefault();
+      // this.splashScreen.hide();
       this.menuItems = this.config.menu;
       this.mobileNavigation = false; // !(this.platform.width() < 766);
       console.log('this.mobileNavigation', this.mobileNavigation);

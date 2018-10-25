@@ -9,7 +9,7 @@
             sizeMd="4"
             sizeLg="4"
             *ngFor="let projet of projects">
-            <article (click)="debug(projet)">
+            <article >
               <a rel="noopener" href="{{ projet?.link_projet }}" target="_blank">
                 <figure>
                   <img src="{{ projet?.featured_image_src_medium  }}" alt="">

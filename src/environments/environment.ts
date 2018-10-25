@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 export const environment = {
   production: false,
-  wpBase: 'wp-json/wp/v2/'
+  wpBase: 'https://nomades.ch/wp-json/wp/v2/'
 };
 
 /*

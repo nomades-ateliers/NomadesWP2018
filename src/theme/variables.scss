@@ -234,7 +234,20 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
       background: #0288D1;
       border: solid 1px #0288D1;
     }
-
+     
+    ion-col.back article h2,
+    ion-col.back:hover section, ion-col.back:active section {
+      color: #0288D1
+    }  
+    
+    ion-col.front article h2,
+    ion-col.front:hover section, ion-col.front:active section  {
+      color: #388E3C
+    }
+    ion-col.mobile article h2,
+    ion-col.mobile:hover section, ion-col.mobile:active section  {
+      color: #FFA000
+    }
 }
 .titre_WORKSHOP{
     margin-top:60px!important;

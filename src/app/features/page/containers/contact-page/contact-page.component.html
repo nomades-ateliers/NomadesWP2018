@@ -1,42 +1,55 @@
-<form [formGroup]="form">
-    <ion-list>
-      <ion-item>
-        <ion-label position="floating">Nom:</ion-label>
-        <ion-input
-          ngDefaultControl
-          formControlName="name"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Prénom:</ion-label>
-        <ion-input
-          ngDefaultControl
-          formControlName="firstname"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Email:</ion-label>
-        <ion-input
-          ngDefaultControl
-          formControlName="email"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Objet:</ion-label>
-        <ion-input
-          ngDefaultControl
-          formControlName="subject"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Message:</ion-label>
-        <ion-input
-          ngDefaultControl
-          formControlName="message"></ion-input>
-      </ion-item>
-    </ion-list>
-    <ion-button
-    [disabled]="!(form.dirty === true && form.valid === true)"
-    class="g-recaptcha"
-    data-sitekey="6LdU2nAUAAAAAAmWbTeiV8ITYmrT_DPdaG4JF0JV"
-    data-callback="submit()">
-      Envoyer
-    </ion-button>
-    <!-- <ion-button [disabled]="!(form.dirty === true && form.valid === true)" (click)="submit()" >Envoyer</ion-button> -->
-</form>
+<div class="contactContainer">
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="fixed">Nom:</ion-label>
+            <ion-input
+              ngDefaultControl
+              formControlName="nom"></ion-input>
+          </ion-item>     
+          <ion-item>
+            <ion-label position="fixed">Prénom:</ion-label>
+            <ion-input
+              ngDefaultControl
+              formControlName="prenom"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="fixed">Email:</ion-label>
+            <ion-input
+              ngDefaultControl
+              formControlName="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="fixed">Objet:</ion-label>
+            <ion-input
+              ngDefaultControl
+              formControlName="objet"></ion-input>
+          </ion-item> 
+          <ion-item>
+            <ion-label position="fixed">Message:</ion-label>
+            <ion-textarea
+              ngDefaultControl
+              formControlName="message"></ion-textarea>
+          </ion-item>
+
+          <div id='recaptcha' class="g-recaptcha"
+            data-sitekey="6LeAHWEUAAAAAD9DQDvlI8EMFkfNvf69SUtJpnt3"
+            data-callback="onSubmit"
+            data-size="invisible"></div>
+          <div padding>
+            <ion-button
+              [disabled]="!(form.dirty === true && form.valid === true)"
+              (click)="submit()">
+                Envoyer
+            </ion-button>
+          </div>
+        </ion-col>
+        <ion-col>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>  
+</div>
