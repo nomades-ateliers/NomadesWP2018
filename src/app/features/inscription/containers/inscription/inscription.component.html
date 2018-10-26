@@ -10,85 +10,170 @@
 
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="(data$|async) as data"> 
       <ion-col>
-        <p><b>Liste des workshops séléctionnés:</b></p>
-        <form [formGroup]="form">
-          <ion-list formArrayName="workshops">
-            <ion-item #wks[i] *ngFor="let wk of form?.get('workshops')?.controls; let i = index" >
-                <ion-label>{{ form?.get('workshops').value[i]?.title?.rendered }} - <small><i>CHF {{form?.get('workshops').value[i]?.ecolage_wk}}.-</i></small></ion-label>
-                <ion-button slot="end" fill="clear" color="dark" (click)="removeItem(i)">
-                    <ion-icon name="close-circle"></ion-icon>
-                </ion-button>
-            </ion-item>
-          </ion-list> 
-
-          <p><b>Coordonnée:</b></p>
-          <ion-list>
-            <ion-item>
-              <ion-label position="floating">Nom:</ion-label>
-              <ion-input
-                ngDefaultControl
-                formControlName="name"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Prenom:</ion-label>
-              <ion-input
-                ngDefaultControl
-                formControlName="firstname"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Date de naissance:</ion-label>
-              <ion-input
-                ngDefaultControl
-                formControlName="bday"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Profession:</ion-label>
-              <ion-input
-                ngDefaultControl
-                formControlName="job"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Email:</ion-label>
-              <ion-input
-                ngDefaultControl
-                formControlName="email"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Adresse : rue, numéro:</ion-label>
-              <ion-input
-                ngDefaultControl
-                formControlName="adress"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Code postal:</ion-label>
-              <ion-input
-                ngDefaultControl
-                formControlName="npa"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Ville:</ion-label>
-              <ion-input
-                ngDefaultControl
-                formControlName="city"></ion-input>
-            </ion-item>
-          </ion-list>  
-        </form>
+        <div class="containerBg">
+            <h2>Liste des workshops séléctionnés:</h2>
+            <form [formGroup]="form">
+              <ion-grid>
+                <ion-show-when size="lg">
+                  <ion-row class="title">
+                    <ion-col sizeMd="12" sizeLg="7">
+                      <ion-label>Titre du workshop</ion-label>
+                    </ion-col>
+                    <ion-col sizeMd="12" sizeLg="3">
+                      <ion-label>Dates</ion-label>
+                    </ion-col>
+                    <ion-col sizeMd="12" sizeLg="2">
+                      <ion-label>Écolages</ion-label>
+                    </ion-col>
+                  </ion-row>
+                </ion-show-when>
+                <ion-hide-when size="lg">
+                  <ion-row class="title">
+                    <ion-col sizeMd="12">
+                      <ion-label>Workshop</ion-label>
+                    </ion-col>
+                  </ion-row>
+                </ion-hide-when>
+                <ion-row class="item" #wks[i] *ngFor="let wk of form?.get('workshops')?.controls; let i = index">
+                  <ion-col sizeMd="12" sizeLg="7">
+                    <ion-label>
+                        {{ form?.get('workshops').value[i]?.title?.rendered }}
+                    </ion-label>
+                  </ion-col>
+                  <ion-col sizeXs="12" sizeSm="6" sizeLg="3">
+                    <ion-label>
+                        {{form?.get('workshops').value[i]?.date_session_1_du}} au 
+                        {{form?.get('workshops').value[i]?.date_session_1_au}}
+                    </ion-label>
+                  </ion-col>
+                  <ion-col sizeXs="12" sizeSm="6" sizeLg="2">
+                    <ion-label>
+                        CHF {{form?.get('workshops').value[i]?.ecolage_wk}}.- 
+                        <ion-icon float-right color="dark" (click)="removeItem(i)" name="close-circle"></ion-icon>
+                      </ion-label>
+                    <!-- <ion-button float-right fill="clear" color="ligth" (click)="removeItem(i)">
+                        <ion-icon name="close-circle"></ion-icon>
+                    </ion-button> -->
+                    <!-- <ion-button  fill="clear" color="dark" (click)="removeItem(i)">
+                        <ion-icon name="close-circle"></ion-icon>
+                    </ion-button> -->
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <p>
+                      <span *ngIf="form?.get('workshops')?.value?.length <= 0"><i>Vous n'avez pas séléctionné de workshops.</i> <br></span>
+                      
+                      <a href="#" routerLink="../workshops">Voir les workshops</a>
+                    </p>
+                  </ion-col>
+                  <ion-col>
+                      <ion-label float-right>
+                        <b>Total écolage: CHF {{totalEcolage || '0'}}.-</b>
+                      </ion-label>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <h2>Coordonnée:</h2>
+              <ion-grid>
+                <ion-row>
+                  <ion-col sizeSm="12" sizeMd="12" sizeLg="6">
+                      
+                      <ion-list>
+                        <ion-item>
+                          <ion-label position="fixed">Nom *</ion-label>
+                          <ion-input
+                            ngDefaultControl
+                            formControlName="name"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                          <ion-label position="fixed">Prenom *</ion-label>
+                          <ion-input
+                            ngDefaultControl
+                            formControlName="firstname"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                          <ion-label position="fixed">Date de naissance</ion-label>
+                          <ion-input
+                            ngDefaultControl
+                            formControlName="bday"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                          <ion-label position="fixed">Profession</ion-label>
+                          <ion-input
+                            ngDefaultControl
+                            formControlName="job"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                          <ion-label position="fixed">Email *</ion-label>
+                          <ion-input
+                            ngDefaultControl
+                            formControlName="email"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                          <ion-label position="fixed">Adresse</ion-label>
+                          <ion-input
+                            ngDefaultControl
+                            formControlName="adress"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                          <ion-label position="fixed">Code postal</ion-label>
+                          <ion-input
+                            ngDefaultControl
+                            formControlName="npa"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                          <ion-label position="fixed">Ville</ion-label>
+                          <ion-input
+                            ngDefaultControl
+                            formControlName="city"></ion-input>
+                        </ion-item>
+                      </ion-list>  
+        
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col sizeSm="12" sizeMd="12" sizeLg="6">
+                      <div class="textPage" [innerHTML]="data?.content?.rendered|replaceBy|safeHtml"></div>
+                  </ion-col>
+                  <ion-col sizeSm="12" sizeMd="12" sizeLg="6">
+                    <ion-list padding-top>
+                        <ion-item class="comments">
+                          <ion-textarea
+                            ngDefaultControl
+                            formControlName="adress"></ion-textarea>
+                        </ion-item>
+                    </ion-list>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-button [disabled]="!(form.dirty === true && form.valid === true)" (click)="submit()" >Envoyer inscription</ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <!-- <ion-list formArrayName="workshops">
+                <ion-item #wks[i] *ngFor="let wk of form?.get('workshops')?.controls; let i = index" >
+                    <ion-label>{{ form?.get('workshops').value[i]?.title?.rendered }} - <small><i>CHF {{form?.get('workshops').value[i]?.ecolage_wk}}.-</i></small></ion-label>
+                    <ion-button slot="end" fill="clear" color="dark" (click)="removeItem(i)">
+                        <ion-icon name="close-circle"></ion-icon>
+                    </ion-button>
+                </ion-item>
+              </ion-list>  -->
+            </form>
+    
+        </div>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col>
-          <b>Total écolage : CHF {{totalEcolage || '0'}}.-</b>
-      </ion-col>
-    </ion-row>
-    <ion-row>
+    <!-- <ion-row>
       <ion-col>
         <div text-left>
           <ion-button [disabled]="!(form.dirty === true && form.valid === true)" (click)="submit()" >Envoyer inscription</ion-button>
         </div>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
   </ion-grid>
   <app-footer></app-footer>
 </ion-content>

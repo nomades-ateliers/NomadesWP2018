@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { WpApiService } from '@app/shared/services';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-inscription',
@@ -15,15 +18,21 @@ export class InscriptionComponent implements OnInit {
   form: FormGroup;
   wksList: any[];
   totalEcolage = 0;
+  data$: Observable<any>;
 
   constructor(
     private _router: Router,
     private readonly _formBuilder: FormBuilder,
+    private _wpApi: WpApiService
   ) { }
 
   ngOnInit() {
     this.currentUrl = this._router.url;
     this._buildForm();
+    this.data$ = this._wpApi.getData({path: 'pages', slug: `slug=inscription`}).pipe(
+      map(res => (res.length === 1 ) ? res[0] : res),
+      tap(data => (!data.type) ? window.location.href = '404' : null)
+    );
   }
 
   ionViewWillLeave() {

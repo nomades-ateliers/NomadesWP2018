@@ -1,5 +1,82 @@
 app-inscription {
+
+    h2 {
+        background: #B71C1C;
+        color: #fff;
+        padding: 0.4rem 1rem;
+        font-weight: 400;
+        font-size: 1rem;
+        letter-spacing: 0.1rem;
+        margin-bottom: 1rem;
+        margin-left: -16px;
+        margin-right: -16px;
+        margin-top: -16px;
+    }
+    a {
+        color: #fff;
+    }
     ion-grid {
         padding: 0;
+        margin-bottom: 36px;
+    }
+    
+    .containerBg {
+        background: #333;
+        padding: 1rem;
+
+        .textPage {
+            color: #fff;
+        }
+        ion-list {
+            background: transparent;
+        }
+        h1, h2, h3, p, ion-label {
+            color: #fff;
+        } 
+        ion-label {
+            min-width: 150px !important;
+        } 
+        ion-input, ion-textarea {
+            background: #fff;   
+            color: #333;   
+        }
+        ion-textarea { 
+            margin-top: 2px;
+        }
+        
+        .title {
+            ion-label {
+                padding-bottom: 0.5rem;
+                border-bottom: solid 1px #fff;
+                // text-decoration: underline;
+            }
+        }
+        ion-row.item {
+                padding: 5px 0;
+                margin-top: 0;
+                margin-bottom: 0;
+            
+            ion-col {
+                padding: 0;
+                margin: 0;
+            }
+            ion-label {
+                min-width: 50px !important;
+                color: #333;
+                background: #fff;
+                margin-top: 0;
+                margin-bottom: 0;
+                padding: 0.8rem 0.5rem;
+            } 
+            ion-input, ion-textarea {
+                color: #333;   
+            }
+            ion-label.uncolored {
+                ion-col, ion-button, ion-label {
+                    background: #fff !important;
+                }
+                background: #fff!important;
+            }
+        }
     }
 }
