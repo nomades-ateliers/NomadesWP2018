@@ -28,116 +28,145 @@
               </ion-col>
             </ion-row>
   
-            <div *ngIf="parentParcour.id === p.id">
-              <article>
-                <ion-row  align-items-center>
-                  <ion-col
-                    size="8"
-                    sizeXs="12"
-                    sizeSm="12"
-                    sizeMd="8"
-                    sizeLg="8"
-                    margin-top>
-                      <header>
-                        <p class="subTitle">{{currentParcour?.name|replaceBy}}</p>
-                        <h1 [ngClass]="{
-                            text: true,
-                            front: currentUrl.toLowerCase().includes('front'),
-                            back: currentUrl.toLowerCase().includes('back'),
-                            mobile: currentUrl.toLowerCase().includes('mobile')
-                          }">{{data?.title?.rendered|replaceBy}}</h1>
-                      </header>
-                  </ion-col>
-                  <ion-col
-                    size="4"
-                    sizeXs="12"
-                    sizeSm="12"
-                    sizeMd="4"
-                    sizeLg="4"
-                    margin-top></ion-col>
-                </ion-row>    
-                <ion-row class="styled">
-                  <ion-col
-                    size="6"
-                    sizeXs="12"
-                    sizeSm="12"
-                    sizeMd="6"
-                    sizeLg="6">
-                    <h2>Programme</h2>
-                    <div class="programme" [innerHTML]="data?.programme_workshop|replaceBy|safeHtml "></div>
-                  </ion-col>
-                  <ion-col
-                    size="6"
-                    sizeXs="12"
-                    sizeSm="12"
-                    sizeMd="6"
-                    sizeLg="6">
-                    <div class="detailListItem">
-                      <h2>Objectifs</h2>
-                      <div class="programme">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit odit iusto minus maxime sed nulla error iure minima, magni neque porro voluptate natus similique. Porro quis laboriosam pariatur fugit dolorem.</div>    
-                    </div>
-                    <div class="detailListItem">
-                      <h2>Informations</h2>
-                      <p>Prochaines dates: <span>{{data?.date_session_1_du}} - {{data?.date_session_1_au}}</span></p>
-                      <p>Durée: <span [innerHTML]="data?.desc_resume_workshop|replaceBy|safeHtml"></span></p>
-                    </div>
-                    <div class="detailListItem">
-                      <h2>Public cible</h2>
-                      <div class="programme">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</div>    
-                    </div>
-                  </ion-col>
-                </ion-row> 
-                <ion-row>
-                  <ion-col>
-                    <ion-button
-                      color="primary"
-                      margin-top
-                      (click)="inscription(data)">
-                      pré-inscription
-                    </ion-button> 
-                  </ion-col>
-                </ion-row>               
-              </article>
-              
-              <aside>
-                <ion-row class="styled">
-                  <ion-col>
+          </div>
+          <!-- <pre>
+            {{data|json}}
+          </pre> -->
+          <div >
+            <article>
+              <ion-row  align-items-center>
+                <ion-col
+                  size="12"
+                  margin-top>
+                    <header>
+                      <p class="subTitle">{{currentParcour?.name|replaceBy}}</p>
+                      <h1 [ngClass]="{
+                          text: true,
+                          front: currentUrl.toLowerCase().includes('front'),
+                          back: currentUrl.toLowerCase().includes('back'),
+                          mobile: currentUrl.toLowerCase().includes('mobile')
+                        }">{{data?.title?.rendered|replaceBy}}</h1>
+                    </header>
+                </ion-col>
+              </ion-row>    
+              <ion-row class="styled">
+                <ion-col
+                  size="6"
+                  sizeXs="12"
+                  sizeSm="12"
+                  sizeMd="6"
+                  sizeLg="6">
+                  <div *ngIf="data?.contenu_workshop">
                     <h2 [ngClass]="{
                       text: true,
                       front: currentUrl.toLowerCase().includes('front'),
                       back: currentUrl.toLowerCase().includes('back'),
                       mobile: currentUrl.toLowerCase().includes('mobile')
-                    }">Workshops similaires:</h2>  
-                  </ion-col>
-                </ion-row> 
-                <ion-row margin-bottom padding-bottom>
-                  <ion-col 
-                    size="4"
-                    sizeXs="12"
-                    sizeSm="12"
-                    sizeMd="4"
-                    sizeLg="4"  
-                    *ngFor="let wk of wks">
-                      <article (click)="go($event, wk)">
-                        <h2 [ngClass]="{
-                          text: true,
-                          front: currentUrl.split('workshops/')[1].split('/')[0].toLowerCase().includes('front'),
-                          back: currentUrl.split('workshops/')[1].split('/')[0].toLowerCase().includes('back'),
-                          mobile: currentUrl.split('workshops/')[1].split('/')[0].toLowerCase().includes('mobile')
-                        }">{{wk?.title.rendered|replaceBy}}</h2>
-                        <p>
-                          Dates: {{ wk?.date_session_1_du }} - {{ wk?.date_session_1_au }}
-                            <!-- <br/>
-                          <span [innerHtml]="workshop?.desc_resume_workshop"></span> -->
-                        </p>
-                      </article>
+                    }">Contenu</h2>
+                    <div class="detailListItem" [innerHTML]="data?.contenu_workshop|replaceBy|safeHtml "></div>
+                  </div>
+                  <div *ngIf="data?.public_workshop">
+                    <h2 [ngClass]="{
+                      text: true,
+                      front: currentUrl.toLowerCase().includes('front'),
+                      back: currentUrl.toLowerCase().includes('back'),
+                      mobile: currentUrl.toLowerCase().includes('mobile')
+                    }">Public</h2>
+                    <div class="detailListItem" [innerHTML]="data?.public_workshop|replaceBy|safeHtml "></div>    
+                  </div>
+                  <div *ngIf="data?.date_session_1_du || data?.date_session_1_au">
+                    <h2 [ngClass]="{
+                      text: true,
+                      front: currentUrl.toLowerCase().includes('front'),
+                      back: currentUrl.toLowerCase().includes('back'),
+                      mobile: currentUrl.toLowerCase().includes('mobile')
+                    }">Prochaines dates</h2>
+                    <div class="detailListItem">
+                      <p><span>{{data?.date_session_1_du}} - {{data?.date_session_1_au}}</span></p>                      
+                    </div>
+                  </div>
+                  <div *ngIf="data?.desc_resume_workshop|replaceBy|safeHtml">
+                    <h2 [ngClass]="{
+                      text: true,
+                      front: currentUrl.toLowerCase().includes('front'),
+                      back: currentUrl.toLowerCase().includes('back'),
+                      mobile: currentUrl.toLowerCase().includes('mobile')
+                    }">Durée et horaires</h2>
+                    <div class="detailListItem" [innerHTML]="data?.desc_resume_workshop|replaceBy|safeHtml"></div>    
+                  </div>
+                  <div *ngIf="data?.ecolage_wk">
+                    <h2 [ngClass]="{
+                      text: true,
+                      front: currentUrl.toLowerCase().includes('front'),
+                      back: currentUrl.toLowerCase().includes('back'),
+                      mobile: currentUrl.toLowerCase().includes('mobile')
+                    }">Écolage</h2>
+                    <div class="detailListItem"><p>CHF <span [innerHTML]="data?.ecolage_wk|replaceBy|safeHtml"></span>.-</p></div>                 
+                  </div>
+                  <ion-button
+                    color="primary"
+                    margin-top
+                    (click)="inscription(data)">
+                    pré-inscription
+                  </ion-button> 
+                </ion-col>
+                <ion-col
+                  size="6"
+                  sizeXs="12"
+                  sizeSm="12"
+                  sizeMd="6"
+                  sizeLg="6">
+                  <div *ngIf="data?.programme_workshop">
+                    <h2 [ngClass]="{
+                      text: true,
+                      front: currentUrl.toLowerCase().includes('front'),
+                      back: currentUrl.toLowerCase().includes('back'),
+                      mobile: currentUrl.toLowerCase().includes('mobile')
+                    }">Programme</h2>
+                    <div class="programme" [innerHTML]="data?.programme_workshop|replaceBy|safeHtml "></div>
+                  </div>
+                </ion-col>
+              </ion-row>               
+            </article>
+            
+            <aside>
+              <ion-row class="styled">
+                <ion-col>
+                  <h2 [ngClass]="{
+                    text: true,
+                    front: currentUrl.toLowerCase().includes('front'),
+                    back: currentUrl.toLowerCase().includes('back'),
+                    mobile: currentUrl.toLowerCase().includes('mobile')
+                  }">Workshops similaires:</h2>  
+                </ion-col>
+              </ion-row> 
+              <ion-row margin-bottom padding-bottom>
+                <ion-col 
+                  size="3"
+                  sizeXs="12"
+                  sizeSm="12"
+                  sizeMd="3"
+                  sizeLg="3"  
+                  *ngFor="let wk of wks">
+                    <article (click)="go($event, wk)">
+                      <h2 [ngClass]="{
+                        text: true,
+                        front: currentUrl.split('workshops/')[1].split('/')[0].toLowerCase().includes('front'),
+                        back: currentUrl.split('workshops/')[1].split('/')[0].toLowerCase().includes('back'),
+                        mobile: currentUrl.split('workshops/')[1].split('/')[0].toLowerCase().includes('mobile')
+                      }" [innerHtml]="(wk?.titre_deux_ligne || wk?.title.rendered) | replaceBy"></h2>
+                      <p>
+                        Dates: {{ wk?.date_session_1_du }} - {{ wk?.date_session_1_au }}
+                          <!-- <br/>
+                        <span [innerHtml]="workshop?.desc_resume_workshop"></span> -->
+                      </p>
+                    </article>
+    
+                </ion-col>
+              </ion-row>
+            </aside>
       
-                  </ion-col>
-                </ion-row>
-              </aside>
-        
 
-            </div>
           </div>
 
           <!-- <ion-row>

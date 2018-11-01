@@ -201,6 +201,30 @@ function appp_register_post_meta() {
         )
     );
     register_rest_field( 'workshop', // any post type registered with API
+        'titre_deux_ligne', // this needs to match meta key
+        array(
+            'get_callback'    => 'appp_get_meta',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+    register_rest_field( 'workshop', // any post type registered with API
+        'public_workshop', // this needs to match meta key
+        array(
+            'get_callback'    => 'appp_get_meta',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+    register_rest_field( 'workshop', // any post type registered with API
+        'contenu_workshop', // this needs to match meta key
+        array(
+            'get_callback'    => 'appp_get_meta',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+    register_rest_field( 'workshop', // any post type registered with API
         'titre_workshop_cour', // this needs to match meta key
         array(
             'get_callback'    => 'appp_get_meta',

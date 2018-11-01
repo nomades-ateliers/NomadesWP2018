@@ -65,4 +65,12 @@ export class AppComponent {
     });
   }
 
+  navigate(page) {
+    console.log(page);
+    
+    this.menuCtl.close()
+      .then(_=> console.log(page))
+      .then(_=> this._router.navigate(['./' + page]))
+  }
+
 }

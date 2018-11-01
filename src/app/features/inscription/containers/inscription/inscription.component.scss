@@ -1,5 +1,11 @@
 app-inscription {
-
+    div#recaptcha {
+        opacity: 0;
+    }
+    .link {
+        text-decoration: underline!important;
+        cursor: pointer;
+    }
     h2 {
         background: #B71C1C;
         color: #fff;
@@ -61,13 +67,15 @@ app-inscription {
                 margin: 0;
             }
             ion-label {
-                min-width: 50px !important;
+                min-width: 60px !important;
                 color: #333;
                 background: #fff;
                 margin-top: 0;
                 margin-bottom: 0;
                 padding: 0.8rem 0.5rem;
+                min-height: 2.76rem;
             } 
+
             ion-input, ion-textarea {
                 color: #333;   
             }
@@ -77,6 +85,13 @@ app-inscription {
                 }
                 background: #fff!important;
             }
+        }
+        .comments {
+            margin-left: -1rem;
+            margin-right: -1rem;
+
+ 
+            ion-textarea { padding: 0.5rem 1rem;}
         }
     }
 }

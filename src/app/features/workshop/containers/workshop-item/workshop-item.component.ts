@@ -68,7 +68,8 @@ export class WorkshopItemComponent implements OnInit {
         // return wks array filtered by current.parcour.id
         return wks.filter(i => i.parcours.includes(currentParcpourID))
                   // remove current selected item from items List
-                  .filter(i =>  i.id !== w.id);
+                  .filter(i =>  i.id !== w.id)
+                  .sort((a, b) => a.wk_position - b.wk_position);
       }),
       // if unexisting data, return to the 404 page
       tap(data => (!data[0]) ? window.location.href = '404' : null),
@@ -86,34 +87,42 @@ export class WorkshopItemComponent implements OnInit {
 
   async inscription(item) {
     console.log(item);
-    const alert = await this.alertController.create({
-      header: item.title.rendered,
-      subHeader: 'Pré-inscription',
-      message: `Vous allez être rediriger vers la page des inscriptions`,
-      buttons: [
-        {
-          text: `Annuler` ,
-          role: 'cancel',
-          handler: () => {
-            console.log('cancel', item.id);
-          }
-        },
-        {
-          text: `Continuer`,
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm', item.id);
-            let data = JSON.parse(localStorage.getItem('nomades_workshop') || '[]');
-            if (!data.find(i => i.id === item.id)) {
-              data = [...data, item];
-            }
-            localStorage.setItem('nomades_workshop', JSON.stringify(data));
-            this._router.navigate(['./inscription']);
-          }
-        },
-      ]
-    });
 
-    await alert.present();
+    // const alert = await this.alertController.create({
+    //   header: item.title.rendered,
+    //   subHeader: 'Pré-inscription',
+    //   message: `Vous allez être rediriger vers la page des inscriptions`,
+    //   buttons: [
+    //     {
+    //       text: `Annuler` ,
+    //       role: 'cancel',
+    //       handler: () => {
+    //         console.log('cancel', item.id);
+    //       }
+    //     },
+    //     {
+    //       text: `Continuer`,
+    //       cssClass: 'secondary',
+    //       handler: () => {
+    //         console.log('Confirm', item.id);
+    //         let data = JSON.parse(localStorage.getItem('nomades_workshop') || '[]');
+    //         if (!data.find(i => i.id === item.id)) {
+    //           data = [...data, item];
+    //         }
+    //         localStorage.setItem('nomades_workshop', JSON.stringify(data));
+    //         this._router.navigate(['./inscription']);
+    //       }
+    //     },
+    //   ]
+    // });
+
+    // await alert.present();
+    console.log('Confirm', item.id);
+    let data = JSON.parse(localStorage.getItem('nomades_workshop') || '[]');
+    if (!data.find(i => i.id === item.id)) {
+      data = [...data, item];
+    }
+    localStorage.setItem('nomades_workshop', JSON.stringify(data));
+    this._router.navigate(['./inscription']);
   }
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { of, BehaviorSubject } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { first, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -28,42 +28,34 @@ export class WpApiService {
   }
 
   async sendMail(data) {
-
-    // const body = new FormData();
-    // body.append('user' , 'login');
-    // body.append('password' , 'pass');
-    
     const headers = new HttpHeaders()
-        .set('cache-control', 'no-cache')
+        // .set('cache-control', null)
+        // .set('X-Requested-With', null)
         .set('Content-Type', 'application/json');
-    // const params = new HttpParams().set('ajax', JSON.stringify(data));
-    return this.http.post(
-      'https://nomades.ch/inc/processFromContact.php',
+    console.log('send request...');
+    return await this.http.post(
+      'https://nomades.ch/inc/ng-processFromContact.php',
       data,
       {
-        headers
+        headers: headers
       }
     ).pipe(first())
-    .toPromise();
+    .toPromise()
+  }
 
-    // work with xmlhttprequest
-    // const xhr = new XMLHttpRequest();
-    // var response = new BehaviorSubject(null);
-    // xhr.open("POST", "https://nomades.ch/inc/send.php");
-    // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    // xhr.setRequestHeader("Cache-Control", "no-cache");
-    // const obs = of(xhr.addEventListener("readystatechange", (e) => e));
-    // xhr.send(JSON.stringify(data));
-    // return obs;
-
-    // working with fetch()
-    // const res = await fetch("https://nomades.ch/inc/send.php", {
-    //   method: 'POST',
-    //   body: JSON.stringify(data),
-    //   headers: {
-    //     'Content-Type': 'application/x-www-form-urlencoded'
-    //   },
-    // });
-    // return res
+  async sendInscription(data) {
+    const headers = new HttpHeaders()
+        // .set('cache-control', null)
+        // .set('X-Requested-With', null)
+        .set('Content-Type', 'application/json');
+    console.log('send request...');
+    return await this.http.post(
+      'https://nomades.ch/inc/ng-processFromInscription.php',
+      data,
+      {
+        headers: headers
+      }
+    ).pipe(first())
+    .toPromise()
   }
 }

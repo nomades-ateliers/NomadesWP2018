@@ -62,8 +62,8 @@
                               front: c?.name.toLowerCase().includes('front'),
                               back: c?.name.toLowerCase().includes('back'),
                               mobile: c?.name.toLowerCase().includes('mobile')
-                          }">{{workshop?.title.rendered|replaceBy}}</h2>
-                        <p>
+                          }" [innerHtml]="(workshop?.titre_deux_ligne || workshop?.title.rendered) | replaceBy"></h2>
+                        <p *ngIf="workshop?.date_session_1_du && workshop?.date_session_1_au">
                           Dates: {{ workshop?.date_session_1_du }} - {{ workshop?.date_session_1_au }}
                           <!-- <br/>
                           <span [innerHtml]="workshop?.desc_resume_workshop"></span> -->

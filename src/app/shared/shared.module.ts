@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, forwardRef } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, forwardRef, Injector } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { PipesModule } from '@app/shared/pipes';
 import { WpApiService } from '@app/shared/services';
@@ -11,6 +11,7 @@ import { SloganComponent } from '@app/shared/components/slogan/slogan.component'
 import { FooterComponent } from '@app/shared/components/footer/footer.component';
 import { HeaderAppComponent } from '@app/shared/components/header-app/header-app.component';
 import { RouterModule } from '../../../node_modules/@angular/router';
+// import { ReCaptchaDirective, RECAPTCHA_URL } from './directives/gcaptcha/gcaptcha';
 
 const SHARED_COMPONENTS: any[] = [
   // add your shared component here
@@ -20,10 +21,11 @@ const SHARED_COMPONENTS: any[] = [
   SloganComponent,
   HeaderAppComponent,
   FooterComponent,
+  // ReCaptchaDirective
 ];
 const SHARED_SERVICES: any[] = [
   // add your shared services here
-  WpApiService,
+  WpApiService
 ];
 const SHARED_IMPORT_MODULES: any[] = [
   // add your import available to export here

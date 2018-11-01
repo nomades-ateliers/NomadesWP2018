@@ -10,14 +10,13 @@
               class="menuItemSpliPan"
               mode="md"
               lines="none"
-              (click)="menuCtl?.close()"
+              (click)="navigate(item?.url.split('/').reverse()[0])"
               *ngFor="let item of menuItems"
-              routerLink="{{item?.url.split('/').reverse()[0]}}"
               routerLinkActive="{{(currentUrl.includes('index'))
-              ? item?.url.split('/').reverse()[0] === ''
+              ? (item?.url.split('/').reverse()[0] === 'index'  ) || (item?.url.split('/')[1] === 'cursus')
               : currentUrl.includes(item?.title.toLowerCase())}}">
               <ion-label text-wrap>
-                {{item?.title}}
+                {{item?.title}} 
               </ion-label>
             </ion-item>
           </ion-list>

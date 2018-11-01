@@ -428,6 +428,11 @@ add_action( 'init', 'cptui_register_my_taxes_parcours' );
     }
         add_action( 'add_meta_boxes', 'formation_dates' );
 
+    // sous-titre de la formation
+    function workshop_subtitle() {
+        add_meta_box( 'workshop_subtitle', 'Sous-titre de la formation', 'metbox_workshop_subtitle', 'workshop', 'normal', 'high' );
+    }
+        add_action( 'add_meta_boxes', 'workshop_subtitle' );
 
 
      // general workshop // special workshop
@@ -525,19 +530,37 @@ add_action( 'init', 'cptui_register_my_taxes_parcours' );
 
 
                 </div>
-
-                <div class="block_admin_pm">
+                <hr/>
+                <div class="">
                         <h3> PROGRAMME</h3>
 
                         <?php
-                            $settings = array( 'media_buttons' => false,'tinymce' => array( 'width' => 200 ) );
+                            $settings = array( 'media_buttons' => false,'tinymce' => array( 'width' => 'auto' ) );
                             wp_editor(wpshed_get_custom_field('programme_workshop'), 'programme_workshop', $settings );
                         ?>
 
                        <span class="precision_admin">Mettre Possibilité de Mettre des listes ou des titres</span></p>
 
                 </div>
+                <hr/>
+                <div class="">
+                        <h3> CONTENU</h3>
 
+                        <?php
+                            $settings = array( 'media_buttons' => false,'tinymce' => array( 'width' => 'auto' ) );
+                            wp_editor(wpshed_get_custom_field('contenu_workshop'), 'contenu_workshop', $settings );
+                        ?>
+                </div>
+                <hr/>
+                <div class="">
+                        <h3> PUBLIC CIBLE</h3>
+
+                        <?php
+                            $settings = array( 'media_buttons' => false,'tinymce' => array( 'width' => 'auto' ) );
+                            wp_editor(wpshed_get_custom_field('public_workshop'), 'public_workshop', $settings );
+                        ?>
+                </div>
+                
              </div>
 
      <?php }
@@ -690,7 +713,18 @@ add_action( 'init', 'cptui_register_my_taxes_parcours' );
         <?php
     }
 
+    
+    function metbox_workshop_subtitle( $post ) {
 
+        wp_nonce_field( 'my_nonce_workshop_subtitle', 'nonce_workshop_subtitle' ); ?>
+
+        <p class="block_admin_pm grand titre_niveau">
+           <label for="workshop_subtitle">Sous-titre</label> <input type="text" id="workshop_subtitle" name="workshop_subtitle"   value="<?php echo wpshed_get_custom_field( 'workshop_subtitle' ); ?>" />
+        </p>
+
+
+    <?php
+    }
      function metbox_formation_dates( $post ) {
 
              wp_nonce_field( 'my_nonce_formation_dates', 'nonce_formation_dates' ); ?>
@@ -930,7 +964,13 @@ add_action( 'init', 'cptui_register_my_taxes_parcours' );
              if( isset( $_POST['programme_workshop'] ) )
             update_post_meta( $post_id, 'programme_workshop', $_POST['programme_workshop']);
 
-
+            if( isset( $_POST['contenu_workshop'] ) )
+                update_post_meta( $post_id, 'contenu_workshop', $_POST['contenu_workshop']);
+            if( isset( $_POST['public_workshop'] ) )
+                update_post_meta( $post_id, 'public_workshop', $_POST['public_workshop']);
+            if( isset( $_POST['workshop_subtitle'] ) )
+                update_post_meta( $post_id, 'workshop_subtitle', $_POST['workshop_subtitle']);
+                                
 
         } // OK pour le nonce workshop
 

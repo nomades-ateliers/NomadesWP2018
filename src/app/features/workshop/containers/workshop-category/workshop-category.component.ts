@@ -124,7 +124,7 @@ export class WorkshopCategoryComponent implements OnInit {
   private _loadWorkshops(id: string) {
 
     this.workshops$ = this._http.getRemoteData({path: 'workshop', slug: 'per_page=100'}).pipe(
-      // map(wks => wks.filter),
+      map(wks => wks.sort((a, b) => a.wk_position - b.wk_position)),
       // tap(w => this.workshopsLenght = w.length),
       tap(w => console.log(w))
     );
