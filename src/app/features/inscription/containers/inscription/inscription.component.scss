@@ -93,5 +93,10 @@ app-inscription {
  
             ion-textarea { padding: 0.5rem 1rem;}
         }
+        @media screen and (max-width: 991px) {
+            .item.hydrated ion-col {
+                background: #fff;
+            }
+        }
     }
 }
