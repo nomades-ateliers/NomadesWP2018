@@ -4,6 +4,8 @@ import { v4 } from 'uuid';
 import { FileElement } from '../classes/element';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { first, take } from 'rxjs/operators';
 
 export interface IFileService {
   add(fileElement: FileElement);
@@ -19,11 +21,15 @@ export class FileService implements IFileService {
   private map = new Map<string, FileElement>();
   private querySubject: BehaviorSubject<FileElement[]>;
 
-  constructor() {}
+  constructor(
+    private _http: HttpClient
+  ) {}
 
   add(fileElement: FileElement) {
     fileElement.id = v4();
     this.map.set(fileElement.id, this.clone(fileElement));
+    console.log('yyy',this.map);
+    
     return fileElement;
   }
 
@@ -38,6 +44,7 @@ export class FileService implements IFileService {
   }
 
   queryInFolder(folderId: string) {
+    console.log('folderId', folderId);
     const result: FileElement[] = [];
     this.map.forEach(element => {
       if (element.parent === folderId) {
@@ -50,6 +57,7 @@ export class FileService implements IFileService {
       this.querySubject.next(result);
     }
     return this.querySubject.asObservable();
+    
   }
 
   get(id: string) {
@@ -58,5 +66,14 @@ export class FileService implements IFileService {
 
   clone(element: FileElement) {
     return JSON.parse(JSON.stringify(element));
+  }
+
+  loadFiles() {
+    console.log('deh');
+    
+    return this._http.get('http://localhost:3000/?user=fazio')
+        .pipe()
+        .toPromise()
+        .then(res => (console.log(res), res))
   }
 }

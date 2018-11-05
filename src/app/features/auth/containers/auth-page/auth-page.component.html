@@ -4,10 +4,10 @@
     <ion-row>
       <ion-col>
           <app-menu-nav [currentUrl]="'/index'"></app-menu-nav>
-          <app-header-people [baseUrl]="'https://nomades.ch/wp-content/themes/theme_nomades'"></app-header-people>
-          <app-adress></app-adress>
+          <!-- <app-header-people baseUrl="https://nomades.ch/wp-content/uploads/2018/10/nomade01-.png"></app-header-people> -->
+          <!-- <app-adress></app-adress> -->
           <app-slogan [slogan]="'espace élèves'"></app-slogan>
-          <ion-toolbar>{{currentFolder}}</ion-toolbar>
+
           <!-- <div *ngIf="data$ | async as frontPage;">
             <div [innerHTML]="frontPage?.content?.rendered|replaceBy|safeHtml "></div>
           </div> -->
@@ -53,7 +53,7 @@
     <ng-template #connected>
       <ion-row>
         <ion-col>
-          <!-- <pre>{{fileElements|json}} </pre> -->
+          <pre>{{fileElements|async|json}} </pre>
           <app-file-explorer
             [path]="currentPath"
             [canNavigateUp]="canNavigateUp"

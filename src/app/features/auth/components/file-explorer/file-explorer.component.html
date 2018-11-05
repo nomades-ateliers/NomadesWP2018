@@ -1,6 +1,12 @@
-
+<ion-toolbar>
+  {{path}}
+  <ion-buttons slot="end">
+      <ion-icon slot="icon-only" name="arrow-back" *ngIf="canNavigateUp" class="pointer" (click)="navigateUp()">x</ion-icon>
+      <ion-icon slot="icon-only" name="add" (click)="openNewFolderDialog()">x</ion-icon>
+  </ion-buttons>
+  
+</ion-toolbar>
 <ion-list>
-
 
   <ion-item (click)="navigate(element)" *ngFor="let element of fileElements"> 
     <ion-title>

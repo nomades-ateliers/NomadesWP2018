@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { FileElement } from '../../classes/element';
+import { ModalController } from '@ionic/angular';
+import { NewFolderDialogComponent } from '@app/features/auth/components/new-folder-dialog/new-folder-dialog.component';
 
 @Component({
   selector: 'app-file-explorer',
@@ -19,6 +21,10 @@ export class FileExplorerComponent {
   @Output() navigatedDown = new EventEmitter<FileElement>();
   @Output() navigatedTo = new EventEmitter<FileElement>();
   @Output() navigatedUp = new EventEmitter();
+
+  constructor(
+    public modalCtrl: ModalController
+  ) {}
 
   deleteElement(element: FileElement) {
     this.elementRemoved.emit(element);
@@ -43,8 +49,20 @@ export class FileExplorerComponent {
     this.elementMoved.emit({ element: element, moveTo: moveTo });
   }
 
-  openNewFolderDialog() {
-
+  async openNewFolderDialog() {
+    let modal = await this.modalCtrl.create({
+      component: NewFolderDialogComponent
+    });
+    await modal.present();
+    modal
+      .onDidDismiss()
+      .then((res) => {
+        console.log('res', res);
+        const { data = null } = res;
+        if (data) {
+          this.folderAdded.emit({ name: data });
+        }
+      })
   }
 
   openRenameDialog(element: FileElement) {

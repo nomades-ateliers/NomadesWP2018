@@ -16,28 +16,41 @@ export class AuthPageComponent implements OnInit {
   form: FormGroup;
 
   currentRoot: FileElement;
-  currentPath: string;
+  currentPath: string = './';
   canNavigateUp = false;
 
-  currentFolder =  './';
   public fileElements: Observable<FileElement[]>;
 
   constructor(
     private readonly _formBuilder: FormBuilder,
-    private _fileService: FileService  ) {
+    private _fileService: FileService) {
     }
 
   ngOnInit() {
     this._buildForm();
-    this._fileService.add({ name: 'www', isFolder: true, parent: 'root' });
-    this._fileService.add({ name: 'Folder_A', isFolder: true, parent: 'root' });
-    this._fileService.add({ name: 'File_a', isFolder: false, parent: './Folder_A' });
-    this.updateFileElementQuery();
+    // this._fileService.add({ name: 'www', isFolder: true, parent: 'root' });
+    // const folder_a = this._fileService.add({ name: 'Folder_A', isFolder: true, parent: 'root' });
+    // this._fileService.add({ name: 'File_a', isFolder: false, parent: folder_a.id });
+    // this.updateFileElementQuery();
+
   }
 
   ionViewWillEnter() {
     console.log('ionViewWillEnter');
     this._checkUser();
+    this._loadFiles()
+  }
+
+  _loadFiles (path = null) {
+    console.log(path);
+    if (path) {
+
+    }   
+    // main root folder
+    return this._fileService.loadFiles()
+      .then((res: any) => (res.repoContent.map(r => new FileElement(r)), res))
+      .then((res: any) => res.repoContent.map(r => this._fileService.add(r)))
+      .then(() => this.updateFileElementQuery())       
   }
 
   _buildForm() {
@@ -65,11 +78,11 @@ export class AuthPageComponent implements OnInit {
   }
 
   navigateToFolder(element: FileElement) {
-    console.log('navToFolder');
     this.currentRoot = element;
     this.updateFileElementQuery();
     this.currentPath = this.pushToPath(this.currentPath, element.name);
     this.canNavigateUp = true;
+    this._loadFiles(this.currentPath)
   }
 
   navigateUp() {
@@ -101,13 +114,11 @@ export class AuthPageComponent implements OnInit {
 
   // upd list file elements
   updateFileElementQuery() {
-    console.log('updateFileElementQuery');
     this.fileElements = this._fileService.queryInFolder(this.currentRoot ? this.currentRoot.id : 'root');
   }
 
   // push path method
   pushToPath(path: string, folderName: string) {
-    console.log('pushToPath');
     let p = path ? path : '';
     p += `${folderName}/`;
     return p;
