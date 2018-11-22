@@ -148,7 +148,7 @@
                   sizeMd="3"
                   sizeLg="3"  
                   *ngFor="let wk of wks">
-                    <article (click)="go($event, wk)">
+                    <article class="related" (click)="go($event, wk)">
                       <h2 [ngClass]="{
                         text: true,
                         front: currentUrl.split('workshops/')[1].split('/')[0].toLowerCase().includes('front'),

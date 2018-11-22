@@ -1,10 +1,19 @@
 app-inscription {
+    ion-item, .item-native {
+        border-width: 0;
+        --border-width: 0;
+    }
     div#recaptcha {
         opacity: 0;
     }
     .link {
         text-decoration: underline!important;
         cursor: pointer;
+        color: #c70009;
+        padding-top: 5px;
+    }
+    .link:hover {
+        color: #fff;
     }
     h2 {
         background: #B71C1C;
@@ -41,13 +50,18 @@ app-inscription {
         } 
         ion-label {
             min-width: 150px !important;
+            cursor: default;
         } 
         ion-input, ion-textarea {
             background: #fff;   
             color: #333;   
+            cursor: pointer;
         }
         ion-textarea { 
             margin-top: 2px;
+        }
+        ion-icon {
+            cursor: pointer;
         }
         
         .title {

@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
+import { updateHTMLElementHeight } from '@app/utils';
 
 import { WpApiService } from '@app/shared/services';
 
@@ -25,7 +26,7 @@ export class WorkshopItemComponent implements OnInit {
   public currentUrl: any;
   public baseUrl = [
     'https://nomades.ch/wp-content/uploads/2018/10/nomade04-.png', // vert
-    'https://nomades.ch/wp-content/uploads/2018/10/nomade02-.png', // default => TODO: replace by yellow
+    'https://nomades.ch/wp-content/uploads/2018/11/nomade05_jaune-png.png', // default => TODO: replace by yellow
     'https://nomades.ch/wp-content/uploads/2018/10/nomade03-.png' // bleu
   ];
   
@@ -73,6 +74,7 @@ export class WorkshopItemComponent implements OnInit {
       }),
       // if unexisting data, return to the 404 page
       tap(data => (!data[0]) ? window.location.href = '404' : null),
+      tap(() => updateHTMLElementHeight(['article.related']))
     );
   }
 

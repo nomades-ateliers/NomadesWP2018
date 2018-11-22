@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FileElement } from '@app/features/auth/classes/element';
 import { FileService } from '@app/features/auth/services/file.service';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-auth-page',
@@ -19,7 +20,8 @@ export class AuthPageComponent implements OnInit {
   currentPath: string = './';
   canNavigateUp = false;
 
-  public fileElements: Observable<FileElement[]>;
+  public fileElements: FileElement[];
+  public fileElements$: Observable<FileElement[]>;
 
   constructor(
     private readonly _formBuilder: FormBuilder,
@@ -32,25 +34,29 @@ export class AuthPageComponent implements OnInit {
     // const folder_a = this._fileService.add({ name: 'Folder_A', isFolder: true, parent: 'root' });
     // this._fileService.add({ name: 'File_a', isFolder: false, parent: folder_a.id });
     // this.updateFileElementQuery();
+    this._loadFiles()
 
   }
 
   ionViewWillEnter() {
-    console.log('ionViewWillEnter');
-    this._checkUser();
-    this._loadFiles()
+    // console.log('ionViewWillEnter');
+    // this._checkUser();
   }
 
-  _loadFiles (path = null) {
+  async _loadFiles (path = null) {
     console.log(path);
-    if (path) {
-
-    }   
+    // if (path) {
+    //   this.fileElements = <any> await this._fileService.loadFiles(path)
+    //     .then(map((res: any) => res.repoContent))
+    //   return;
+    // }   
     // main root folder
-    return this._fileService.loadFiles()
-      .then((res: any) => (res.repoContent.map(r => new FileElement(r)), res))
-      .then((res: any) => res.repoContent.map(r => this._fileService.add(r)))
-      .then(() => this.updateFileElementQuery())       
+    this.fileElements = <any> await this._fileService.loadFiles()
+    .then(map((res: any) => res.repoContent))
+      // .then((res: any) => (res.repoContent.map(r => new FileElement(r)), res))
+  
+      // .then((res: any) => res.repoContent.map(r => this._fileService.add(r)))
+      // .then(() => this.updateFileElementQuery())       
   }
 
   _buildForm() {
@@ -66,55 +72,57 @@ export class AuthPageComponent implements OnInit {
 
 
   addFolder(folder: { name: string }) {
-    console.log('asddFolder');
-    this._fileService.add({ isFolder: true, name: folder.name, parent: this.currentRoot ? this.currentRoot.id : 'root' });
-    this.updateFileElementQuery();
+    // console.log('asddFolder');
+    // this._fileService.add({ isFolder: true, name: folder.name, parent: this.currentRoot ? this.currentRoot.id : 'root' });
+    // this.updateFileElementQuery();
   }
 
   removeElement(element: FileElement) {
-    console.log('removeElement');
-    this._fileService.delete(element.id);
-    this.updateFileElementQuery();
+    // console.log('removeElement');
+    // this._fileService.delete(element.id);
+    // this.updateFileElementQuery();
   }
 
   navigateToFolder(element: FileElement) {
-    this.currentRoot = element;
-    this.updateFileElementQuery();
+    
+    // this.updateFileElementQuery();
     this.currentPath = this.pushToPath(this.currentPath, element.name);
-    this.canNavigateUp = true;
+    // this.canNavigateUp = true;
+    this.currentRoot = element;
     this._loadFiles(this.currentPath)
+    console.log('navigateToFolder', this.currentRoot, this.currentPath, element);
   }
 
   navigateUp() {
-    console.log('nabidgtion logc');
-    if (this.currentRoot && this.currentRoot.parent === 'root') {
-      this.currentRoot = null;
-      this.canNavigateUp = false;
-      this.updateFileElementQuery();
-    } else {
-      this.currentRoot = this._fileService.get(this.currentRoot.parent);
-      this.updateFileElementQuery();
-    }
-    this.currentPath = this.popFromPath(this.currentPath);
+    // console.log('nabidgtion logc');
+    // if (this.currentRoot && this.currentRoot.parent === 'root') {
+    //   this.currentRoot = null;
+    //   this.canNavigateUp = false;
+    //   this.updateFileElementQuery();
+    // } else {
+    //   this.currentRoot = this._fileService.get(this.currentRoot.parent);
+    //   this.updateFileElementQuery();
+    // }
+    // this.currentPath = this.popFromPath(this.currentPath);
   }
 
   // move item place
   moveElement(event: { element: FileElement; moveTo: FileElement }) {
-    console.log('move element');
-    this._fileService.update(event.element.id, { parent: event.moveTo.id });
-    this.updateFileElementQuery();
+    // console.log('move element');
+    // this._fileService.update(event.element.id, { parent: event.moveTo.id });
+    // this.updateFileElementQuery();
   }
 
   // remname item
   renameElement(element: FileElement) {
     console.log('rename');
-    this._fileService.update(element.id, { name: element.name });
+    // this._fileService.update(element.id, { name: element.name });
     this.updateFileElementQuery();
   }
 
   // upd list file elements
   updateFileElementQuery() {
-    this.fileElements = this._fileService.queryInFolder(this.currentRoot ? this.currentRoot.id : 'root');
+    // this.fileElements = this._fileService.queryInFolder(this.currentRoot ? this.currentRoot.id : 'root');
   }
 
   // push path method
@@ -126,12 +134,12 @@ export class AuthPageComponent implements OnInit {
 
   // pop path method
   popFromPath(path: string) {
-    console.log('popFromPath');
-    let p = path ? path : '';
-    const split = p.split('/');
-    split.splice(split.length - 2, 1);
-    p = split.join('/');
-    return p;
+    // console.log('popFromPath');
+    // let p = path ? path : '';
+    // const split = p.split('/');
+    // split.splice(split.length - 2, 1);
+    // p = split.join('/');
+    // return p;
   }
 
   login() {

@@ -6,7 +6,7 @@
 # @Last modified time: 08-11-2017
 
 /**
- * Template part for displaying posts
+ * Template part for displaying formations page
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
@@ -33,25 +33,23 @@
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
-		<?php
-			the_content( sprintf(
-				wp_kses(
-					/* translators: %s: Name of current post. Only visible to screen readers */
-					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'nomades-wp-2018' ),
-					array(
-						'span' => array(
-							'class' => array(),
-						),
-					)
-				),
-				get_the_title()
-			) );
-
-			wp_link_pages( array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'nomades-wp-2018' ),
-				'after'  => '</div>',
-			) );
-		?>
+		<div class="block">
+			<?php echo (get_post_meta($post->ID, 'content_block_formation_1', true));?>
+		</div>
+		<div class="block">
+			<?php echo (get_post_meta($post->ID, 'content_block_formation_2', true));?>
+		</div>
+		<div class="block">
+			<?php echo (get_post_meta($post->ID, 'content_block_formation_3', true));?>
+		</div>
+		<div class="block">
+			<?php echo (get_post_meta($post->ID, 'content_block_formation_4', true));?>
+		</div>
+		<?php // print_r(get_post_meta($post->ID));?>
+		</div>
+		<div class="dates">
+			Prochaine dates: du <?php echo (get_post_meta($post->ID, 'date_formation_du', true));?> au <?php echo (get_post_meta($post->ID, 'date_formation_au', true));?>
+		</div>
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">

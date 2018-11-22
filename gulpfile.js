@@ -54,6 +54,7 @@ gulp.task('wpfile', function () {
 // Task watch
 // Rerun the task when a file changes
  gulp.task('watch', function() {
+  gulp.watch(['./www/*.js'], ['js']);
   gulp.watch(['./wordpress/*.php', './wordpress/**/*.php', './wordpress/template-parts/*.php'], ['php']);
 });
 

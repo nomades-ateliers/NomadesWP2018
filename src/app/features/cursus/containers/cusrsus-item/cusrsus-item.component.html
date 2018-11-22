@@ -38,7 +38,7 @@
                 size-sm="12"
                 size-md="10"
                 size-lg="8">
-                <span>{{f?.t_formation_b1|replaceBy}}</span>
+                <!-- <span>{{f?.t_formation_b1|replaceBy}}</span> -->
                 <h2 [ngStyle]="{
                   color: (currentRoute.includes('front')) ? '#388E3C' : '#0288D1'
                 }">{{f?.title?.rendered|replaceBy}}</h2>
@@ -110,13 +110,15 @@
             </div>
           </ion-grid>
         </ion-row>  
- 
-        <ion-row margin-bottom class="timeline">
-          <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>10 jours</span></ion-col>
-          <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>20 jours</span></ion-col>
-          <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>30 jours</span></ion-col>
-          <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>40 jours</span></ion-col>
-        </ion-row>
+        <ion-show-when size="lg">
+          <ion-row margin-bottom class="timeline">
+            <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>10 jours</span></ion-col>
+            <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>20 jours</span></ion-col>
+            <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>30 jours</span></ion-col>
+            <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>40 jours</span></ion-col>
+          </ion-row>          
+        </ion-show-when>
+
 
       </ng-container>
       <ng-template #spinner>

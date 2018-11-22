@@ -227,3 +227,6 @@ add_filter( "rest_post_collection_params", function($query_params, $post_type){
 
 
 
+
+
+require get_template_directory() . '/inc/yost_to_wpapi.php';

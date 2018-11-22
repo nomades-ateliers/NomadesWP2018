@@ -1,126 +1,10 @@
 <?php
-function cptui_register_my_cpts() {
 
-	/**
-	 * Post Type: Formations.
-	 */
+// function themename_post_formats_setup() {
+//     add_theme_support( 'post-formats', array( 'aside', 'gallery', 'toto' ) );
+// }
+// add_action( 'after_setup_theme', 'themename_post_formats_setup' );
 
-	$labels = array(
-		"name" => __( "Formations"),
-		"singular_name" => __( "Formation"),
-		"menu_name" => __( "Block Formations"),
-		"add_new" => __( "Ajouter nouveau"),
-		"add_new_item" => __( "Ajouter nouvelle formation"),
-		"edit" => __( "Modifier"),
-		"edit_item" => __( "Modifier la formation"),
-		"new_item" => __( "Nouvelle formation"),
-		"view" => __( "Voir la formation"),
-		"view_item" => __( "Voir formation"),
-		"search_items" => __( "Rechercher Formation"),
-	);
-
-	$args = array(
-		"label" => __( "Formations"),
-		"labels" => $labels,
-		"description" => "Pour les blocks de formations uniquement, en haut de la page !",
-		"public" => true,
-		"publicly_queryable" => true,
-		"show_ui" => true,
-		"show_in_rest" => true,
-		"rest_base" => "",
-		"has_archive" => true,
-		"show_in_menu" => true,
-		"exclude_from_search" => false,
-		"capability_type" => "post",
-		"map_meta_cap" => true,
-		"hierarchical" => true,
-		"rewrite" => array( "slug" => "formation", "with_front" => true ),
-		"query_var" => true,
-		"supports" => array( "title" ),
-	);
-
-	register_post_type( "formation", $args );
-
-	/**
-	 * Post Type: Workshops.
-	 */
-
-	$labels = array(
-		"name" => __( "Workshops"),
-		"singular_name" => __( "Workshop"),
-		"add_new" => __( "Ajouter nouveau"),
-		"add_new_item" => __( "Ajouter Nouveau workshop"),
-		"edit" => __( "Modifier"),
-		"edit_item" => __( "Modifier un workshop"),
-		"new_item" => __( "Nouveau Workshop"),
-		"view" => __( "Voir le workshop"),
-		"view_item" => __( "Voir le workshop"),
-	);
-
-	$args = array(
-		"label" => __( "Workshops"),
-		"labels" => $labels,
-		"description" => "Custom post type pour les worksops",
-		"public" => true,
-		"publicly_queryable" => false,
-		"show_ui" => true,
-		"show_in_rest" => true,
-		"rest_base" => "",
-		"has_archive" => true,
-		"show_in_menu" => true,
-		"exclude_from_search" => false,
-		"capability_type" => "post",
-		"map_meta_cap" => true,
-		"hierarchical" => false,
-		"rewrite" => array( "slug" => "workshop", "with_front" => true ),
-		"query_var" => true,
-		"supports" => array( "title" ),
-	);
-
-	register_post_type( "workshop", $args );
-
-	/**
-	 * Post Type: Projets.
-	 */
-
-	$labels = array(
-		"name" => __( "Projets"),
-		"singular_name" => __( "Projet"),
-		"menu_name" => __( "Projets élèves"),
-		"add_new" => __( "Ajouter nouveau"),
-		"add_new_item" => __( "Ajouter Nouveau projet"),
-		"edit" => __( "Modifier"),
-		"edit_item" => __( "Modifier un projet"),
-		"new_item" => __( "Nouveau Projet"),
-		"view" => __( "Voir projet"),
-		"view_item" => __( "Voir un projet"),
-		"search_items" => __( "Rechercher un projet"),
-	);
-
-	$args = array(
-		"label" => __( "Projets"),
-		"labels" => $labels,
-		"description" => "Type de contenu pour les projets en bas de page",
-		"public" => true,
-		"publicly_queryable" => false,
-		"show_ui" => true,
-		"show_in_rest" => true,
-		"rest_base" => "",
-		"has_archive" => true,
-		"show_in_menu" => true,
-		"exclude_from_search" => false,
-		"capability_type" => "post",
-		"map_meta_cap" => true,
-		"hierarchical" => false,
-		"rewrite" => array( "slug" => "projet", "with_front" => true ),
-		"query_var" => true,
-		"supports" => array( "title", "thumbnail" ),
-	);
-
-	register_post_type( "projet", $args );
-}
-
-add_action( 'init', 'cptui_register_my_cpts' );
 
 function cptui_register_my_cpts_formation() {
 
@@ -147,7 +31,7 @@ function cptui_register_my_cpts_formation() {
 		"labels" => $labels,
 		"description" => "Pour les blocks de formations uniquement, en haut de la page !",
 		"public" => true,
-		"publicly_queryable" => false,
+		// "publicly_queryable" => false,
 		"show_ui" => true,
 		"show_in_rest" => true,
 		"rest_base" => "",
@@ -158,8 +42,8 @@ function cptui_register_my_cpts_formation() {
 		"map_meta_cap" => true,
 		"hierarchical" => false,
 		"rewrite" => array( "slug" => "formation", "with_front" => true ),
-		"query_var" => true,
-		"supports" => array( "title" ),
+        "query_var" => true,
+		"supports" => array( "title" , "post-formats"),
 	);
 
 	register_post_type( "formation", $args );
@@ -190,17 +74,17 @@ function cptui_register_my_cpts_workshop() {
 		"labels" => $labels,
 		"description" => "Custom post type pour les worksops",
 		"public" => true,
-		"publicly_queryable" => false,
+		// "publicly_queryable" => false,
 		"show_ui" => true,
 		"show_in_rest" => true,
-		"rest_base" => "",
+		// "rest_base" => "",
 		"has_archive" => true,
 		"show_in_menu" => true,
 		"exclude_from_search" => false,
 		"capability_type" => "post",
 		"map_meta_cap" => true,
-		"hierarchical" => false,
-		"rewrite" => array( "slug" => "workshop", "with_front" => true ),
+        "hierarchical" => true,
+		"rewrite" => array( "slug" => "workshops"),
 		"query_var" => true,
 		"supports" => array( "title" ),
 	);
@@ -244,8 +128,8 @@ function cptui_register_my_cpts_projet() {
 		"exclude_from_search" => false,
 		"capability_type" => "post",
 		"map_meta_cap" => true,
-		"hierarchical" => false,
-		"rewrite" => array( "slug" => "projet", "with_front" => true ),
+		"hierarchical" => true,
+		"rewrite" => array( "slug" => "projet" ),
 		"query_var" => true,
 		"supports" => array( "title", "thumbnail" ),
 	);
@@ -254,65 +138,6 @@ function cptui_register_my_cpts_projet() {
 }
 
 add_action( 'init', 'cptui_register_my_cpts_projet' );
-
-function cptui_register_my_taxes() {
-
-	/**
-	 * Taxonomy: Cursus.
-	 */
-
-	$labels = array(
-		"name" => __( "Cursus"),
-		"singular_name" => __( "Cursus"),
-	);
-
-	$args = array(
-		"label" => __( "Cursus"),
-		"labels" => $labels,
-		"public" => true,
-		"hierarchical" => 1,
-		"label" => "Cursus",
-		"show_ui" => true,
-		"show_in_menu" => true,
-		"show_in_nav_menus" => true,
-		"query_var" => true,
-		"rewrite" => array( 'slug' => 'cursus', 'with_front' => false, ),
-		"show_admin_column" => 0,
-		"show_in_rest" => true,
-		"rest_base" => "",
-		"show_in_quick_edit" => true,
-	);
-	register_taxonomy( "cursus", array( "formation" ), $args );
-
-	/**
-	 * Taxonomy: Parcours.
-	 */
-
-	$labels = array(
-		"name" => __( "Parcours"),
-		"singular_name" => __( "Parcour"),
-	);
-
-	$args = array(
-		"label" => __( "Parcours"),
-		"labels" => $labels,
-		"public" => true,
-		"hierarchical" => 1,
-		"label" => "Parcours",
-		"show_ui" => true,
-		"show_in_menu" => true,
-		"show_in_nav_menus" => true,
-		"query_var" => true,
-		"rewrite" => array( 'slug' => 'parcours', 'with_front' => false, ),
-		"show_admin_column" => 0,
-		"show_in_rest" => true,
-		"rest_base" => "",
-		"show_in_quick_edit" => true,
-	);
-	register_taxonomy( "parcours", array( "workshop" ), $args );
-}
-
-add_action( 'init', 'cptui_register_my_taxes' );
 
 function cptui_register_my_taxes_cursus() {
 
@@ -335,7 +160,7 @@ function cptui_register_my_taxes_cursus() {
 		"show_in_menu" => true,
 		"show_in_nav_menus" => true,
 		"query_var" => true,
-		"rewrite" => array( 'slug' => 'cursus', 'with_front' => false, ),
+        "rewrite" => array( 'slug' => 'cursus' ),
 		"show_admin_column" => 0,
 		"show_in_rest" => true,
 		"rest_base" => "",
@@ -361,13 +186,13 @@ function cptui_register_my_taxes_parcours() {
 		"label" => __( "Parcours"),
 		"labels" => $labels,
 		"public" => true,
-		"hierarchical" => 1,
+		"hierarchical" => true,
 		"label" => "Parcours",
 		"show_ui" => true,
 		"show_in_menu" => true,
 		"show_in_nav_menus" => true,
 		"query_var" => true,
-		"rewrite" => array( 'slug' => 'parcours', 'with_front' => false, ),
+		// "rewrite" => array( 'slug' => 'workshops' ),
 		"show_admin_column" => 0,
 		"show_in_rest" => true,
 		"rest_base" => "",
@@ -1039,3 +864,48 @@ add_action( 'init', 'cptui_register_my_taxes_parcours' );
     } // end update_edit_form
     add_action('post_edit_form_tag', 'update_edit_form');
 
+    // function themename_custom_post_formats_setup() {
+    //     // add post-formats to post_type 'page'
+    //     add_post_type_support( 'formation', 'post-formats' );
+     
+    //     // add post-formats to post_type 'my_custom_post_type'
+    // }
+    // add_action( 'init', 'themename_custom_post_formats_setup' );
+
+
+// A callback function to add a custom field to our "presenters" taxonomy  
+function order_taxonomy_custom_fields($tag) {  
+    // Check for existing taxonomy meta for the term you're editing  
+     $t_id = $tag->term_id; // Get the ID of the term you're editing  
+     $term_meta = get_option( "taxonomy_term_$t_id" ); // Do the check  
+ ?>   
+ <tr class="form-field">  
+     <th scope="row" valign="top">  
+         <label for="order"><?php _e('Ordre de tris'); ?></label>  
+     </th>  
+     <td>  
+         <input type="text" name="term_meta[order]" id="term_meta[order]" size="25" style="width:60%;" value="<?php echo $term_meta['order'] ? $term_meta['order'] : ''; ?>"><br />  
+         <span class="description"><?php _e('Ordre d affichage des catégories.'); ?></span>  
+     </td>  
+ </tr>  
+ <?php  
+ } 
+ // A callback function to save our extra taxonomy field(s)  
+function save_taxonomy_custom_fields( $term_id ) {  
+    if ( isset( $_POST['term_meta'] ) ) {  
+        $t_id = $term_id;  
+        $term_meta = get_option( "taxonomy_term_$t_id" );  
+        $cat_keys = array_keys( $_POST['term_meta'] );  
+            foreach ( $cat_keys as $key ){  
+            if ( isset( $_POST['term_meta'][$key] ) ){  
+                $term_meta[$key] = $_POST['term_meta'][$key];  
+            }  
+        }  
+        //save the option array  
+        update_option( "taxonomy_term_$t_id", $term_meta );  
+    }  
+}
+// Add the fields to the "order" taxonomy, using our callback function  
+add_action( 'order_edit_form_fields', 'order_taxonomy_custom_fields', 10, 2 );  
+// Save the changes made on the "order" taxonomy, using our callback function  
+add_action( 'edited_order', 'save_taxonomy_custom_fields', 10, 2 );  

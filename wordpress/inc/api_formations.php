@@ -25,6 +25,13 @@ function appp_post_type_rest_support() {
     $wp_post_types[$post_type_name]->rest_base = $post_type_name;
     $wp_post_types[$post_type_name]->rest_controller_class = 'WP_REST_Posts_Controller';
   }
+
+  $post_type_name = 'projet';
+  if( isset( $wp_post_types[ $post_type_name ] ) ) {
+    $wp_post_types[$post_type_name]->show_in_rest = true;
+    $wp_post_types[$post_type_name]->rest_base = $post_type_name;
+    $wp_post_types[$post_type_name]->rest_controller_class = 'WP_REST_Posts_Controller';
+  }
 }
 
 add_action( 'rest_api_init', 'appp_register_post_meta' );
@@ -232,6 +239,25 @@ function appp_register_post_meta() {
             'schema'          => null,
         )
     );
+
+
+    register_rest_field( 'parcours', // any post type registered with API
+        'order', // this needs to match meta key
+        array(
+            'get_callback'    => 'app_get_taxMeta',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+}
+function app_get_taxMeta($tax){
+    $id = $tax[ 'id' ];
+    $term_meta = get_option( "taxonomy_term_$id" );
+    // $terms = get_field("order", $tax );
+
+    // return $data;
+    return ($term_meta) ? intval($term_meta['order']) : 0;
+    
 }
 function appp_get_meta( $object, $field_name, $request ) {
     return get_post_meta( $object[ 'id' ], $field_name, true );

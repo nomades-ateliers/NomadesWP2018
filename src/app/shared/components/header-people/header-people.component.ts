@@ -8,6 +8,7 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 })
 export class HeaderPeopleComponent implements OnInit {
 
+  @Input() readonly isHome = false;
   @Input() readonly baseUrl: string;
 
   ngOnInit() {

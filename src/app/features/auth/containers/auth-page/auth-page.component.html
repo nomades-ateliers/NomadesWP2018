@@ -53,8 +53,8 @@
     <ng-template #connected>
       <ion-row>
         <ion-col>
-          <pre>{{fileElements|async|json}} </pre>
-          <app-file-explorer
+          <pre>{{fileElements|json}} </pre>
+          <!-- <app-file-explorer
             [path]="currentPath"
             [canNavigateUp]="canNavigateUp"
             (folderAdded)="addFolder($event)"
@@ -63,7 +63,7 @@
             (elementRemoved)="removeElement($event)"
             (elementRenamed)="renameElement($event)"
             (elementMoved)="moveElement($event)"
-            [fileElements]="fileElements|async"></app-file-explorer>
+            [fileElements]="fileElements$|async"></app-file-explorer> -->
         </ion-col>
       </ion-row>
     </ng-template>

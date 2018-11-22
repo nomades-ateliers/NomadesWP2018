@@ -9,19 +9,26 @@
  * WordPress FrontPage entry point
  */
 
- get_header();?>
+ get_header();
+// custom wp query
+// $the_query = new WP_Query( array( 'post_type' => 'formation' ) );
+ ?>
 
       <main id="main" class="site-main" role="main">
-      		<?php
-      		if ( have_posts() ) :?>
-      			<?php
-      			/* Start the Loop */
-      			while ( have_posts() ) : the_post();
-              // echo '<div class="content">';
-              // the_content();
-              // echo '</div>';
-      				get_template_part( 'template-parts/content', 'page' );
-      			endwhile;
-      		endif; ?>
+			<?php
+				the_content();
+				$terms = get_terms('cursus');
+				if ( !empty( $terms ) && !is_wp_error( $terms ) ){
+					echo "<ul>";
+					foreach ( $terms as $term ) {
+					echo "<li>" . $term->name . "</li>";
+
+					}
+					echo "</ul>";
+				}	  
+			?>
       </main><!-- #main -->
-<?php get_footer();?>
+<?php 
+// reset wp query with custom args
+wp_reset_postdata();
+get_footer();?>

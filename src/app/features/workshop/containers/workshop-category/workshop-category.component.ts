@@ -4,7 +4,7 @@ import { WpApiService } from '@app/shared/services';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { fadeAnim } from '@app/shared/animations/fade.animation';
-
+import { updateHTMLElementHeight } from '@app/utils';
 @Component({
   selector: 'app-workshop-category',
   templateUrl: './workshop-category.component.html',
@@ -17,7 +17,7 @@ export class WorkshopCategoryComponent implements OnInit {
   public currentUrl: any;
   public baseUrl = [
     'https://nomades.ch/wp-content/uploads/2018/10/nomade04-.png', // vert
-    'https://nomades.ch/wp-content/uploads/2018/10/nomade02-.png', // default => TODO: replace by yellow
+    'https://nomades.ch/wp-content/uploads/2018/11/nomade05_jaune-png.png', // default => TODO: replace by yellow
     'https://nomades.ch/wp-content/uploads/2018/10/nomade03-.png' // bleu
   ];
   // public parcour: any;
@@ -44,48 +44,9 @@ export class WorkshopCategoryComponent implements OnInit {
     // if (arts.length <= 0) this.updateHeight(arts);
   }
 
-  private _updateHeight() {
-    // find all items elements
-    const items = Array.from(document.querySelectorAll('article'))
-    console.log('_updateHeight items find-> ', items.length);
-    // init default maxHeight
-    let maxHeight = 0;
-    // get height of each element and store the biger in maxHeight
-    items.map(i => {
-      const iH = i.getBoundingClientRect().height;
-      if (iH > maxHeight) maxHeight = iH;
-      return i
-    })
-    // apply maxHeight to all elements
-    .map(i => {
-      i.style.height = `${maxHeight}px`;
-      return i;
-    })  
-    // re-run function if maxHeight is equal to 0 (unsized elements)
-    // or if items.length <= 0 (unfinded elements)
-    if (items.length <= 0 || maxHeight === 0) {
-      // see below why using setTimeout()...
-      setTimeout(_=> this._updateHeight(), 1500);
-      return;
-    }
-    // if all elements is resizing, finaly 
-    // remove opacity of each containers with small 
-    // setTimeout() to prevent ngFor construction debounce time with ionic element (longer to biuld to the DOM)
-    // TODO: check with higher ionic version of 4.0.0-beta.13 if the loading time is the same.
-    //       if time is faster with new release, you can remove this setTimeOut and refact the method to
-    //       remove all setTimeOut() and working with correct angular pattern design.
-    setTimeout(_=> 
-      Array.from(document.querySelectorAll('.wks'))
-      .map((e: HTMLElement) => {
-        e.style.opacity = '1';
-      }),
-      250
-    );
-  }
-
   go(url: string) {
-    console.log('go: ', url);
-    this._router.navigate(['/workshops/' + url]);
+    console.log('go to: ', url);
+    this._router.navigate(['workshops/' + url]);
   }
 
   displayDetail(item) {
@@ -113,11 +74,14 @@ export class WorkshopCategoryComponent implements OnInit {
           .filter(i => i.parent === parcour.id)
           // filter only caregories with children count > 0
           .filter(i => +i.count >= 1)
+          // order parcours by proprety
+          .sort((a, b) => b.order < a.order)
       ),
       tap(res => this._loadWorkshops(parcour.id)),
       tap(_ => this.parcours = this.parcours.filter(p => p.parent === 0)),
       // add this to update all item with the same height size.
-      tap(_ => this._updateHeight())
+      tap(_ => updateHTMLElementHeight(['article'])),
+      tap(_ => updateHTMLElementHeight(['h1']))
     );
   }
 

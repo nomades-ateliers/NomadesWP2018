@@ -22,8 +22,8 @@
                 front: c?.name.toLowerCase().includes('front'),
                 back: c?.name.toLowerCase().includes('back'),
                 mobile: c?.name.toLowerCase().includes('mobile'),
-                active: c.link.split('parcours/').reverse()[0] === currentUrl.split('workshops/').reverse()[0]
-            }" (click)="go(c.link.split('parcours/').reverse()[0])">{{c?.name}}</ion-col>
+                active: c.link.split('workshops/').reverse()[0].includes(currentUrl.split('workshops/').reverse()[0])
+            }" (click)="go(c.link.split('workshops/').reverse()[0])">{{c?.name}}</ion-col>
           </ion-row> 
       </div>
 
