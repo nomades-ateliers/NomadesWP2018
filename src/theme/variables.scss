@@ -255,7 +255,7 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
     text-align: center;
     letter-spacing: 0.028em;
     color: #000;
-    font-family: "Helvnul","AkzidenzGrotesk-Light",Arial,Helvetica,sans-serif;
+    font-family: Helvetica,sans-serif;
     margin-bottom: 40px;
 
   }
@@ -273,4 +273,20 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
 
 .header-md::after {
   background: none;
+}
+
+p {
+  font-size: 1rem;
+  font-weight: 300;
+}
+b, strong {
+  font-weight: 400;
+}
+*.block_title {
+  text-transform: uppercase;
+  padding: 0.4rem;
+  margin: 0;
+  font-weight: 300;
+  font-size: 1.3rem;
+  letter-spacing: 0.1rem;
 }

@@ -23,7 +23,9 @@
                 back: c?.name.toLowerCase().includes('back'),
                 mobile: c?.name.toLowerCase().includes('mobile'),
                 active: c.link.split('workshops/').reverse()[0].includes(currentUrl.split('workshops/').reverse()[0])
-            }" (click)="go(c.link.split('workshops/').reverse()[0])">{{c?.name}}</ion-col>
+            }" (click)="go(c.link.split('workshops/').reverse()[0])">
+              <h2 class="block_title">{{c?.name}}</h2>
+            </ion-col>
           </ion-row> 
       </div>
 

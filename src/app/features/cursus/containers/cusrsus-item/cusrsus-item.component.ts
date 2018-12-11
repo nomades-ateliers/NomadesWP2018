@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { WpApiService } from '@app/shared/services';
 import { fadeAnim } from '@app/shared/animations/fade.animation';
@@ -19,6 +19,7 @@ export class CusrsusItemComponent implements OnInit {
 
   public data$: Observable<any>;
   public cursus$: Observable<any>;
+  public currentCursus = null;
   public currentRoute = '';
   public formations$: Observable<any[]>;
   public frontEndFormations$: Observable<any[]>;
@@ -39,12 +40,16 @@ export class CusrsusItemComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.formations$ = this._wpApi.getRemoteData({path: 'formation', slug: ``});
+    this.formations$ = this._wpApi.getRemoteData({path: 'formation', slug: ``}).pipe(
+      map(res => res.map(item => {item.formation_position = +item.formation_position; return item})),
+      map((res) => res.sort((a, b) => a.formation_position - b.formation_position))
+    );
     this.data$ = this._wpApi.getData({path: 'pages', slug: `slug=cursus`}).pipe(
       map(res => (res.length === 1 ) ? res[0] : res),
     );
     this.cursus$ = this._wpApi.getData({path: 'cursus', slug: ``}).pipe(
       map(res => (res.length === 1 ) ? res[0] : res),
+      tap(cs => (this.currentCursus = cs.find(c => c.slug === this.currentRoute)))
     );
 
     this.frontEndFormations$ = this.formations$.pipe(

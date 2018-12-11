@@ -1,7 +1,23 @@
 app-contact-page {
+    ion-slides {
+        p {
+            font-size: 1rem;
+            padding: 0 2rem;
+            color: #fff;
+            text-align: left;
+            span {
+                margin-top: 5px;
+                color: #B71C1C !important;
+                display: inline-block;
+            }
+        }
+    }
     .contactContainer {
-        background: #333;   
-        padding: 1rem 0;
+        form {
+            background: #333;   
+            padding: 1rem 0;            
+        }
+
         ion-label { 
             color: #fff;
         }
@@ -14,6 +30,13 @@ app-contact-page {
         }
         ion-list {
             background: transparent;
+        }
+
+        .annexes {
+            p {
+                padding-bottom: 1rem;
+                border-bottom: solid 1px #333;
+            }
         }
     }
     div#recaptcha {

@@ -18,7 +18,9 @@
         col: true,
         front: c?.name.toLowerCase().includes('front'),
         back: c?.name.toLowerCase().includes('back')
-      }" (click)="go(c.link.split('cursus/').reverse()[0])">{{c?.name}}</ion-col>
+      }" (click)="go(c.link.split('cursus/').reverse()[0])">
+      <h2 class="block_title">{{c?.name}}</h2>
+    </ion-col>
     </ion-row>
   </ion-grid>
   <app-footer></app-footer>

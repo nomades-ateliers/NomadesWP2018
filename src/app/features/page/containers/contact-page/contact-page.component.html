@@ -1,8 +1,9 @@
+<!-- {{(data$ | async)?.title?.rendered }} -->
 <div class="contactContainer">
   <form [formGroup]="form">
     <ion-grid>
       <ion-row>
-        <ion-col sizeXs="12" sizeMd="6">
+        <ion-col align-self-center sizeXs="12" sizeMd="6">
           <ion-row>
             <ion-col sizeXs="12" sizeMd="3">
               <ion-label position="fixed">Nom *</ion-label>
@@ -65,10 +66,43 @@
             </ion-button>
           </div>
         </ion-col>
-        <ion-col sizeXs="12" sizeMd="6">
-          <img src="https://nomades.ch/wp-content/uploads/2018/10/nomade02-.png" alt="banière nomades">
+        <ion-col align-self-center sizeXs="12" sizeMd="6">
+          <ion-show-when size="md">
+            <ion-slides mode="md" [options]="slideOpts">
+              <ion-slide>
+                <img src="https://nomades.ch/wp-content/themes/theme_nomades/images/perso_contact/Pierre-Marie_V2.png" alt="">
+                <p>
+                    Mes clients sont des sociétés qui demandent des applications web développées avec les techniques les plus avancées.<br/>
+                    <span>Bien sûr, je peux le faire ...</span>
+                </p>
+              </ion-slide>
+              <ion-slide>
+                <img src="https://nomades.ch/wp-content/themes/theme_nomades/images/perso_contact/Eda.png" alt="">
+                <p>
+                    Je contrôle la gestion de plusiurs organisations internationales. Aussi je leur conseille sur leur stratégie de communication sur le web. Moins coûteuse que le print et d’une portée plus large. Avec mes connaissances dans les technologies web,<br/>
+                    <span>Je peux le faire ...</span>
+                </p>
+              </ion-slide>
+              <ion-slide>
+                <img src="https://nomades.ch/wp-content/themes/theme_nomades/images/perso_contact/tania.png" alt="">
+                <p>
+                    Je conseille les entreprises sur leur relation-clients. Une plateforme web interactive est l’un des investissements les plus efficaces pour optimiser et fidéliser leur relation avec les clients.<br/>
+                    <span>Je sais le faire ...</span>
+                </p>
+              </ion-slide>
+            </ion-slides>
+          </ion-show-when>
+          <!-- <img src="https://nomades.ch/wp-content/uploads/2018/10/nomade02-.png" alt="banière nomades"> -->
         </ion-col>
       </ion-row>
     </ion-grid>
   </form>  
+  <div class="annexes" text-center>
+    <p>
+      <span>CHARTE / ASSOCIATION NOMADES.ATELIERS </span> <a routerLink="../charte-manifeste-association-nomades-ateliers">Consulter la charte</a> 
+    </p>
+    <p>
+      <span>MANIFESTE / ASSOCIATION NOMADES.ATELIERS </span> <a href="https://nomades.ch/manifest-nomades.pdf" target="_blank" title="Manifeste Nomades">Télécharger le manifest</a> 
+    </p>
+  </div>
 </div>

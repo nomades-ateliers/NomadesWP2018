@@ -12,6 +12,7 @@
           </div>
       </ion-col>
     </ion-row>
+    <!-- <pre>{{formations$|async|json}}</pre> -->
     <div class="cursus" *ngFor="let c of cursus$|async">
      <ion-row justify-content-start>
         <ion-col align-self-start [ngClass]="{
@@ -19,11 +20,14 @@
             front: c?.name.toLowerCase().includes('front'),
             back: c?.name.toLowerCase().includes('back'),
             active: c.link.split('cursus/').reverse()[0] === currentRoute
-        }" (click)="go(c.link.split('cursus/').reverse()[0])">{{c?.name}}</ion-col>
+        }" (click)="go(c.link.split('cursus/').reverse()[0])">
+          <h2 class="block_title">{{c?.name}}</h2>
+        </ion-col>
       </ion-row>       
     </div>
 
-    <div class="cursus">
+    <div *ngIf="(cursus$|async) as cursus" class="cursus"> 
+      <div class="cursusDesc" [innerHTML]="currentCursus?.description | safeHtml"></div>
       <ng-container *ngIf="(currentRoute.includes('front')) ? (frontEndFormations$|async) : (backEndFormations$|async) as dataToList;else spinner">
         <ion-row  
           margin-vertical 

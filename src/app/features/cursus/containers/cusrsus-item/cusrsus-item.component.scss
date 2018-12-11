@@ -1,12 +1,20 @@
 app-cusrsus-item {
-
+    h4.front {
+        color: #388E3C;
+    }
+    h4.back {
+        color: #0288D1;
+    }
+    .cursusDesc {
+        padding: 0 16px;
+    }
     .cursus {
         span {
             font-weight: 300;
         }
         p {
             font-size: 1.2rem;
-            font-weight: 400;
+            // font-weight: 400;
         }
 
         padding: 0.4rem;

@@ -7,7 +7,7 @@
           <app-header-people [baseUrl]="baseUrl"></app-header-people>
           <app-adress></app-adress>
           <app-slogan [slogan]="(data$ | async)?.title?.rendered"></app-slogan>
-          <div *ngIf="currentUrl !== '/nomades'">
+          <div>
             <div *ngIf="data$ | async as data" margin>
               <div [innerHTML]="data?.content?.rendered|replaceBy|safeHtml "></div>
             </div>          
@@ -21,9 +21,9 @@
         <app-projects-page *ngSwitchCase="'/projets'"></app-projects-page>
         <app-contact-page *ngSwitchCase="'/contact'"></app-contact-page>
         <ng-template ngSwitchDefault>
-          <div *ngIf="(data$ | async) as data;" margin>
+          <!-- <div *ngIf="(data$ | async) as data;" margin>
             <div [innerHTML]="data?.content?.rendered|replaceBy|safeHtml "></div>
-          </div>
+          </div> -->
         </ng-template>        
       </ion-col>
     </ion-row>

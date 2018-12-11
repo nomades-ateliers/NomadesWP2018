@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { WpApiService } from '@app/shared/services';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { loadFile } from '@app/utils';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 declare const grecaptcha: any;
 
@@ -17,8 +19,18 @@ declare const grecaptcha: any;
   encapsulation: ViewEncapsulation.None
 })
 export class ContactPageComponent implements OnInit {
+  
+  // public data$: Observable<any>;
   form: FormGroup;
-  loader: HTMLIonLoadingElement
+  loader: HTMLIonLoadingElement  
+  slideOpts = {
+    loop: true,
+    effect: 'fade',
+    speed: 1000,
+    autoplay: {
+      delay: 5000,
+    },
+  };
 
   constructor(
     private readonly _formBuilder: FormBuilder,
@@ -28,6 +40,9 @@ export class ContactPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // this.data$ = this._http.getData({path: 'pages', slug: `slug=contact`}).pipe(
+    //   map(res => (res.length === 1 ) ? res[0] : res),
+    // );
     // load JS file
     loadFile(this);
     // build contact form
