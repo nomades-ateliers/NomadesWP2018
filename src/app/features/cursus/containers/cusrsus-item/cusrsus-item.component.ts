@@ -28,7 +28,7 @@ export class CusrsusItemComponent implements OnInit {
   baseUrl = [
     'https://nomades.ch/wp-content/uploads/2018/10/nomade01-.png',
     'https://nomades.ch/wp-content/uploads/2018/10/nomade03-.png',
-  ]
+  ];
 
   constructor(
     private _wpApi: WpApiService,
@@ -41,7 +41,7 @@ export class CusrsusItemComponent implements OnInit {
 
   ngOnInit() {
     this.formations$ = this._wpApi.getRemoteData({path: 'formation', slug: ``}).pipe(
-      map(res => res.map(item => {item.formation_position = +item.formation_position; return item})),
+      map(res => res.map(item => {item.formation_position = +item.formation_position; return item; })),
       map((res) => res.sort((a, b) => a.formation_position - b.formation_position))
     );
     this.data$ = this._wpApi.getData({path: 'pages', slug: `slug=cursus`}).pipe(
@@ -68,5 +68,10 @@ export class CusrsusItemComponent implements OnInit {
   getdetail(u: string) {
     const w = window.open('https://nomades.ch/wp-content/' + u.split('/wp-content').reverse()[0], '_blank');
     w.focus();
+  }
+
+  toggle(block: HTMLElement) {
+    console.log(block);
+    block.classList.toggle('open');
   }
 }

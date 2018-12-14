@@ -1,11 +1,6 @@
 app-cusrsus-item {
-    h4.front {
-        color: #388E3C;
-    }
-    h4.back {
-        color: #0288D1;
-    }
-    .cursusDesc {
+
+    .item, .description {
         padding: 0 16px;
     }
     .cursus {
@@ -14,6 +9,7 @@ app-cusrsus-item {
         }
         p {
             font-size: 1.2rem;
+            // margin-bottom: -10px;
             // font-weight: 400;
         }
 
@@ -28,7 +24,9 @@ app-cusrsus-item {
             }
             h2 {
                 margin-top: 0.2rem;
-            }
+                margin-bottom: 0;
+                padding: 0;
+            }          
   
         }
     }
@@ -66,15 +64,66 @@ app-cusrsus-item {
         margin: 0;
         margin-top: -5px;
         padding-left: 1.6rem;
+        padding-top: 5px;
+    }
+
+    .chocolat.back .cursustitle,.chocolat.back h4 {
+        color: #0288D1;
+    }
+    .chocolat.front .cursustitle, .chocolat.front h4 {
+        color: #388E3C;
+    }
+    h4 {
+        margin: 0;
+    }
+    .cursusDesc h4 + p {
+        margin-top: 5px;
     }
     @media screen and (max-width: 991px) {
+        .alignWithCard img {
+            margin-top: 10px !important;
+        }
+        .chocolat {
+            .item {
+                position: relative;
+                overflow: hidden;
+                border: solid 1px;
+                margin-bottom: -1px;
+
+                h4.cursustitle{
+                    cursor: pointer;
+                    margin: 0; 
+                    padding: 12px 0; 
+                    position: relative;
+                }
+                .cursustitle::after {
+                    content: ' +';
+                    position: absolute;
+                    right: 12px;
+                }
+                .cursustitle:hover::after {
+                    opacity: 0.5;
+                }
+                .cursusDesc {
+                    max-height: 1px;
+                    overflow: hidden;
+                }
+                
+            }
+            .item.open {
+                max-height: 99999px;
+                .cursusDesc {
+                    max-height: 99999px;
+                }
+            }
+        }
         p.nextTime {
             padding-left: 0;
         }
     }
     .cursus ion-col img {
         margin: 0;
-        width: 3.5rem;
+        width: 3.8rem;
         padding-right: 10px;
         // max-width: 80px;
         cursor: pointer;
@@ -102,4 +151,11 @@ app-cusrsus-item {
              }
         }
     } 
+    .description h4 {
+        color: inherit !important;
+        margin: 30px 0;
+    }
+    .card-content p {
+        margin-bottom: -10px;
+    }  
 }

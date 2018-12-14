@@ -176,16 +176,10 @@ require get_template_directory() . '/inc/template-functions.php';
 require get_template_directory() . '/inc/wp-api.php';
 require get_template_directory() . '/inc/wp-api-filter.php';
 
-require get_template_directory() . '/inc/formation.php';
-
-/**
- * Require demo custompost type
- */
-require get_template_directory() . '/inc/demo.custom_post.php';
 /**
  * Require custompost type
  */
-require get_template_directory() . '/inc/custom-post.php';
+require get_template_directory() . '/inc/imports.php';
 
 
 require get_template_directory() . '/theme-config.php';

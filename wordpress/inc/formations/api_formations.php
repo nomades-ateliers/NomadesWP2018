@@ -240,11 +240,111 @@ function appp_register_post_meta() {
         )
     );
 
-
+    
     register_rest_field( 'parcours', // any post type registered with API
         'order', // this needs to match meta key
         array(
             'get_callback'    => 'app_get_taxMeta',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+
+    register_rest_field( 'cursus', // any post type registered with API
+        'choco_block1', // this needs to match meta key
+        array(
+            'get_callback' => 'app_get_choco_block1',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+    register_rest_field( 'cursus', // any post type registered with API
+        'choco_block1_title', // this needs to match meta key
+        array(
+            'get_callback' => 'app_get_choco_block1_title',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+    register_rest_field( 'cursus', // any post type registered with API
+        'choco_block1_title_short', // this needs to match meta key
+        array(
+            'get_callback' => 'app_get_choco_block1_title_short',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+
+    register_rest_field( 'cursus', // any post type registered with API
+        'choco_block2', // this needs to match meta key
+        array(
+            'get_callback'    => 'app_get_choco_block2',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+    register_rest_field( 'cursus', // any post type registered with API
+        'choco_block2_title', // this needs to match meta key
+        array(
+            'get_callback' => 'app_get_choco_block2_title',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+    register_rest_field( 'cursus', // any post type registered with API
+        'choco_block2_title_short', // this needs to match meta key
+        array(
+            'get_callback' => 'app_get_choco_block2_title_short',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+
+    register_rest_field( 'cursus', // any post type registered with API
+        'choco_block3', // this needs to match meta key
+        array(
+            'get_callback'    => 'app_get_choco_block3',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+    register_rest_field( 'cursus', // any post type registered with API
+        'choco_block3_title', // this needs to match meta key
+        array(
+            'get_callback' => 'app_get_choco_block3_title',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+    register_rest_field( 'cursus', // any post type registered with API
+        'choco_block3_title_short', // this needs to match meta key
+        array(
+            'get_callback' => 'app_get_choco_block3_title_short',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+
+    register_rest_field( 'cursus', // any post type registered with API
+        'choco_block4', // this needs to match meta key
+        array(
+            'get_callback'    => 'app_get_choco_block4',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+    register_rest_field( 'cursus', // any post type registered with API
+        'choco_block4_title', // this needs to match meta key
+        array(
+            'get_callback' => 'app_get_choco_block4_title',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+    register_rest_field( 'cursus', // any post type registered with API
+        'choco_block4_title_short', // this needs to match meta key
+        array(
+            'get_callback' => 'app_get_choco_block4_title_short',
             'update_callback' => null,
             'schema'          => null,
         )
@@ -259,6 +359,71 @@ function app_get_taxMeta($tax){
     return ($term_meta) ? intval($term_meta['order']) : 0;
     
 }
+
+function app_get_choco_block1($tax){
+    $id = $tax[ 'id' ];
+    $term_meta = get_option( "taxonomy_term_$id" );
+    return ($term_meta) ? $term_meta['choco_block1'] : null; 
+}
+function app_get_choco_block1_title($tax){
+    $id = $tax[ 'id' ];
+    $term_meta = get_option( "taxonomy_term_$id" );
+    return ($term_meta) ? $term_meta['choco_block1_title'] : null; 
+}
+function app_get_choco_block1_title_short($tax){
+    $id = $tax[ 'id' ];
+    $term_meta = get_option( "taxonomy_term_$id" );
+    return ($term_meta) ? $term_meta['choco_block1_title_short'] : null; 
+}
+
+function app_get_choco_block2($tax){
+    $id = $tax[ 'id' ];
+    $term_meta = get_option( "taxonomy_term_$id" );
+    return ($term_meta) ? $term_meta['choco_block2'] : null; 
+}
+function app_get_choco_block2_title($tax){
+    $id = $tax[ 'id' ];
+    $term_meta = get_option( "taxonomy_term_$id" );
+    return ($term_meta) ? $term_meta['choco_block2_title'] : null; 
+}
+function app_get_choco_block2_title_short($tax){
+    $id = $tax[ 'id' ];
+    $term_meta = get_option( "taxonomy_term_$id" );
+    return ($term_meta) ? $term_meta['choco_block2_title_short'] : null; 
+}
+
+function app_get_choco_block3($tax){
+    $id = $tax[ 'id' ];
+    $term_meta = get_option( "taxonomy_term_$id" );
+    return ($term_meta) ? $term_meta['choco_block3'] : null; 
+}
+function app_get_choco_block3_title($tax){
+    $id = $tax[ 'id' ];
+    $term_meta = get_option( "taxonomy_term_$id" );
+    return ($term_meta) ? $term_meta['choco_block3_title'] : null; 
+}
+function app_get_choco_block3_title_short($tax){
+    $id = $tax[ 'id' ];
+    $term_meta = get_option( "taxonomy_term_$id" );
+    return ($term_meta) ? $term_meta['choco_block3_title_short'] : null; 
+}
+
+function app_get_choco_block4($tax){
+    $id = $tax[ 'id' ];
+    $term_meta = get_option( "taxonomy_term_$id" );
+    return ($term_meta) ? $term_meta['choco_block4'] : null; 
+}
+function app_get_choco_block4_title($tax){
+    $id = $tax[ 'id' ];
+    $term_meta = get_option( "taxonomy_term_$id" );
+    return ($term_meta) ? $term_meta['choco_block4_title'] : null; 
+}
+function app_get_choco_block4_title_short($tax){
+    $id = $tax[ 'id' ];
+    $term_meta = get_option( "taxonomy_term_$id" );
+    return ($term_meta) ? $term_meta['choco_block4_title_short'] : null; 
+}
+
 function appp_get_meta( $object, $field_name, $request ) {
     return get_post_meta( $object[ 'id' ], $field_name, true );
 }

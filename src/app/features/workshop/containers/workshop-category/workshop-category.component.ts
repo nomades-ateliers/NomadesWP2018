@@ -35,7 +35,7 @@ export class WorkshopCategoryComponent implements OnInit {
   ngOnInit() {
     this.currentUrl = this._router.url;
     console.log('currentUrl', this.currentUrl);
-    
+
     this._loadParcours();
   }
 

@@ -27,14 +27,52 @@
     </div>
 
     <div *ngIf="(cursus$|async) as cursus" class="cursus"> 
-      <div class="cursusDesc" [innerHTML]="currentCursus?.description | safeHtml"></div>
+      <div [ngClass]="{
+        'chocolat': true,
+        'front': currentRoute.includes('front'),
+        'back': currentRoute.includes('back')
+      }">
+
+      <div #block1 *ngIf="currentCursus?.choco_block1" class="item open">
+        <ion-show-when size="lg">
+          <h3 (click)="toggle(block1)" class="cursustitle" [innerHTML]="currentCursus?.choco_block1_title | safeHtml"></h3>
+        </ion-show-when>
+        <ion-hide-when size="lg">
+          <h3 (click)="toggle(block1)" class="cursustitle" [innerHTML]="currentCursus?.choco_block1_title_short | safeHtml"></h3>
+        </ion-hide-when>
+          <div class="cursusDesc" [innerHTML]="currentCursus?.choco_block1 | safeHtml"></div>  
+        </div>
+        <div #block2 *ngIf="currentCursus?.choco_block2" class="item">
+          <ion-show-when size="lg">
+            <h3 (click)="toggle(block2)" class="cursustitle" [innerHTML]="currentCursus?.choco_block2_title | safeHtml"></h3>
+          </ion-show-when>
+          <ion-hide-when size="lg">
+            <h3 (click)="toggle(block2)" class="cursustitle" [innerHTML]="currentCursus?.choco_block2_title_short | safeHtml"></h3>
+          </ion-hide-when>
+          <div class="cursusDesc" [innerHTML]="currentCursus?.choco_block2 | safeHtml"></div>  
+        </div>
+        <div #block3 *ngIf="currentCursus?.choco_block3" class="item">
+          <ion-show-when size="lg">
+            <h3 (click)="toggle(block3)" class="cursustitle" [innerHTML]="currentCursus?.choco_block3_title | safeHtml"></h3>
+          </ion-show-when>
+          <ion-hide-when size="lg">
+            <h3 (click)="toggle(block3)" class="cursustitle" [innerHTML]="currentCursus?.choco_block3_title_short | safeHtml"></h3>
+          </ion-hide-when>
+          <div class="cursusDesc" [innerHTML]="currentCursus?.choco_block3 | safeHtml"></div>  
+        </div>
+        <div #block4 *ngIf="currentCursus?.choco_block4" class="item">
+          <h3 (click)="toggle(block4)" class="cursustitle" [innerHTML]="currentCursus?.choco_block4_title | safeHtml"></h3>
+          <div class="cursusDesc" [innerHTML]="currentCursus?.choco_block4 | safeHtml"></div>  
+        </div>
+        <div class="description" [innerHTML]="currentCursus?.description | safeHtml"></div>        
+      </div>
       <ng-container *ngIf="(currentRoute.includes('front')) ? (frontEndFormations$|async) : (backEndFormations$|async) as dataToList;else spinner">
         <ion-row  
           margin-vertical 
           justify-content-start 
           *ngFor="let f of (currentRoute.includes('front')) ? (frontEndFormations$|async) : (backEndFormations$|async)">
-          <ion-grid margin-top>
-            <ion-row padding justify-content-start>
+          <ion-grid margin-vertical>
+            <ion-row padding-horizontal justify-content-start>
               <ion-col class="alignWithCard" 
                 align-self-start 
                 text-start
@@ -42,7 +80,7 @@
                 size-sm="12"
                 size-md="10"
                 size-lg="8">
-                <!-- <span>{{f?.t_formation_b1|replaceBy}}</span> -->
+                <span *ngIf="f?.t_formation_b1">{{f?.t_formation_b1|replaceBy}}</span>
                 <h2 [ngStyle]="{
                   color: (currentRoute.includes('front')) ? '#388E3C' : '#0288D1'
                 }">{{f?.title?.rendered|replaceBy}}</h2>
