@@ -6,7 +6,7 @@
           <app-menu-nav [currentUrl]="'/index'"></app-menu-nav>
           <app-header-people [baseUrl]="currentRoute?.toLowerCase()?.includes('front') ? baseUrl[0] : baseUrl[1]"></app-header-people>
           <app-adress></app-adress>
-          <app-slogan [slogan]="'FORMATIONS DIPLÔMANTES DANS LES METIERS DU WEB'" [link]="'./index'"></app-slogan>
+          <app-slogan [slogan]="'FORMATIONS DIPLÔMANTES AUX LES METIERS DU WEB'" [link]="'./index'"></app-slogan>
           <div *ngIf="data$ | async as front;">
             <div [innerHTML]="front?.content?.rendered|replaceBy|safeHtml"></div>
           </div>
@@ -18,10 +18,11 @@
         <ion-col align-self-start [ngClass]="{
             col: true,
             front: c?.name.toLowerCase().includes('front'),
+            marketing: c?.name.toLowerCase().includes('marketing'),
             back: c?.name.toLowerCase().includes('back'),
             active: c.link.split('cursus/').reverse()[0] === currentRoute
         }" (click)="go(c.link.split('cursus/').reverse()[0])">
-          <h2 class="block_title">{{c?.name}}</h2>
+          <h2 class="block_title">{{c?.name|replaceBy}}</h2>
         </ion-col>
       </ion-row>       
     </div>
@@ -30,47 +31,105 @@
       <div [ngClass]="{
         'chocolat': true,
         'front': currentRoute.includes('front'),
-        'back': currentRoute.includes('back')
+        'back': currentRoute.includes('back'),
+        'marketing': currentRoute.includes('marketing')
       }">
 
       <div #block1 *ngIf="currentCursus?.choco_block1" class="item open">
         <ion-show-when size="lg">
-          <h3 (click)="toggle(block1)" class="cursustitle" [innerHTML]="currentCursus?.choco_block1_title | safeHtml"></h3>
+          <h3 (click)="toggle(block1)" [ngClass]="{
+            'text': true,
+            'cursustitle': true,
+            'front': currentRoute.includes('front'),
+            'back': currentRoute.includes('back'),
+            'marketing': currentRoute.includes('marketing')
+          }"  [innerHTML]="currentCursus?.choco_block1_title | safeHtml"></h3>
         </ion-show-when>
         <ion-hide-when size="lg">
-          <h3 (click)="toggle(block1)" class="cursustitle" [innerHTML]="currentCursus?.choco_block1_title_short | safeHtml"></h3>
+          <h3 (click)="toggle(block1)" [ngClass]="{
+            'text': true,
+            'cursustitle': true,
+            'front': currentRoute.includes('front'),
+            'back': currentRoute.includes('back'),
+            'marketing': currentRoute.includes('marketing')
+          }"  [innerHTML]="currentCursus?.choco_block1_title_short | safeHtml"></h3>
         </ion-hide-when>
           <div class="cursusDesc" [innerHTML]="currentCursus?.choco_block1 | safeHtml"></div>  
         </div>
         <div #block2 *ngIf="currentCursus?.choco_block2" class="item">
           <ion-show-when size="lg">
-            <h3 (click)="toggle(block2)" class="cursustitle" [innerHTML]="currentCursus?.choco_block2_title | safeHtml"></h3>
+            <h3 (click)="toggle(block2)" [ngClass]="{
+              'text': true,
+              'cursustitle': true,
+              'front': currentRoute.includes('front'),
+              'back': currentRoute.includes('back'),
+              'marketing': currentRoute.includes('marketing')
+            }"  [innerHTML]="currentCursus?.choco_block2_title | safeHtml"></h3>
           </ion-show-when>
           <ion-hide-when size="lg">
-            <h3 (click)="toggle(block2)" class="cursustitle" [innerHTML]="currentCursus?.choco_block2_title_short | safeHtml"></h3>
+            <h3 (click)="toggle(block2)" [ngClass]="{
+              'text': true,
+              'cursustitle': true,
+              'front': currentRoute.includes('front'),
+              'back': currentRoute.includes('back'),
+              'marketing': currentRoute.includes('marketing')
+            }"  [innerHTML]="currentCursus?.choco_block2_title_short | safeHtml"></h3>
           </ion-hide-when>
           <div class="cursusDesc" [innerHTML]="currentCursus?.choco_block2 | safeHtml"></div>  
         </div>
         <div #block3 *ngIf="currentCursus?.choco_block3" class="item">
           <ion-show-when size="lg">
-            <h3 (click)="toggle(block3)" class="cursustitle" [innerHTML]="currentCursus?.choco_block3_title | safeHtml"></h3>
+            <h3 (click)="toggle(block3)" [ngClass]="{
+              'text': true,
+              'cursustitle': true,
+              'front': currentRoute.includes('front'),
+              'back': currentRoute.includes('back'),
+              'marketing': currentRoute.includes('marketing')
+            }"  [innerHTML]="currentCursus?.choco_block3_title | safeHtml"></h3>
           </ion-show-when>
           <ion-hide-when size="lg">
-            <h3 (click)="toggle(block3)" class="cursustitle" [innerHTML]="currentCursus?.choco_block3_title_short | safeHtml"></h3>
+            <h3 (click)="toggle(block3)" [ngClass]="{
+              'text': true,
+              'cursustitle': true,
+              'front': currentRoute.includes('front'),
+              'back': currentRoute.includes('back'),
+              'marketing': currentRoute.includes('marketing')
+            }"  [innerHTML]="currentCursus?.choco_block3_title_short | safeHtml"></h3>
           </ion-hide-when>
           <div class="cursusDesc" [innerHTML]="currentCursus?.choco_block3 | safeHtml"></div>  
         </div>
         <div #block4 *ngIf="currentCursus?.choco_block4" class="item">
-          <h3 (click)="toggle(block4)" class="cursustitle" [innerHTML]="currentCursus?.choco_block4_title | safeHtml"></h3>
+          <h3 (click)="toggle(block4)" [ngClass]="{
+            'text': true,
+            'cursustitle': true,
+            'front': currentRoute.includes('front'),
+            'back': currentRoute.includes('back'),
+            'marketing': currentRoute.includes('marketing')
+          }"  [innerHTML]="currentCursus?.choco_block4_title | safeHtml"></h3>
           <div class="cursusDesc" [innerHTML]="currentCursus?.choco_block4 | safeHtml"></div>  
         </div>
-        <div class="description" [innerHTML]="currentCursus?.description | safeHtml"></div>        
+        <div padding [ngClass]="{
+          'blockInscription': true,
+          'front': currentRoute.includes('front'),
+          'back': currentRoute.includes('back'),
+          'marketing': currentRoute.includes('marketing')
+        }"  [innerHTML]="currentCursus?.description | safeHtml"></div>        
       </div>
-      <ng-container *ngIf="(currentRoute.includes('front')) ? (frontEndFormations$|async) : (backEndFormations$|async) as dataToList;else spinner">
+      <ng-container *ngIf="
+      (currentRoute.includes('front'))
+        ? (frontEndFormations$|async)
+        : (currentRoute.includes('front'))
+          ? (backEndFormations$|async)
+          : (marketingFormations$|async) as dataToList;else spinner">
         <ion-row  
           margin-vertical 
-          justify-content-start 
-          *ngFor="let f of (currentRoute.includes('front')) ? (frontEndFormations$|async) : (backEndFormations$|async)">
+          class="item_module_row"
+          justify-content-start
+          *ngFor="let f of (currentRoute.includes('front'))
+            ? (frontEndFormations$|async)
+            : (currentRoute.includes('back'))
+              ? (backEndFormations$|async)
+              : (marketingFormations$|async)">
           <ion-grid margin-vertical>
             <ion-row padding-horizontal justify-content-start>
               <ion-col class="alignWithCard" 
@@ -82,7 +141,7 @@
                 size-lg="8">
                 <span *ngIf="f?.t_formation_b1">{{f?.t_formation_b1|replaceBy}}</span>
                 <h2 [ngStyle]="{
-                  color: (currentRoute.includes('front')) ? '#388E3C' : '#0288D1'
+                  color: (currentRoute.toLowerCase().includes('front')) ? '#388E3C' : (currentRoute.toLowerCase().includes('back')) ?' #0288D1' : '#c40074'
                 }">{{f?.title?.rendered|replaceBy}}</h2>
               </ion-col>
               <ion-col class="alignWithCard" 
@@ -124,16 +183,16 @@
                 margin-bottom
                 class="row">
                   <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3" *ngIf="f?.content_block_formation_1.length > 0">
-                      <app-item-card [color]="(currentRoute.toLowerCase().includes('front')) ? '#388E3C' : '#0288D1'" [curcus]="{title: {rendered: f?.content_block_formation_1|replaceBy }}"></app-item-card>
+                      <app-item-card [color]="(currentRoute.toLowerCase().includes('front')) ? '#388E3C' : (currentRoute.toLowerCase().includes('back')) ?' #0288D1' : '#c40074'" [curcus]="{title: {rendered: f?.content_block_formation_1|replaceBy }}"></app-item-card>
                   </ion-col>
                   <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3" *ngIf="f?.content_block_formation_2.length > 0">
-                      <app-item-card [color]="(currentRoute.toLowerCase().includes('front')) ? '#388E3C' : '#0288D1'" [curcus]="{title: {rendered: f?.content_block_formation_2|replaceBy }}"></app-item-card>
+                      <app-item-card [color]="(currentRoute.toLowerCase().includes('front')) ? '#388E3C' : (currentRoute.toLowerCase().includes('back')) ?' #0288D1' : '#c40074'" [curcus]="{title: {rendered: f?.content_block_formation_2|replaceBy }}"></app-item-card>
                   </ion-col>
                   <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3" *ngIf="f?.content_block_formation_3.length > 0">
-                      <app-item-card [color]="(currentRoute.toLowerCase().includes('front')) ? '#388E3C' : '#0288D1'" [curcus]="{title: {rendered: f?.content_block_formation_3|replaceBy}}"></app-item-card>
+                      <app-item-card [color]="(currentRoute.toLowerCase().includes('front')) ? '#388E3C' : (currentRoute.toLowerCase().includes('back')) ?' #0288D1' : '#c40074'" [curcus]="{title: {rendered: f?.content_block_formation_3|replaceBy}}"></app-item-card>
                   </ion-col>
                   <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3" *ngIf="f?.content_block_formation_4.length > 0">
-                      <app-item-card [color]="(currentRoute.toLowerCase().includes('front')) ? '#388E3C' : '#0288D1'" [curcus]="{title: {rendered: f?.content_block_formation_4|replaceBy }}"></app-item-card>
+                      <app-item-card [color]="(currentRoute.toLowerCase().includes('front')) ? '#388E3C' : (currentRoute.toLowerCase().includes('back')) ?' #0288D1' : '#c40074'" [curcus]="{title: {rendered: f?.content_block_formation_4|replaceBy }}"></app-item-card>
                   </ion-col>
                   <!-- <ion-col class="fadeSlow" size-xs="12" size-md="6" size-lg="3" *ngIf="!f?.content_block_formation_4.length > 0">
                       <ion-card>
@@ -160,6 +219,125 @@
             <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>40 jours</span></ion-col>
           </ion-row>          
         </ion-show-when>
+        <br>
+        <br>
+        <ion-row margin-top>
+          <ion-col margin-top [ngClass]="{
+              'blockInscription': true,
+              'front': currentRoute.includes('front'),
+              'back': currentRoute.includes('back'),
+              'marketing': currentRoute.includes('marketing')
+            }">
+            PRE-INSCRIPTION AU {{currentCursus?.name|replaceBy}}
+         
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>Je souhaite faire une Pré-Inscription et réserver une place sans engagement (*) sur les modules de formation suivants :</p>
+          </ion-col>
+        </ion-row>
+        <div margin-bottom *ngIf="
+        (currentRoute.includes('front'))
+          ? (frontEndFormations$|async)
+          : (currentRoute.includes('front'))
+            ? (backEndFormations$|async)
+            : (marketingFormations$|async) as dataToList;">
+          <ion-row no-margin no-padding *ngFor="let f of (currentRoute.includes('front'))
+          ? (frontEndFormations$|async)
+          : (currentRoute.includes('back'))
+            ? (backEndFormations$|async)
+            : (marketingFormations$|async)">
+            <ion-col sizeXs="12" sizeMd="6">
+              <ion-item no-margin lines="none">
+                <ion-label [ngClass]="{
+                  'text': true,
+                  'front': currentRoute.includes('front'),
+                  'back': currentRoute.includes('back'),
+                  'marketing': currentRoute.includes('marketing')
+                }">{{f?.title?.rendered|replaceBy}}</ion-label>
+                <ion-checkbox slot="start"></ion-checkbox>
+              </ion-item>
+            </ion-col>
+            <ion-col sizeXs="12" sizeMd="3">
+              <!-- <pre>{{f|json}}</pre> -->
+              <select>
+                <option>du {{f?.date_formation_du}} au {{f?.date_formation_au}}</option>
+              </select>
+            </ion-col>
+            <ion-col sizeXs="12" sizeMd="3">CHF {{f?.formation_price}}.-</ion-col>
+          </ion-row>
+          <form padding-top margin-top [formGroup]="incriptionForm">
+            <ion-row margin-top padding-vertical [ngClass]="{
+              'inscriptionBlock': true,
+              'front': currentRoute.includes('front'),
+              'back': currentRoute.includes('back'),
+              'marketing': currentRoute.includes('marketing')
+            }">
+              <ion-col sizeXs="12" sizeMd="6">
+                <ion-grid no-margin padding-vertical>
+                  <ion-row no-margin no-padding>
+                    <ion-col no-margin no-padding>
+                      <ion-item padding-horizontal>
+                        <ion-label>prénom *</ion-label>
+                        <ion-input formControlName="prenom" name="prenom" type="text"></ion-input>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row no-margin no-padding>
+                    <ion-col no-margin no-padding>
+                      <ion-item>
+                        <ion-label>nom *</ion-label>
+                        <ion-input formControlName="nom" name="nom" type="text"></ion-input>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row no-margin no-padding>
+                    <ion-col no-margin no-padding>
+                      <ion-item>
+                        <ion-label>e-mail *</ion-label>
+                        <ion-input formControlName="email" name="email" type="email"></ion-input>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row no-margin no-padding>
+                    <ion-col no-margin no-padding>
+                      <ion-item>
+                        <ion-label>Téléphone *</ion-label>
+                        <ion-input formControlName="phone" name="nom" type="text"></ion-input>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-col>
+              <ion-col sizeXs="12" sizeMd="6" padding-horizontal>
+                <p>Votre place est réservée dès le moment de l’envoi de votre pré-inscription jusqu’à la confir- mation ou l’annulation de celle-ci, mais au plus tard 15 jours avant le début de la formation.</p>
+                <ion-grid padding-vertical>
+                  <ion-row no-padding>
+                    <ion-col sizeMd="8" no-padding>
+                      <ion-item line="none" no-padding>
+                        <ion-label>Pièce jointe: CV *</ion-label>
+                        <input type="file">
+                      </ion-item>
+                    </ion-col>
+   
+                    <ion-col sizeMd="4" text-right>
+                      <ion-button [ngClass]="{
+                        'btnInscription': true,
+                        'front': currentRoute.includes('front'),
+                        'back': currentRoute.includes('back'),
+                        'marketing': currentRoute.includes('marketing')
+                      }" (click)="sendInscription()">
+                        Envoyer
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-col>
+            </ion-row>
+          </form>
+
+        </div>
 
 
       </ng-container>

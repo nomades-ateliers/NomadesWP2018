@@ -41,6 +41,19 @@ app-front-page {
         color: #fff;
         border: solid 1px #0288D1;
     }
+    .cursus .col.marketing{
+        background: #fff;
+        color: #c40074;
+        border: solid 1px #c40074;
+    }
+    .btnInscription.marketing {
+        --background: #c40074;
+    }
+    .cursus .col.marketing:hover, .cursus .col.marketing.active{
+        background: #c40074;
+        color: #fff;
+        border: solid 1px #c40074;
+    }
     ion-grid {
         padding: 0;
     }

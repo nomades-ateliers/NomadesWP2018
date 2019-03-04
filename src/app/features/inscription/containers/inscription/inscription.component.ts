@@ -20,6 +20,7 @@ export class InscriptionComponent implements OnInit {
   baseUrl = 'https://nomades.ch/wp-content/uploads/2018/10/nomade02-.png';
   form: FormGroup;
   wksList: any[];
+  formationsList: any[];
   totalEcolage = 0;
   data$: Observable<any>;
   loader: HTMLIonLoadingElement;
@@ -53,14 +54,22 @@ export class InscriptionComponent implements OnInit {
   ionViewWillEnter() {
     // extract data from localstorage
     const workshops = JSON.parse(localStorage.getItem('nomades_workshop') || '[]');
+    const formations = JSON.parse(localStorage.getItem('nomades_formations') || '[]');
     // build form control with correct object data
     // + calculate total amount
     workshops.map(c => {
       this.totalEcolage = this.totalEcolage + (+c.ecolage_wk);
-      return this.getControl().push(this._formBuilder.control(c));
+      return this.getControl('workshops').push(this._formBuilder.control(c));
     });
     // patch value to the form
     this.form.patchValue({workshops});
+    formations.map(f => {
+      if (f.ecolage) {
+        this.totalEcolage = this.totalEcolage + (+f.ecolage);
+      }
+      return this.getControl('formations').push(this._formBuilder.control(f));
+    });
+    this.form.patchValue({formations});
     console.log('form', this.form.value);
   }
 
@@ -77,10 +86,17 @@ export class InscriptionComponent implements OnInit {
       total_workshop: [],
       workshops: this._formBuilder.array(
         [],
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(1)
-        ])
+        // Validators.compose([
+        //   Validators.required,
+        //   Validators.minLength(1)
+        // ])
+      ),
+      formations: this._formBuilder.array(
+        [],
+        // Validators.compose([
+        //   Validators.required,
+        //   Validators.minLength(1)
+        // ])
       ),
       ajax: ['true'],
       captcha: [''],
@@ -89,25 +105,37 @@ export class InscriptionComponent implements OnInit {
     this.form.markAsPristine();
   }
 
-  getControl(): FormArray {
+  getControl(control): FormArray {
     // return trainingForm.vat.value
-    return this.form.get('workshops') as FormArray;
+    return this.form.get(control) as FormArray;
   }
 
-  removeItem(index: number) {
+  removeItem(index: number, control: string) {
     // remove from form
-    this.getControl().markAsDirty();
-    this.getControl().removeAt(index);
+    this.getControl(control).markAsDirty();
+    this.getControl(control).removeAt(index);
     // calcule new total
     this.totalEcolage = 0;
     this.form.value.workshops.map(i => {
       this.totalEcolage = this.totalEcolage + (+i.ecolage_wk);
       return i;
     });
-    // remove from localstorage
-    localStorage.setItem('nomades_workshop', JSON.stringify(this.form.value.workshops));
-    // update object data
-    this.wksList = JSON.parse(localStorage.getItem('nomades_workshop') || '[]');
+    switch (true) {
+      case control === 'workshops':
+        // remove from localstorage
+        localStorage.setItem('nomades_workshop', JSON.stringify(this.form.value.workshops));
+        // update object data
+        this.wksList = JSON.parse(localStorage.getItem('nomades_workshop') || '[]');
+        break;
+      case control === 'formations':
+        // remove from localstorage
+        localStorage.setItem('nomades_formations', JSON.stringify(this.form.value.formations));
+        // update object data
+        this.wksList = JSON.parse(localStorage.getItem('nomades_formations') || '[]');
+        break;
+      default:
+        break;
+    }
   }
 
   async submit() {
@@ -116,10 +144,13 @@ export class InscriptionComponent implements OnInit {
       console.log('invalid form data');
       return;
     }
+    if ((this.form.value.formations.length + this.form.value.workshops.length) <= 0) {
+      return console.log('invalid form data, no formations or workshops');
+    }
     // to prevent multiple sending action
     this.loader = await this._loadingCtrl.create({
       message: 'envois du formulaire en cours...',
-    })
+    });
     this.loader.present();
     // to prevent multiple sending action
     this.form.markAsPristine();
@@ -129,9 +160,11 @@ export class InscriptionComponent implements OnInit {
 
   async onSubmit(e) {
     console.log('submit callback reCAPTCHA', e);
-    if (!e) return;
-    this.form.patchValue({captcha: e})
-    this.form.patchValue({total_workshop: this.totalEcolage})
+    if (!e) {
+      return;
+    }
+    this.form.patchValue({captcha: e});
+    this.form.patchValue({total_workshop: this.totalEcolage});
     // to prevent multiple sending action
     this.form.markAsPristine();
     await this._sendDataForm();
@@ -153,10 +186,14 @@ export class InscriptionComponent implements OnInit {
 
   async _displayNotif(res) {
     const { result = null} = res;
-    if (!result) return;
-    if (this.loader) this.loader.dismiss();
-    let alertElement: HTMLIonAlertElement
-    switch(true) {
+    if (!result) {
+      return;
+    }
+    if (this.loader) {
+      this.loader.dismiss();
+    }
+    let alertElement: HTMLIonAlertElement;
+    switch (true) {
       case result === 200:
         // clear localstorage
         await localStorage.removeItem('nomades_workshop');
@@ -166,22 +203,26 @@ export class InscriptionComponent implements OnInit {
           buttons: [{
             text: 'ok'
           }]
-        })
+        });
         break;
-      default: 
+      default:
         alertElement = await this._alertCtrl.create({
           subHeader: `Erreur`,
           message: `Il y a eu un problème lors de l'envoi de votre message.`,
           buttons: [{
             text: 'ok'
           }]
-        })
+        });
     }
-    await alertElement.present()
-    return res
+    await alertElement.present();
+    return res;
   }
 
   goWk() {
     this._router.navigate(['./workshops']);
+  }
+
+  goFormations() {
+    this._router.navigate(['./index']);
   }
 }

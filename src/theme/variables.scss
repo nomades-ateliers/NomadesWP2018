@@ -103,6 +103,9 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
   --ion-color-white-shade: #e0e0e0;
   --ion-color-white-tint: #ffffff;
 
+  ion-row, ion-col {
+    transition: 1250ms ease-in-out;
+  }
 
   u {
     text-decoration: none;
@@ -234,7 +237,25 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
       background: #0288D1;
       border: solid 1px #0288D1;
     }
-     
+ 
+    .marketing {
+      color: #c40074;
+    }    
+    .marketing.text:hover {
+      color: #c40074;
+    }
+    .marketing.col {
+      background: #fff;
+      border: solid 1px #c40074;
+    }
+    .marketing:hover, .marketing.active {
+        color: #fff;
+    }
+    .marketing.col:hover, .marketing.col.active {
+      background: #c40074;
+      border: solid 1px #c40074;
+    }
+
     ion-col.back article h2,
     ion-col.back:hover section, ion-col.back:active section {
       color: #0288D1
@@ -248,6 +269,10 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
     ion-col.mobile:hover section, ion-col.mobile:active section  {
       color: #FFA000
     }
+    ion-col.marketing article h2,
+    ion-col.marketing:hover section, ion-col.marketing:active section {
+      color: #c40074
+    }  
 }
 .titre_WORKSHOP{
     margin-top:60px!important;

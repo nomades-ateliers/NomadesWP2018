@@ -84,6 +84,14 @@ function appp_register_post_meta() {
             'schema'          => null,
         )
     );
+    register_rest_field( 'formation', // any post type registered with API
+        'formation_price', // this needs to match meta key
+        array(
+            'get_callback'    => 'appp_get_meta',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
 
     register_rest_field( 'formation', // any post type registered with API
         'date_formation_du', // this needs to match meta key

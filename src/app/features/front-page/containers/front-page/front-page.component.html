@@ -6,7 +6,7 @@
           <app-menu-nav [currentUrl]="'/index'"></app-menu-nav>
           <app-header-people isHome="true" [baseUrl]="baseUrl"></app-header-people>
           <app-adress></app-adress>
-          <app-slogan [slogan]="'FORMATIONS DIPLÔMANTES DANS LES METIERS DU WEB'"></app-slogan>
+          <app-slogan [slogan]="'FORMATIONS DIPLÔMANTES AUX METIERS DU WEB'"></app-slogan>
 
           <!-- <div *ngIf="data$ | async as frontPage;">
             <div [innerHTML]="frontPage?.content?.rendered|replaceBy|safeHtml "></div>
@@ -17,9 +17,10 @@
       <ion-col [ngClass]="{
         col: true,
         front: c?.name.toLowerCase().includes('front'),
-        back: c?.name.toLowerCase().includes('back')
+        back: c?.name.toLowerCase().includes('back'),
+        marketing: c?.name.toLowerCase().includes('marketing')
       }" (click)="go(c.link.split('cursus/').reverse()[0])">
-      <h2 class="block_title">{{c?.name}}</h2>
+      <h2 class="block_title">{{c?.name|replaceBy}}</h2>
     </ion-col>
     </ion-row>
   </ion-grid>

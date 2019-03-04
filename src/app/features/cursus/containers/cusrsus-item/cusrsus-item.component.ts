@@ -6,6 +6,7 @@ import { map, tap } from 'rxjs/operators';
 
 import { WpApiService } from '@app/shared/services';
 import { fadeAnim } from '@app/shared/animations/fade.animation';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -24,6 +25,8 @@ export class CusrsusItemComponent implements OnInit {
   public formations$: Observable<any[]>;
   public frontEndFormations$: Observable<any[]>;
   public backEndFormations$: Observable<any[]>;
+  public marketingFormations$: Observable<any[]>;
+  public incriptionForm: FormGroup;
 
   baseUrl = [
     'https://nomades.ch/wp-content/uploads/2018/10/nomade01-.png',
@@ -33,10 +36,19 @@ export class CusrsusItemComponent implements OnInit {
   constructor(
     private _wpApi: WpApiService,
     private _route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _fb: FormBuilder
   ) {
     console.log(this._route.snapshot.params.slug);
     this.currentRoute = this._route.snapshot.params.slug;
+    this.incriptionForm = this._fb.group({
+      prenom: [null, Validators.required],
+      nom: [null, Validators.required],
+      email: [null, Validators.required],
+      phone: [null, Validators.required],
+      cv: [null, Validators.required],
+      formations: [null, Validators.required],
+    });
    }
 
   ngOnInit() {
@@ -58,6 +70,9 @@ export class CusrsusItemComponent implements OnInit {
     this.backEndFormations$ = this.formations$.pipe(
       map(formations => formations.filter(f => f.cursus[0] === 3).sort(f => f.formation_position))
     );
+    this.marketingFormations$ = this.formations$.pipe(
+      map(formations => formations.filter(f => f.cursus[0] === 23).sort(f => f.formation_position))
+    );
   }
 
   go(link) {
@@ -73,5 +88,27 @@ export class CusrsusItemComponent implements OnInit {
   toggle(block: HTMLElement) {
     console.log(block);
     block.classList.toggle('open');
+  }
+
+  inscription() {
+    if (!this.currentCursus) {
+      return;
+    }
+    console.log('Confirm', this.currentCursus.id);
+    let data = JSON.parse(localStorage.getItem('nomades_formations') || '[]');
+    if (!data.find(i => i.id === this.currentCursus.id)) {
+      data = [...data, this.currentCursus];
+    }
+    localStorage.setItem('nomades_formations', JSON.stringify(data));
+    this._router.navigate(['./inscription']);
+  }
+
+  sendInscription() {
+    console.log(this.incriptionForm.valid);
+    if (!this.incriptionForm.valid) {
+      return alert('formulaire non valide');
+    }
+    alert('pas encore codé... attend confirtation du changement...');
+    this.incriptionForm.reset();
   }
 }

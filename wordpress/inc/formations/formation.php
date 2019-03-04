@@ -44,6 +44,13 @@ $args = array(
 add_action( 'init', 'cptui_register_my_cpts_formation' );
 
 
+// prix de la formation
+function formation_price() {
+    add_meta_box( 'formation_price', 'Prix de la formation', 'metbox_formation_price', 'formation', 'normal', 'high' );
+}
+add_action( 'add_meta_boxes', 'formation_price' );
+
+
 // position de la formation
 function formation_position() {
     add_meta_box( 'formation_position', 'Position de la formation', 'metbox_formation_position', 'formation', 'normal', 'high' );
@@ -88,6 +95,20 @@ wp_nonce_field( 'my_nonce_formation_priorite', 'nonce_formation_priorite' ); ?>
          <option value="non">NON</option>
         <option <?php if (wpshed_get_custom_field('formation_priorite') == 'priorite') echo 'selected="selected"'; ?> value="priorite">OUI</option>
     </select>
+</p>
+
+
+<?php
+}
+
+function metbox_formation_price( $post ) {
+
+  wp_nonce_field( 'my_nonce_formation_price', 'nonce_formation_price' ); ?>
+
+
+<p class="block_admin_pm grand titre_niveau">
+    <label for="formation_price"> Prix de la formation :</label>
+    <input id="formation_price" name="formation_price" type="number" value="<?php echo wpshed_get_custom_field( 'formation_price' );?>">
 </p>
 
 
@@ -254,6 +275,14 @@ if(isset( $_POST['nonce_formation_position'] ) || wp_verify_nonce( $_POST['nonce
 
 } // FIN OK pour le nonce my_nonce_formation_position
 
+if(isset( $_POST['nonce_formation_price'] ) || wp_verify_nonce( $_POST['nonce_formation_price'], 'my_nonce_formation_price' ) ){
+
+    if( isset( $_POST['formation_price'] ) )
+    update_post_meta( $post_id, 'formation_price', esc_attr( $_POST['formation_price'] ) );
+  
+} // FIN OK pour le nonce my_nonce_formation_price
+
+  
 if(isset( $_POST['nonce_formation_priorite'] ) || wp_verify_nonce( $_POST['nonce_formation_priorite'], 'my_nonce_formation_priorite' ) ){
 
   if( isset( $_POST['formation_priorite'] ) )

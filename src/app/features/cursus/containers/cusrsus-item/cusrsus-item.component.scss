@@ -39,11 +39,54 @@ app-cusrsus-item {
         background: #fff;
         color: #388E3C;
         border: solid 1px #388E3C;
+
+
+    }
+    .blockInscription {
+        margin-top: 2rem;
+    }
+    .blockInscription.front {
+        background: #388E3C;
+        color: #fff;
+    }
+    .btnInscription.front {
+        --background: #388E3C;
+        color: #fff;
+    }
+    .text.front, 
+    //.chocolat.front .cursustitle, .chocolat.front h4 
+    {
+        --color: #388E3C;
+        color: #388E3C;
+    }
+    .inscriptionBlock.front {
+        margin-top:10px;
+        background: rgba(0, 145, 46, 0.1);
+        border: solid 1px #ccc;
     }
     .cursus .col.front:hover, .cursus .col.front.active{
         background: #388E3C;
         color: #fff;
         border: solid 1px #388E3C;
+    }
+    .blockInscription.back {
+        background: #0288D1;
+        color: #fff;
+    }
+    .btnInscription.back {
+        --background: #0288D1;
+        color: #fff;
+    }
+    .text.back, 
+    // .chocolat.back .cursustitle, .chocolat.back h4 
+    {
+        --color: #0288D1;
+        color: #0288D1;
+    }
+    .inscriptionBlock.back {
+        margin-top:10px;
+        background: rgba(0, 137, 215, 0.1);
+        border: solid 1px #ccc;
     }
     .cursus .col.back{
         background: #fff;
@@ -55,6 +98,36 @@ app-cusrsus-item {
         color: #fff;
         border: solid 1px #0288D1;
     }
+    .cursus .col.marketing{
+        background: #fff;
+        color: #c40074;
+        border: solid 1px #c40074;
+    }
+    .blockInscription.marketing {
+        background: #c40074;
+        color: #fff;
+    }
+    .btnInscription.marketing {
+        --background: #c40074;
+        color: #fff;
+    }
+    .text.marketing, 
+    // .chocolat.marketing .cursustitle, .chocolat.marketing h4
+    {
+        --color: #c40074;
+        color: #c40074;
+    }
+    .inscriptionBlock.marketing {
+        margin-top:10px;
+        background: rgba(196, 0, 116, 0.1);
+        border: solid 1px #ccc;
+    }
+    .cursus .col.marketing:hover, .cursus .col.marketing.active{
+        background: #c40074;
+        color: #fff;
+        border: solid 1px #c40074;
+    }
+
     .alignWithCard {
         padding: 0;
     }
@@ -67,19 +140,26 @@ app-cusrsus-item {
         padding-top: 5px;
     }
 
-    .chocolat.back .cursustitle,.chocolat.back h4 {
-        color: #0288D1;
+    .chocolat.back .cursustitle, .chocolat.back h4, 
+    .chocolat.marketing .cursustitle, .chocolat.marketing h4,
+    .chocolat.front .cursustitle, .chocolat.front h4
+    {
+        // color: #0288D1;
+        font-weight: 400;
+        cursor: pointer;
     }
-    .chocolat.front .cursustitle, .chocolat.front h4 {
-        color: #388E3C;
-    }
+    
+  
     h4 {
         margin: 0;
     }
     .cursusDesc h4 + p {
         margin-top: 5px;
     }
-    @media screen and (max-width: 991px) {
+    select {
+        font-size: 1rem;
+    }
+    // @media screen and (max-width: 991px) {
         .alignWithCard img {
             margin-top: 10px !important;
         }
@@ -87,7 +167,7 @@ app-cusrsus-item {
             .item {
                 position: relative;
                 overflow: hidden;
-                border: solid 1px;
+                border: solid 0px;
                 margin-bottom: -1px;
 
                 h4.cursustitle{
@@ -120,7 +200,7 @@ app-cusrsus-item {
         p.nextTime {
             padding-left: 0;
         }
-    }
+    // }
     .cursus ion-col img {
         margin: 0;
         width: 3.8rem;
@@ -157,5 +237,9 @@ app-cusrsus-item {
     }
     .card-content p {
         margin-bottom: -10px;
-    }  
+    }
+    
+    .item_module_row {
+        margin-bottom: 48px
+    }
 }

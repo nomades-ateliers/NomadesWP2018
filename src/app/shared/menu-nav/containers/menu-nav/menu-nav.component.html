@@ -35,7 +35,7 @@
             (click)="goPage(item)"
             [ngClass]="{
               active: (currentUrl.includes('index'))
-                ? item.url.split('/').reverse()[0] === ''
+                ? item.url.split('/').reverse()[0] === 'index'
                 : currentUrl.includes(item?.title.toLowerCase())
             }">
               {{item?.title}}

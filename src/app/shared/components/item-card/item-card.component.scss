@@ -1,9 +1,10 @@
 ion-card.hydrated {
     height: 100%;
-    border-bottom: solid 0.25rem transparent;
+    border-bottom: solid 0.35rem transparent;
     box-shadow: none;
     padding: 0;
     border-radius: 0;
+    transition: all 250ms ease;
 
     .card-content.hydrated {
         padding:0;
@@ -11,4 +12,11 @@ ion-card.hydrated {
 }
 article {
     height:  100%;
+}
+
+@media screen and (max-width: 991px) {
+    ion-card.hydrated {
+        height: 100%;
+        border-bottom: solid 0.15rem transparent;
+    }
 }
