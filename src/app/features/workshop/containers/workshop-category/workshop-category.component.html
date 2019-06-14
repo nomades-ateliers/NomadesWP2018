@@ -22,6 +22,7 @@
                 front: c?.name.toLowerCase().includes('front'),
                 back: c?.name.toLowerCase().includes('back'),
                 mobile: c?.name.toLowerCase().includes('mobile'),
+                marketing: c?.name.toLowerCase().includes('marketing'),
                 active: c.link.split('workshops/').reverse()[0].includes(currentUrl.split('workshops/').reverse()[0])
             }" (click)="go(c.link.split('workshops/').reverse()[0])">
               <h2 class="block_title">{{c?.name}}</h2>
@@ -42,7 +43,8 @@
               *ngFor="let d of data" [ngClass]="{
                     front: currentUrl.toLowerCase().includes('front'),
                     back: currentUrl.toLowerCase().includes('back'),
-                    mobile: currentUrl.toLowerCase().includes('mobile')
+                    mobile: currentUrl.toLowerCase().includes('mobile'),
+                    marketing: currentUrl.toLowerCase().includes('marketing')
                   }">
                 <ng-container *ngIf="(workshops$|async|filterBy:{prop: 'parcours', value: d?.id}) as workshops">
                   <!-- <section [@listAnimation]="(workshops).length || 0"> -->
@@ -54,16 +56,18 @@
                           text: true,
                           front: c?.name.toLowerCase().includes('front'),
                           back: c?.name.toLowerCase().includes('back'),
-                          mobile: c?.name.toLowerCase().includes('mobile')
+                          mobile: c?.name.toLowerCase().includes('mobile'),
+                          marketing: c?.name.toLowerCase().includes('marketing')
                       }" 
-                      (click)="displayDetail(workshop)" 
+                      (click)="displayDetail(d?.slug, workshop)"
                       *ngFor="let workshop of (workshops)">
                       <div>
                         <h2 [ngClass]="{
                               text: true,
                               front: c?.name.toLowerCase().includes('front'),
                               back: c?.name.toLowerCase().includes('back'),
-                              mobile: c?.name.toLowerCase().includes('mobile')
+                              mobile: c?.name.toLowerCase().includes('mobile'),
+                              marketing: c?.name.toLowerCase().includes('marketing')
                           }" [innerHtml]="(workshop?.titre_deux_ligne || workshop?.title.rendered) | replaceBy"></h2>
                         <p *ngIf="workshop?.date_session_1_du && workshop?.date_session_1_au">
                           Dates: {{ workshop?.date_session_1_du }} - {{ workshop?.date_session_1_au }}

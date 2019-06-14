@@ -83,6 +83,11 @@ function wk_priorite() {
 }
 add_action( 'add_meta_boxes', 'wk_priorite' );
 
+function wk_nav() {
+    add_meta_box( 'wk_nav', 'Workshop dans la barre de navigation', 'metbox_wk_nav', 'workshop', 'normal', 'high' );
+}
+add_action( 'add_meta_boxes', 'wk_nav' );
+
 // special workshop
 function metbox_workshop_resume( $post ) {
 
@@ -205,6 +210,22 @@ function metbox_workshop_globale( $post ) {
 }
 
 
+
+function metbox_wk_nav( $post ) {
+
+    wp_nonce_field( 'my_nonce_wk_nav', 'nonce_wk_nav' ); ?>
+  
+    <p class="block_admin_pm grand titre_niveau">
+       <label for="wk_nav"> Workshop visible dans la barre de navigation des workshop sur la page detaillé de chaque workshop: </label>
+       <select name="wk_nav" id="wk_nav">
+            <option value="NON">NON</option>
+            <option <?php if (wpshed_get_custom_field('wk_nav') == 'oui') echo 'selected="selected"'; ?> value="oui">OUI</option>
+        </select>
+   </p>
+  
+  
+   <?php
+  }
 
 function metbox_wk_complet( $post ) {
 

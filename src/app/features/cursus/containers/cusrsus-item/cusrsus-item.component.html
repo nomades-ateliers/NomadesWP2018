@@ -1,11 +1,11 @@
 <app-header-app></app-header-app>
 <ion-content>
-  <ion-grid fixed margin-bottom>
+  <ion-grid fixed>
     <ion-row>
       <ion-col>
           <app-menu-nav [currentUrl]="'/index'"></app-menu-nav>
           <app-header-people [baseUrl]="currentRoute?.toLowerCase()?.includes('front') ? baseUrl[0] : baseUrl[1]"></app-header-people>
-          <app-adress></app-adress>
+          <br>
           <app-slogan [slogan]="'FORMATIONS DIPLÔMANTES AUX LES METIERS DU WEB'" [link]="'./index'"></app-slogan>
           <div *ngIf="data$ | async as front;">
             <div [innerHTML]="front?.content?.rendered|replaceBy|safeHtml"></div>
@@ -108,12 +108,17 @@
           }"  [innerHTML]="currentCursus?.choco_block4_title | safeHtml"></h3>
           <div class="cursusDesc" [innerHTML]="currentCursus?.choco_block4 | safeHtml"></div>  
         </div>
-        <div padding [ngClass]="{
-          'blockInscription': true,
-          'front': currentRoute.includes('front'),
-          'back': currentRoute.includes('back'),
-          'marketing': currentRoute.includes('marketing')
-        }"  [innerHTML]="currentCursus?.description | safeHtml"></div>        
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col [ngClass]="{
+              'blockInscription': true,
+              'front': currentRoute.includes('front'),
+              'back': currentRoute.includes('back'),
+              'marketing': currentRoute.includes('marketing')
+            }"  [innerHTML]="currentCursus?.description | safeHtml"></ion-col>
+          </ion-row>
+        </ion-grid>
+        <!-- <d no-paddinginnerHTML]="currentCursus?.description | safeHtml"></div>         -->
       </div>
       <ng-container *ngIf="
       (currentRoute.includes('front'))
@@ -130,9 +135,9 @@
             : (currentRoute.includes('back'))
               ? (backEndFormations$|async)
               : (marketingFormations$|async)">
-          <ion-grid margin-vertical>
-            <ion-row padding-horizontal justify-content-start>
-              <ion-col class="alignWithCard" 
+          <ion-grid margin-top>
+            <ion-row no-padding justify-content-start>
+              <ion-col class="alignWithCard bottom_line" 
                 align-self-start 
                 text-start
                 size-xs="12" 
@@ -141,10 +146,10 @@
                 size-lg="8">
                 <span *ngIf="f?.t_formation_b1">{{f?.t_formation_b1|replaceBy}}</span>
                 <h2 [ngStyle]="{
-                  color: (currentRoute.toLowerCase().includes('front')) ? '#388E3C' : (currentRoute.toLowerCase().includes('back')) ?' #0288D1' : '#c40074'
+                  color: (currentRoute.toLowerCase().includes('front')) ? 'rgb(84,112,43)' : (currentRoute.toLowerCase().includes('back')) ?' rgb(64,114,144)' : 'rgb(142,25,78)'
                 }">{{f?.title?.rendered|replaceBy}}</h2>
               </ion-col>
-              <ion-col class="alignWithCard" 
+              <ion-col class="alignWithCard bottom_line" 
                 align-self-start
                 text-right
                 size-xs="2" 
@@ -153,7 +158,11 @@
                 size-lg="1" push-xs="10"  push-sm="1" push-md="0">
                 <img (click)="getdetail(f?.wp_custom_attachment?.url)" src="https://nomades.ch/wp-content/themes/theme_nomades/images/logo-acrobat-reader.jpg" alt="">
               </ion-col>
-              <ion-col class="alignWithCard" 
+              <ion-col [ngClass]="{
+                'alignWithCard': true,
+                'nextTimeCol': true,
+                'bottom_line': f?.content_block_formation_4.length > 0
+                }"
                 align-self-start
                 size-xs="10" 
                 size-sm="6"
@@ -179,20 +188,20 @@
             </ion-row>
             <div [@listAnimation]="(dataToList).length || 0" >
               <ion-row 
-                
+                no-padding
                 margin-bottom
-                class="row">
-                  <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3" *ngIf="f?.content_block_formation_1.length > 0">
-                      <app-item-card [color]="(currentRoute.toLowerCase().includes('front')) ? '#388E3C' : (currentRoute.toLowerCase().includes('back')) ?' #0288D1' : '#c40074'" [curcus]="{title: {rendered: f?.content_block_formation_1|replaceBy }}"></app-item-card>
+                class="row block_list_item">
+                  <ion-col no-padding class="fadeSlow" size-xs="12" size-md="12" size-lg="3" *ngIf="f?.content_block_formation_1.length > 0">
+                      <app-item-card [color]="(currentRoute.toLowerCase().includes('front')) ? 'rgb(84,112,43)' : (currentRoute.toLowerCase().includes('back')) ?' rgb(64,114,144)' : 'rgb(142,25,78)'" [curcus]="{title: {rendered: f?.content_block_formation_1|replaceBy }}"></app-item-card>
                   </ion-col>
-                  <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3" *ngIf="f?.content_block_formation_2.length > 0">
-                      <app-item-card [color]="(currentRoute.toLowerCase().includes('front')) ? '#388E3C' : (currentRoute.toLowerCase().includes('back')) ?' #0288D1' : '#c40074'" [curcus]="{title: {rendered: f?.content_block_formation_2|replaceBy }}"></app-item-card>
+                  <ion-col no-padding class="fadeSlow" size-xs="12" size-md="12" size-lg="3" *ngIf="f?.content_block_formation_2.length > 0">
+                      <app-item-card [color]="(currentRoute.toLowerCase().includes('front')) ? 'rgb(84,112,43)' : (currentRoute.toLowerCase().includes('back')) ?' rgb(64,114,144)' : 'rgb(142,25,78)'" [curcus]="{title: {rendered: f?.content_block_formation_2|replaceBy }}"></app-item-card>
                   </ion-col>
-                  <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3" *ngIf="f?.content_block_formation_3.length > 0">
-                      <app-item-card [color]="(currentRoute.toLowerCase().includes('front')) ? '#388E3C' : (currentRoute.toLowerCase().includes('back')) ?' #0288D1' : '#c40074'" [curcus]="{title: {rendered: f?.content_block_formation_3|replaceBy}}"></app-item-card>
+                  <ion-col no-padding class="fadeSlow" size-xs="12" size-md="12" size-lg="3" *ngIf="f?.content_block_formation_3.length > 0">
+                      <app-item-card [color]="(currentRoute.toLowerCase().includes('front')) ? 'rgb(84,112,43)' : (currentRoute.toLowerCase().includes('back')) ?' rgb(64,114,144)' : 'rgb(142,25,78)'" [curcus]="{title: {rendered: f?.content_block_formation_3|replaceBy}}"></app-item-card>
                   </ion-col>
-                  <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3" *ngIf="f?.content_block_formation_4.length > 0">
-                      <app-item-card [color]="(currentRoute.toLowerCase().includes('front')) ? '#388E3C' : (currentRoute.toLowerCase().includes('back')) ?' #0288D1' : '#c40074'" [curcus]="{title: {rendered: f?.content_block_formation_4|replaceBy }}"></app-item-card>
+                  <ion-col no-padding class="fadeSlow" size-xs="12" size-md="12" size-lg="3" *ngIf="f?.content_block_formation_4.length > 0">
+                      <app-item-card [color]="(currentRoute.toLowerCase().includes('front')) ? 'rgb(84,112,43)' : (currentRoute.toLowerCase().includes('back')) ?' rgb(64,114,144)' : 'rgb(142,25,78)'" [curcus]="{title: {rendered: f?.content_block_formation_4|replaceBy }}"></app-item-card>
                   </ion-col>
                   <!-- <ion-col class="fadeSlow" size-xs="12" size-md="6" size-lg="3" *ngIf="!f?.content_block_formation_4.length > 0">
                       <ion-card>
@@ -212,11 +221,11 @@
           </ion-grid>
         </ion-row>  
         <ion-show-when size="lg">
-          <ion-row margin-bottom class="timeline">
-            <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>10 jours</span></ion-col>
-            <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>20 jours</span></ion-col>
-            <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>30 jours</span></ion-col>
-            <ion-col class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>40 jours</span></ion-col>
+          <ion-row margin-bottom class="block_list_item timeline">
+            <ion-col no-padding class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>10 jours</span></ion-col>
+            <ion-col no-padding class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>20 jours</span></ion-col>
+            <ion-col no-padding class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>30 jours</span></ion-col>
+            <ion-col no-padding class="fadeSlow" size-xs="12" size-md="12" size-lg="3"><span>40 jours</span></ion-col>
           </ion-row>          
         </ion-show-when>
         <br>
@@ -234,52 +243,58 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <p>Je souhaite faire une Pré-Inscription et réserver une place sans engagement (*) sur les modules de formation suivants :</p>
+            <p class="no-padd-bottom">Je souhaite faire une Pré-Inscription et réserver une place sans engagement (*) sur les modules de formation suivants :</p>
           </ion-col>
         </ion-row>
-        <div margin-bottom *ngIf="
+        <div  class="font16px" margin-bottom *ngIf="
         (currentRoute.includes('front'))
           ? (frontEndFormations$|async)
           : (currentRoute.includes('front'))
             ? (backEndFormations$|async)
             : (marketingFormations$|async) as dataToList;">
-          <ion-row no-margin no-padding *ngFor="let f of (currentRoute.includes('front'))
+          <ion-row align-items-center no-margin no-padding *ngFor="let f of (currentRoute.includes('front'))
           ? (frontEndFormations$|async)
           : (currentRoute.includes('back'))
             ? (backEndFormations$|async)
             : (marketingFormations$|async)">
-            <ion-col sizeXs="12" sizeMd="6">
-              <ion-item no-margin lines="none">
+            <ion-col no-padding sizeXs="12" sizeMd="6">
+              <ion-item class="itemTranslate" no-margin lines="none">
                 <ion-label [ngClass]="{
                   'text': true,
                   'front': currentRoute.includes('front'),
                   'back': currentRoute.includes('back'),
                   'marketing': currentRoute.includes('marketing')
                 }">{{f?.title?.rendered|replaceBy}}</ion-label>
-                <ion-checkbox slot="start"></ion-checkbox>
+                <ion-checkbox #checkboxItem slot="start"></ion-checkbox>
               </ion-item>
             </ion-col>
-            <ion-col sizeXs="12" sizeMd="3">
+            <ion-col padding-horizontal sizeXs="12" sizeMd="3">
               <!-- <pre>{{f|json}}</pre> -->
-              <select>
-                <option>du {{f?.date_formation_du}} au {{f?.date_formation_au}}</option>
-              </select>
+              <ion-select placeholder="Dates" [ngClass]="{
+                'selectInscription': true
+              }" interface="popover">
+                <ion-select-option>du {{f?.date_formation_du}} au {{f?.date_formation_au}}</ion-select-option>
+                <ion-select-option *ngIf="f?.date_formation_du2">du {{f?.date_formation_du2}} au {{f?.date_formation_au2}}</ion-select-option>
+              </ion-select>
             </ion-col>
-            <ion-col sizeXs="12" sizeMd="3">CHF {{f?.formation_price}}.-</ion-col>
+            <ion-col padding-horizontal sizeXs="12" sizeMd="3">
+              <span *ngIf="!checkboxItem.checked">Écolage</span>
+              <span *ngIf="checkboxItem.checked">CHF {{f?.formation_price}}.-</span>
+            </ion-col>
           </ion-row>
-          <form padding-top margin-top [formGroup]="incriptionForm">
-            <ion-row margin-top padding-vertical [ngClass]="{
+          <form [formGroup]="incriptionForm">
+            <ion-row no-padding [ngClass]="{
               'inscriptionBlock': true,
               'front': currentRoute.includes('front'),
               'back': currentRoute.includes('back'),
               'marketing': currentRoute.includes('marketing')
             }">
               <ion-col sizeXs="12" sizeMd="6">
-                <ion-grid no-margin padding-vertical>
+                <ion-grid no-margin  no-padding>
                   <ion-row no-margin no-padding>
                     <ion-col no-margin no-padding>
                       <ion-item padding-horizontal>
-                        <ion-label>prénom *</ion-label>
+                        <ion-label>Prénom *</ion-label>
                         <ion-input formControlName="prenom" name="prenom" type="text"></ion-input>
                       </ion-item>
                     </ion-col>
@@ -287,7 +302,7 @@
                   <ion-row no-margin no-padding>
                     <ion-col no-margin no-padding>
                       <ion-item>
-                        <ion-label>nom *</ion-label>
+                        <ion-label>Nom *</ion-label>
                         <ion-input formControlName="nom" name="nom" type="text"></ion-input>
                       </ion-item>
                     </ion-col>
@@ -310,19 +325,29 @@
                   </ion-row>
                 </ion-grid>
               </ion-col>
-              <ion-col sizeXs="12" sizeMd="6" padding-horizontal>
-                <p>Votre place est réservée dès le moment de l’envoi de votre pré-inscription jusqu’à la confir- mation ou l’annulation de celle-ci, mais au plus tard 15 jours avant le début de la formation.</p>
-                <ion-grid padding-vertical>
+              <ion-col sizeXs="12" sizeMd="6" no-padding>
+                <ion-grid no-padding>
                   <ion-row no-padding>
-                    <ion-col sizeMd="8" no-padding>
-                      <ion-item line="none" no-padding>
-                        <ion-label>Pièce jointe: CV *</ion-label>
-                        <input type="file">
-                      </ion-item>
+                    <ion-col  padding-horizontal>
+                      <p>Votre place est réservée dès le moment de l’envoi de votre pré-inscription jusqu’à la confir- mation ou l’annulation de celle-ci, mais au plus tard 15 jours avant le début de la formation.</p>
                     </ion-col>
+                  </ion-row>
+                  <ion-row class="contact-send-row" align-items-baseline no-padding>
+  
    
-                    <ion-col sizeMd="4" text-right>
-                      <ion-button [ngClass]="{
+                    <ion-col sizeMd="10" padding-horizontal>
+                      <input #fileInput [hidden]="true" (change)="processWeb()" type="file">
+
+                      <ion-button [disabled]="cvDisabled" (click)="openFile()" [ngClass]="{
+                        'btnInscription': true,
+                        'front': currentRoute.includes('front'),
+                        'back': currentRoute.includes('back'),
+                        'marketing': currentRoute.includes('marketing')
+                      }" >Pièce jointe: CV * </ion-button> <span margin-left padding-horizontal>{{cvFileName}}</span>
+                    </ion-col>
+                    <ion-col sizeMd="2" >
+                      
+                      <ion-button class="ion-float-right" [ngClass]="{
                         'btnInscription': true,
                         'front': currentRoute.includes('front'),
                         'back': currentRoute.includes('back'),
@@ -355,4 +380,5 @@
 
   </ion-grid>
   <app-footer></app-footer>
+  <app-adress></app-adress>
 </ion-content>

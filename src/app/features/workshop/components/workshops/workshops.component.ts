@@ -20,10 +20,10 @@ export class WorkshopsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.data$ = this._wpApi.getRemoteData({path: 'parcours', slug: ``}).pipe(
+    this.data$ = this._wpApi.getRemoteData({path: 'parcours', slug: `per_page=100`}).pipe(
       map(res => (res.length === 1 ) ? res[0] : res),
       map(ps => ps.filter(p => p.parent === 0)),
-      map(ps => ps.sort((p: any) => p._id))
+      map(ps => ps.sort((a, b) => a.order - b.order))
       // tap(data => (!data.type) ? window.location.href = '404' : null)
     );
   }

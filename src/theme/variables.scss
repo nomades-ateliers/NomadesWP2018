@@ -88,7 +88,7 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
   --ion-color-dark-tint: #383838;
 
 
-  --ion-color-green: #388E3C;
+  --ion-color-green: rgb(84,112,43);
   --ion-color-green-rgb: 56, 124, 43;
   --ion-color-green-contrast: #fff;
   --ion-color-green-contrast-rgb: 255,255,255;
@@ -143,18 +143,30 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
     border-left: solid 12px #B71C1C !important;
   }
 
+  .cursus {
+    .col {
+      padding: 0 0.5rem;
+    }
+  }
   .wks, .wksCat {
-    padding: 0.4rem;
+    padding: 0.3rem;
+
+    ion-col.front, ion-col.front_, 
+    ion-col.back, ion-col.back_, 
+    ion-col.mobile, ion-col.mobile_, 
+    ion-col.marketing, ion-col.marketing_ {
+      cursor: pointer !important;
+    } 
 
     ion-col {
         text-transform: uppercase;
-        padding: 0.4rem;
+        padding: 0rem 0.4rem;
         font-weight: 300;
         font-size: 1.3rem;
         letter-spacing: 0.1rem;        
         margin: 0;
         transition: 250ms ease-in-out;
-        cursor: pointer;
+        // cursor: pointer;
 
         p.section {
             padding: 0;
@@ -178,101 +190,112 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
           p {
             color: initial;
           }
+
         }
     }
 
     .front {
-      color: #388E3C;;
+      color: rgb(84,112,43);;
     }
     .front.text:hover {
-      color: #388E3C;
+      color: rgb(84,112,43);
     }
     .front.col {
         background: #fff;
-        border: solid 1px #388E3C;
+        border: solid 1px rgb(84,112,43);
     }
     .front:hover, .front.active {
       color: #fff;
     }
     .front.col:hover, .front.col.active {
-      background: #388E3C;
-      border: solid 1px #388E3C;
+      background: rgb(84,112,43);
+      border: solid 1px rgb(84,112,43);
     }
     article.front:hover, article.front:focus, article.front:active, article.front.active {
-      border: solid 1px #388E3C;
+      border: solid 1px rgb(84,112,43);
     }
 
     .mobile {
-        color: #FFA000;
+        color: rgb(202,130,42);
     }
     .mobile.text:hover {
-      color: #FFA000;
+      color: rgb(202,130,42);
     }
     .mobile.col {
       background: #fff;
-      border: solid 1px #FFA000;
+      border: solid 1px rgb(202,130,42);
     }
     .mobile:hover, .mobile.active {
       color: #fff;
     }
     .mobile.col:hover, .mobile.col.active {
-      background: #FFA000;
-      border: solid 1px #FFA000;
+      background: rgb(202,130,42);
+      border: solid 1px rgb(202,130,42);
     } 
 
     .back {
-        color: #0288D1;
+        color: rgb(64,114,144);
     }    
     .back.text:hover {
-      color: #0288D1;
+      color: rgb(64,114,144);
     }
     .back.col {
       background: #fff;
-      border: solid 1px #0288D1;
+      border: solid 1px rgb(64,114,144);
     }
     .back:hover, .back.active {
         color: #fff;
     }
     .back.col:hover, .back.col.active {
-      background: #0288D1;
-      border: solid 1px #0288D1;
+      background: rgb(64,114,144);
+      border: solid 1px rgb(64,114,144);
     }
  
     .marketing {
-      color: #c40074;
+      color: rgb(142,25,78);
     }    
     .marketing.text:hover {
-      color: #c40074;
+      color: rgb(142,25,78);
     }
     .marketing.col {
       background: #fff;
-      border: solid 1px #c40074;
+      border: solid 1px rgb(142,25,78);
     }
     .marketing:hover, .marketing.active {
         color: #fff;
     }
     .marketing.col:hover, .marketing.col.active {
-      background: #c40074;
-      border: solid 1px #c40074;
+      background: rgb(142,25,78);
+      border: solid 1px rgb(142,25,78);
     }
 
     ion-col.back article h2,
     ion-col.back:hover section, ion-col.back:active section {
-      color: #0288D1
+      color: rgb(64,114,144)
     }  
     
     ion-col.front article h2,
     ion-col.front:hover section, ion-col.front:active section  {
-      color: #388E3C
+      color: rgb(84,112,43)
     }
     ion-col.mobile article h2,
     ion-col.mobile:hover section, ion-col.mobile:active section  {
-      color: #FFA000
+      color: rgb(202,130,42)
     }
     ion-col.marketing article h2,
     ion-col.marketing:hover section, ion-col.marketing:active section {
-      color: #c40074
-    }  
+      color: rgb(142,25,78)
+    } 
+    
+    .related {
+      cursor: pointer;
+    }
+}
+// titre des workshop sur la page workshop detail
+article {
+  .col {
+    padding: 0.4rem !important;
+  }
 }
 .titre_WORKSHOP{
     margin-top:60px!important;
@@ -288,10 +311,10 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
       color: #c33a32;
   }
   .bleu {
-      color: #0288D1;
+      color: rgb(64,114,144);
   }
   .vert {
-      color: #388E3C;
+      color: rgb(84,112,43);
   }
 }
 
@@ -309,7 +332,7 @@ b, strong {
 }
 *.block_title {
   text-transform: uppercase;
-  padding: 0.4rem;
+  padding: .2rem .8rem!important;
   margin: 0;
   font-weight: 300;
   font-size: 1.3rem;

@@ -37,99 +37,136 @@ app-cusrsus-item {
     }
     .cursus .col.front{
         background: #fff;
-        color: #388E3C;
-        border: solid 1px #388E3C;
+        color: rgb(84,112,43);
+        border: solid 1px rgb(84,112,43);
 
 
     }
     .blockInscription {
         margin-top: 2rem;
+        padding-left: 7px;
     }
     .blockInscription.front {
-        background: #388E3C;
+        background: rgb(84,112,43);
         color: #fff;
     }
     .btnInscription.front {
-        --background: #388E3C;
+        --background: rgb(84,112,43);
         color: #fff;
     }
     .text.front, 
     //.chocolat.front .cursustitle, .chocolat.front h4 
     {
-        --color: #388E3C;
-        color: #388E3C;
+        --color: rgb(84,112,43);
+        color: rgb(84,112,43);
+    }
+    .item-native {
+        min-height:10px;
+    }
+    .contact-send-row {
+        position: absolute;
+        bottom: 0;
+        width: 100;
+    }
+    ion-input, ion-label {
+        min-height: 10px!important;
+        --padding-bottom: 0;
+        --padding-top: 0;
+    }
+    ion-select.selectInscription {
+        border: solid 1px #8f8f8f;
     }
     .inscriptionBlock.front {
         margin-top:10px;
         background: rgba(0, 145, 46, 0.1);
         border: solid 1px #ccc;
     }
+    ion-select.selectInscription.front {
+        background: rgba(0, 145, 46, 0.1);
+    }
     .cursus .col.front:hover, .cursus .col.front.active{
-        background: #388E3C;
+        background: rgb(84,112,43);
         color: #fff;
-        border: solid 1px #388E3C;
+        border: solid 1px rgb(84,112,43);
     }
     .blockInscription.back {
-        background: #0288D1;
+        background: rgb(64,114,144);
         color: #fff;
     }
     .btnInscription.back {
-        --background: #0288D1;
+        --background: rgb(64,114,144);
         color: #fff;
     }
     .text.back, 
     // .chocolat.back .cursustitle, .chocolat.back h4 
     {
-        --color: #0288D1;
-        color: #0288D1;
+        --color: rgb(64,114,144);
+        color: rgb(64,114,144);
     }
     .inscriptionBlock.back {
         margin-top:10px;
         background: rgba(0, 137, 215, 0.1);
         border: solid 1px #ccc;
     }
+    ion-select.selectInscription.back {
+        background:rgba(0, 137, 215, 0.1);
+    }
     .cursus .col.back{
         background: #fff;
-        color: #0288D1;
-        border: solid 1px #0288D1;
+        color: rgb(64,114,144);
+        border: solid 1px rgb(64,114,144);
     }
     .cursus .col.back:hover, .cursus .col.back.active{
-        background: #0288D1;
+        background: rgb(64,114,144);
         color: #fff;
-        border: solid 1px #0288D1;
+        border: solid 1px rgb(64,114,144);
     }
     .cursus .col.marketing{
         background: #fff;
-        color: #c40074;
-        border: solid 1px #c40074;
+        color: rgb(142,25,78);
+        border: solid 1px rgb(142,25,78);
     }
     .blockInscription.marketing {
-        background: #c40074;
+        background: rgb(142,25,78);
         color: #fff;
     }
     .btnInscription.marketing {
-        --background: #c40074;
+        --background: rgb(142,25,78);
         color: #fff;
     }
     .text.marketing, 
     // .chocolat.marketing .cursustitle, .chocolat.marketing h4
     {
-        --color: #c40074;
-        color: #c40074;
+        --color: rgb(142,25,78);
+        color: rgb(142,25,78);
     }
     .inscriptionBlock.marketing {
         margin-top:10px;
         background: rgba(196, 0, 116, 0.1);
         border: solid 1px #ccc;
     }
+
+    .no-padd-bottom {
+        padding-bottom: 0.5rem !important;
+        margin-bottom: 0rem !important;
+    }
+    .font16px {
+        font-size: 16px !important;
+    }
+    ion-select.selectInscription.marketing {
+        background: rgba(196, 0, 116, 0.1);
+    }
     .cursus .col.marketing:hover, .cursus .col.marketing.active{
-        background: #c40074;
+        background: rgb(142,25,78);
         color: #fff;
-        border: solid 1px #c40074;
+        border: solid 1px rgb(142,25,78);
     }
 
     .alignWithCard {
         padding: 0;
+    }
+    .nextTimeCol {
+        padding-left: 1rem;
     }
     p.nextTime {
         font-size: 1rem;
@@ -144,7 +181,7 @@ app-cusrsus-item {
     .chocolat.marketing .cursustitle, .chocolat.marketing h4,
     .chocolat.front .cursustitle, .chocolat.front h4
     {
-        // color: #0288D1;
+        // color: rgb(64,114,144);
         font-weight: 400;
         cursor: pointer;
     }
@@ -161,7 +198,7 @@ app-cusrsus-item {
     }
     // @media screen and (max-width: 991px) {
         .alignWithCard img {
-            margin-top: 10px !important;
+            // margin-top: 10px !important;
         }
         .chocolat {
             .item {
@@ -187,6 +224,7 @@ app-cusrsus-item {
                 .cursusDesc {
                     max-height: 1px;
                     overflow: hidden;
+                    text-align: justify;
                 }
                 
             }
@@ -203,8 +241,9 @@ app-cusrsus-item {
     // }
     .cursus ion-col img {
         margin: 0;
-        width: 3.8rem;
-        padding-right: 10px;
+        width: auto;
+        height: 3.2rem;
+        padding-right: 0px;
         // max-width: 80px;
         cursor: pointer;
     }
@@ -218,7 +257,7 @@ app-cusrsus-item {
     .timeline {
         .fadeSlow {
             max-height: 1.2rem;
-            padding: 0 1rem;
+            padding: 0 0.7rem;
              span {
                 text-align: right;
                 border-bottom: 1px solid;
@@ -239,7 +278,27 @@ app-cusrsus-item {
         margin-bottom: -10px;
     }
     
+    /*
     .item_module_row {
         margin-bottom: 48px
+    }
+    */
+
+    .block_list_item {
+        margin-left: -10px!important;
+        margin-right: -10px!important;
+        margin-top: 0.5rem;
+    }
+
+    .bottom_line{
+        border-bottom: solid 1px #333;
+        padding-bottom: 0.8rem;
+    }
+    .top_line {
+        padding-bottom: 0.5rem;
+        border-top: solid 1px #333;
+    }
+    .itemTranslate {
+        transform: translateX(-2rem);
     }
 }

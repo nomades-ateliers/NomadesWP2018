@@ -3,15 +3,16 @@
   display: block;
   width: 100%;
   right: 0;
-  margin: 1.2rem auto 0;
+  margin: 0.1rem auto 0;
 
   header>div{
     height: 51px;
   }
   img {
-    top: 7px;
-    width: 60px;
+    top: 0px;
+    max-width: 50px;
     margin: auto;
+    margin-top: -0.5rem;
     display: block;
     cursor: pointer;
     // transform: translateY(2rem);
@@ -30,7 +31,7 @@
     position: relative;
     letter-spacing: 0.01em;
     margin-left: 0px;
-    margin-right: 29px;
+    // margin-right: 29px;
     cursor: pointer;
   }
 
@@ -40,13 +41,13 @@
 
   .nav-header {
     color: #c33a32;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     ion-col.border {
       border-left: 1px solid #c33a32;
     }   
   }
   .nav-primary {
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
     ion-col.border {
       border-left: 1px solid #717073;
     } 

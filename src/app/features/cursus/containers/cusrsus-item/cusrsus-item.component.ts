@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
@@ -18,7 +18,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class CusrsusItemComponent implements OnInit {
 
+  @ViewChild('fileInput') fileInput: ElementRef;
   public data$: Observable<any>;
+  public cvDisabled = false;
+  public cvFileName = '';
   public cursus$: Observable<any>;
   public currentCursus = null;
   public currentRoute = '';
@@ -61,17 +64,23 @@ export class CusrsusItemComponent implements OnInit {
     );
     this.cursus$ = this._wpApi.getData({path: 'cursus', slug: ``}).pipe(
       map(res => (res.length === 1 ) ? res[0] : res),
-      tap(cs => (this.currentCursus = cs.find(c => c.slug === this.currentRoute)))
+      map((res: any[]) => {
+        const cc = res.find(c => c.slug === this.currentRoute);
+        const oc = res.filter(c => c.slug !== this.currentRoute);
+        oc.push(cc);
+        return oc;
+      }),
+      tap(cs => (this.currentCursus = cs.find(c => c.slug === this.currentRoute))),
     );
 
     this.frontEndFormations$ = this.formations$.pipe(
-      map(formations => formations.filter(f => f.cursus[0] === 2).sort(f => f.formation_position))
+      map(formations => formations.filter(f => f.cursus[0] === 2).sort((a, b) => a.formation_position - b.formation_position))
     );
     this.backEndFormations$ = this.formations$.pipe(
-      map(formations => formations.filter(f => f.cursus[0] === 3).sort(f => f.formation_position))
+      map(formations => formations.filter(f => f.cursus[0] === 3).sort((a, b) => a.formation_position - b.formation_position))
     );
     this.marketingFormations$ = this.formations$.pipe(
-      map(formations => formations.filter(f => f.cursus[0] === 23).sort(f => f.formation_position))
+      map(formations => formations.filter(f => f.cursus[0] === 23).sort((a, b) => a.formation_position - b.formation_position))
     );
   }
 
@@ -85,6 +94,39 @@ export class CusrsusItemComponent implements OnInit {
     w.focus();
   }
 
+
+  processWeb() {
+    // console.log(this.fileInput);
+    if (this.cvDisabled) {
+      return;
+    }
+    this.cvDisabled = !this.cvDisabled;
+
+    const reader = new FileReader();
+    reader.onload = (readerEvent) => {
+      const fileData = (readerEvent.target as any).result;
+      console.log('XXXX', fileData);
+    };
+    if ((this.fileInput.nativeElement as any).files.length) {
+      const file = (this.fileInput.nativeElement).files[0];
+      this.cvFileName = file.name;
+      // assuming that this file has any extension
+
+      // const extension = file.name.match(/(?<=\.)\w+$/g)[0].toLowerCase();
+
+      // if (this.exts && !this.exts.includes(extension)) {
+      //   (this.fileInput.nativeElement as any).value = '';
+      //   this.disabled = false;
+      //   return this.dataToSend.emit({message: 'Error: Le format du fichier est incompatible ou non conforme.'});
+      // }
+      this.cvDisabled = false;
+      (this.fileInput.nativeElement as any).value = '';
+    }
+  }
+
+  openFile() {
+    this.fileInput.nativeElement.click();
+  }
   toggle(block: HTMLElement) {
     console.log(block);
     block.classList.toggle('open');

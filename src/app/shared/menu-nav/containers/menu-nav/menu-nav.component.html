@@ -1,16 +1,23 @@
 <ion-show-when size="md">
   <div id="app-header">
     <div id="primary-menu" class="menu">
-      <img (click)="goPage()" src="https://nomades.ch/wp-content/themes/theme_nomades/images/logo-nomades.png" alt="">
+
+      <ion-grid no-padding>
   
-      <ion-grid>
-  
-        <ion-row class="nav-header">
+        <ion-row class="nav-header" no-padding>
           <ion-col
+            no-padding
             size-xs="12"
-            size-sm="9"
-            size-md="9" class="border" (click)="goPage()">
+            size-sm="6"
+            size-lg="4" class="border" (click)="goPage()">
             <h1>{{config?.site_title}}</h1>
+          </ion-col>
+          <ion-col
+            no-padding
+            size-xs="12"
+            size-sm="6"
+            size-lg="4">
+              <img (click)="goPage()" src="https://nomades.ch/wp-content/themes/theme_nomades/images/logo-nomades.png" alt="">
           </ion-col>
           <!-- <ion-col
             size-xs="12"

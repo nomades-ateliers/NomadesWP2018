@@ -75,11 +75,16 @@ function metbox_formation_dates( $post ) {
   wp_nonce_field( 'my_nonce_formation_dates', 'nonce_formation_dates' ); ?>
 
   <p class="block_admin_pm grand titre_niveau">
+    Session 1 <br/>
      <label for="date_formation_du">du</label> <input type="text" id="date_formation_du" name="date_formation_du" class="datepicker" size="20" value="<?php echo wpshed_get_custom_field( 'date_formation_du' ); ?>" />
      <label for="date_formation_au">au</label> <input type="text" id="date_formation_au" name="date_formation_au" class="datepicker" size="20" value="<?php echo wpshed_get_custom_field( 'date_formation_au' ); ?>" />
   </p>
 
-
+  <p class="block_admin_pm grand titre_niveau">
+    Session 2 <br/>
+     <label for="date_formation_du2">du</label> <input type="text" id="date_formation_du2" name="date_formation_du2" class="datepicker" size="20" value="<?php echo wpshed_get_custom_field( 'date_formation_du2' ); ?>" />
+     <label for="date_formation_au2">au</label> <input type="text" id="date_formation_au2" name="date_formation_au2" class="datepicker" size="20" value="<?php echo wpshed_get_custom_field( 'date_formation_au2' ); ?>" />
+  </p>
 <?php
 }
 
@@ -300,6 +305,12 @@ if(isset( $_POST['nonce_formation_dates'] ) || wp_verify_nonce( $_POST['nonce_fo
   if( isset( $_POST['date_formation_au'] ) )
  update_post_meta( $post_id, 'date_formation_au', esc_attr( $_POST['date_formation_au'] ) );
 
+ if( isset( $_POST['date_formation_du2'] ) )
+ update_post_meta( $post_id, 'date_formation_du2', esc_attr( $_POST['date_formation_du2'] ) );
+
+  if( isset( $_POST['date_formation_au2'] ) )
+ update_post_meta( $post_id, 'date_formation_au2', esc_attr( $_POST['date_formation_au2'] ) );
+
 } // FIN OK pour le nonce date
 
 
@@ -384,8 +395,15 @@ if(isset( $_POST['nonce_wk_priorite'] ) || wp_verify_nonce( $_POST['nonce_wk_pri
 
 if(isset( $_POST['nonce_wk_complet'] ) || wp_verify_nonce( $_POST['nonce_wk_complet'], 'my_nonce_wk_complet' ) ){
 
-  if( isset( $_POST['wk_complet'] ) )
- update_post_meta( $post_id, 'wk_complet', $_POST['wk_complet']);
+    if( isset( $_POST['wk_complet'] ) )
+   update_post_meta( $post_id, 'wk_complet', $_POST['wk_complet']);
+  
+  } 
+  // OK non nav workshop
+if(isset( $_POST['nonce_wk_nav'] ) || wp_verify_nonce( $_POST['nonce_wk_nav'], 'my_nonce_wk_nav' ) ){
+
+  if( isset( $_POST['wk_nav'] ) )
+ update_post_meta( $post_id, 'wk_nav', $_POST['wk_nav']);
 
 } // OK non position workshop
 

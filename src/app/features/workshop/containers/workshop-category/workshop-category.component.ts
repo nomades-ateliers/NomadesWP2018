@@ -49,9 +49,10 @@ export class WorkshopCategoryComponent implements OnInit {
     this._router.navigate(['workshops/' + url]);
   }
 
-  displayDetail(item) {
+  displayDetail(slug, item) {
+
     const { category } = this._route.snapshot.params;
-    const url = '/workshops/' + category + '/' + item.slug;
+    const url = '/workshops/' + category + '/' + slug + '/' + item.slug;
     console.log('go-> ', url);
     this._router.navigate([url]);
   }
@@ -75,10 +76,17 @@ export class WorkshopCategoryComponent implements OnInit {
           // filter only caregories with children count > 0
           .filter(i => +i.count >= 1)
           // order parcours by proprety
-          .sort((a, b) => b.order < a.order)
+          .sort((a, b) => a.order - b.order)
       ),
+      tap(_ => this.parcours = this.parcours.filter(p => p.parent === 0).sort((a, b) => a.order - b.order)),
+      // tap((res: any[]) => {
+      //   console.log('XXX', this.parcours);
+      //   const cc = this.parcours.find(c => c.slug === this._router.url.split('/').reverse()[0]);
+      //   const oc = this.parcours.filter(c => c.slug !== this._router.url.split('/').reverse()[0]);
+      //   // this.parcours = oc.push(cc);
+      //   console.log('cc oc', this.parcours);
+      // }),
       tap(res => this._loadWorkshops(parcour.id)),
-      tap(_ => this.parcours = this.parcours.filter(p => p.parent === 0)),
       // add this to update all item with the same height size.
       tap(_ => updateHTMLElementHeight(['article'])),
       tap(_ => updateHTMLElementHeight(['h1']))

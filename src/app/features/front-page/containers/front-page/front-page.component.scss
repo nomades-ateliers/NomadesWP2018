@@ -23,36 +23,36 @@ app-front-page {
     }
     .cursus .col.front {
         background: #fff;
-        color: #388E3C;
-        border: solid 1px #388E3C;
+        color: rgb(84,112,43);
+        border: solid 1px rgb(84,112,43);
     }
     .cursus .col.front:hover{
-        background: #388E3C;
+        background: rgb(84,112,43);
         color: #fff;
-        border: solid 1px #388E3C;
+        border: solid 1px rgb(84,112,43);
     }
     .cursus .col.back{
         background: #fff;
-        color: #0288D1;
-        border: solid 1px #0288D1;
+        color: rgb(64,114,144);
+        border: solid 1px rgb(64,114,144);
     }
     .cursus .col.back:hover{
-        background: #0288D1;
+        background: rgb(64,114,144);
         color: #fff;
-        border: solid 1px #0288D1;
+        border: solid 1px rgb(64,114,144);
     }
     .cursus .col.marketing{
         background: #fff;
-        color: #c40074;
-        border: solid 1px #c40074;
+        color: rgb(142,25,78);
+        border: solid 1px rgb(142,25,78);
     }
     .btnInscription.marketing {
-        --background: #c40074;
+        --background: rgb(142,25,78);
     }
     .cursus .col.marketing:hover, .cursus .col.marketing.active{
-        background: #c40074;
+        background: rgb(142,25,78);
         color: #fff;
-        border: solid 1px #c40074;
+        border: solid 1px rgb(142,25,78);
     }
     ion-grid {
         padding: 0;

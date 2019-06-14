@@ -22,14 +22,17 @@ export class WorkshopItemComponent implements OnInit {
   public currentParcour: any;
   public parentParcour: any;
   public allParentParcour: any[];
+  public subCat: any[];
   public workshops$: Observable<any>;
+  public workshopNavRight: any;
   public currentUrl: any;
   public baseUrl = [
     'https://nomades.ch/wp-content/uploads/2018/10/nomade04-.png', // vert
     'https://nomades.ch/wp-content/uploads/2018/11/nomade05_jaune-png.png', // default => TODO: replace by yellow
     'https://nomades.ch/wp-content/uploads/2018/10/nomade03-.png' // bleu
   ];
-  
+  public currentSubCat: any;
+
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,
@@ -55,10 +58,21 @@ export class WorkshopItemComponent implements OnInit {
         }
         // extract workshop parcour ID
         const currentParcpourID = w.parcours[0];
+
         // request to wp api to get all Parcours
         this.allParcours$ = this._wpApi.getRemoteData({path: 'parcours', slug: `per_page=100`}).pipe(
           map(res => (res.length === 1 ) ? res[0] : res),
-          tap(parcours => this.allParentParcour = parcours.filter(p => p.parent === 0).sort((p: any) => p._id)),
+          tap(parcours => {
+            const currentParentCatID = parcours.find(p => p.id === currentParcpourID).parent;
+            this.subCat = parcours.filter(p => p.parent === currentParentCatID);
+            // this.currentSubCat = this.subCat.filter(c => c)
+            console.log('XXXXX', currentParentCatID);
+            this.allParentParcour = parcours.filter(p => p.parent === 0)
+                                            .map(p => (p.order = +(p.order || 0), p))
+                                            .sort((a, b) => {
+                                              return a.order - b.order;
+                                            });
+          }),
           // find corresponding current parcour by filter all parcour by id equal to workshop.parcour.id
           tap(parcours => this.currentParcour = parcours.find(p => p.id === w.parcours[0])),
           // find corresponding parent parcour by filter all parcour by id equal to current.parcour.parrent
@@ -66,11 +80,13 @@ export class WorkshopItemComponent implements OnInit {
         );
         // defin current item with finded workshop
         this.data$ = of(w);
+        this.workshopNavRight = wks.filter(i => (i || {}).wk_nav === 'oui');
         // return wks array filtered by current.parcour.id
-        return wks.filter(i => i.parcours.includes(currentParcpourID))
-                  // remove current selected item from items List
-                  .filter(i =>  i.id !== w.id)
-                  .sort((a, b) => a.wk_position - b.wk_position);
+        return wks
+        .filter(i => i.parcours.includes(currentParcpourID))
+        // remove current selected item from items List
+        .filter(i =>  i.id !== w.id)
+        .sort((a, b) => a.wk_position - b.wk_position);
       }),
       // if unexisting data, return to the 404 page
       tap(data => (!data[0]) ? window.location.href = '404' : null),
@@ -82,8 +98,11 @@ export class WorkshopItemComponent implements OnInit {
     this._router.navigate([`./workshops/${item.slug}`]);
   }
   go($event, item) {
-    const url = `./${this.currentUrl.split('/')[1]}/${this.currentUrl.split('/')[2]}/${item.slug}`;
-    // console.log(url, item.slug);
+    const els = this.currentUrl.split('/');
+    els.shift();
+    els.pop();
+    const url = `${els.join('/')}/${item.slug}`;
+    console.log(els.join('/'), item.slug);
     this._router.navigate([url]);
   }
 

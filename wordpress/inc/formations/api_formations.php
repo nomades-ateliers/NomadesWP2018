@@ -110,6 +110,22 @@ function appp_register_post_meta() {
         )
     );
     register_rest_field( 'formation', // any post type registered with API
+        'date_formation_du2', // this needs to match meta key
+        array(
+            'get_callback'    => 'appp_get_meta',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+    register_rest_field( 'formation', // any post type registered with API
+        'date_formation_au2', // this needs to match meta key
+        array(
+            'get_callback'    => 'appp_get_meta',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+    register_rest_field( 'formation', // any post type registered with API
         't_formation_b1', // this needs to match meta key
         array(
             'get_callback'    => 'appp_get_meta',
@@ -145,6 +161,14 @@ function appp_register_post_meta() {
     // workshop fields
     register_rest_field( 'workshop', // any post type registered with API
         'wk_position', // this needs to match meta key
+        array(
+            'get_callback'    => 'appp_get_meta',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+    register_rest_field( 'workshop', // any post type registered with API
+        'wk_nav', // this needs to match meta key
         array(
             'get_callback'    => 'appp_get_meta',
             'update_callback' => null,

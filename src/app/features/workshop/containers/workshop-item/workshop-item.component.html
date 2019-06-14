@@ -7,25 +7,68 @@
           <app-header-people *ngIf="currentUrl?.toLowerCase()?.includes('front')" [baseUrl]="baseUrl[0]"></app-header-people>
           <app-header-people *ngIf="currentUrl?.toLowerCase()?.includes('back')" [baseUrl]="baseUrl[2]"></app-header-people>
           <app-header-people *ngIf="currentUrl?.toLowerCase()?.includes('mobile')" [baseUrl]="baseUrl[1]"></app-header-people>
-          <app-adress></app-adress>
-          <app-slogan [slogan]="'WORKSHOPS'" [link]="'./workshops'"></app-slogan>
+          <!-- <app-adress></app-adress> -->
+          <br>
+          <h1 class="title">Workshop</h1>
+          <!-- <app-slogan [slogan]="'WORKSHOPS'" [link]="'./workshops'"></app-slogan> -->
 
       </ion-col>
     </ion-row>
     <div *ngIf="workshops$ | async as wks">
       <div *ngIf="allParcours$ | async as allParcours;">
         <div class="wksCat" *ngIf="data$ | async as data;">
-          <div *ngFor="let p of allParentParcour">
-            <ion-row class="parcourTitleRow" (click)="goParcour($event, p)">
-              <ion-col padding [ngClass]="{
-                col: true,
-                front: p?.name.toLowerCase().includes('front'),
-                back: p?.name.toLowerCase().includes('back'),
-                mobile: p?.name.toLowerCase().includes('mobile'),
-                active: parentParcour.id === p.id
-              }">
-                <p class="block_title section">{{p?.name|replaceBy}}</p>
+          <div>
+            <ion-row class="parcourTitleRow no-padding">
+              <ion-col class="no-padding" sizeSm="6">
+                <ion-grid>
+                  <ion-row *ngFor="let p of allParentParcour;">
+                      <ion-col (click)="goParcour($event, p)" [ngClass]="{
+                        col: true,                        
+                        front: p?.name.toLowerCase().includes('front'),
+                        back: p?.name.toLowerCase().includes('back'),
+                        mobile: p?.name.toLowerCase().includes('mobile'),
+                        marketing: p?.name.toLowerCase().includes('marketing'),
+                        active: parentParcour.id === p.id  
+                      }">
+                        <p class="block_title section">{{p?.name|replaceBy}}</p>
+                      </ion-col>
+                  </ion-row>
+                </ion-grid>                
               </ion-col>
+
+              <ion-col sizeSm="6" class="no-padding">
+                <!-- {{workshopNavRight|json}} -->
+                <ion-grid>
+                  <ion-row *ngFor="let wRight of workshopNavRight">
+                    <ion-col [ngClass]="{
+                      wkshopStyleTitleNav: true,
+                      subnav: true,
+                      active: currentUrl.toLowerCase().includes(wRight?.slug),
+                      front_: currentUrl.toLowerCase().includes('front'),
+                      back_: currentUrl.toLowerCase().includes('back'),
+                      mobile_: currentUrl.toLowerCase().includes('mobile')
+                    }">
+                      <p class="block_title section" (click)="go($event, wRight)">{{ wRight?.title?.rendered|replaceBy }}</p>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-col>
+              <!-- <ion-col sizeSm="6" class="no-padding">
+                  <ion-grid>
+                    <ion-row *ngFor="let sub of subCat">
+                        <ion-col [ngClass]="{
+                          wkshopStyleTitleNav: true,
+                          subnav: true,
+                          active: sub?.id === data?.parcours[0],
+                          front_: currentUrl.toLowerCase().includes('front'),
+                          back_: currentUrl.toLowerCase().includes('back'),
+                          mobile_: currentUrl.toLowerCase().includes('mobile')
+                        }">
+                          <p class="block_title section">{{sub?.name|replaceBy}}</p>
+                        </ion-col>
+                    </ion-row>
+                  </ion-grid>  
+              </ion-col> -->
             </ion-row>
   
           </div>
@@ -36,21 +79,22 @@
             <article>
               <ion-row  align-items-center>
                 <ion-col
-                  size="12"
-                  margin-top>
-                    <header>
-                      <p class="subTitle">{{currentParcour?.name|replaceBy}}</p>
-                      <h1 [ngClass]="{
-                          text: true,
+                  size="12" [ngClass]="{
+                          col: true,
                           front: currentUrl.toLowerCase().includes('front'),
                           back: currentUrl.toLowerCase().includes('back'),
-                          mobile: currentUrl.toLowerCase().includes('mobile')
-                        }">{{data?.title?.rendered|replaceBy}}</h1>
+                          mobile: currentUrl.toLowerCase().includes('mobile'),
+                          active: true
+                        }">
+                    <header>
+                      <!-- <p class="subTitle">{{currentParcour?.name|replaceBy}}</p> -->
+                      <h1>{{data?.title?.rendered|replaceBy}}</h1>
                     </header>
                 </ion-col>
               </ion-row>    
               <ion-row class="styled">
                 <ion-col
+                  class="contentWks"
                   size="6"
                   sizeXs="12"
                   sizeSm="12"
@@ -61,7 +105,8 @@
                       text: true,
                       front: currentUrl.toLowerCase().includes('front'),
                       back: currentUrl.toLowerCase().includes('back'),
-                      mobile: currentUrl.toLowerCase().includes('mobile')
+                      mobile: currentUrl.toLowerCase().includes('mobile'),
+                      marketing: currentUrl.toLowerCase().includes('marketing')
                     }">Contenu</h2>
                     <div class="detailListItem" [innerHTML]="data?.contenu_workshop|replaceBy|safeHtml "></div>
                   </div>
@@ -72,6 +117,7 @@
                       back: currentUrl.toLowerCase().includes('back'),
                       mobile: currentUrl.toLowerCase().includes('mobile')
                     }">Public</h2>
+                     
                     <div class="detailListItem" [innerHTML]="data?.public_workshop|replaceBy|safeHtml "></div>    
                   </div>
                   <div *ngIf="data?.date_session_1_du || data?.date_session_1_au">
@@ -103,11 +149,16 @@
                     }">Écolage</h2>
                     <div class="detailListItem"><p>CHF <span [innerHTML]="data?.ecolage_wk|replaceBy|safeHtml"></span>.-</p></div>                 
                   </div>
-                  <ion-button
-                    color="primary"
+                  <ion-button [ngClass]="{
+                      front: currentUrl.toLowerCase().includes('front'),
+                      back: currentUrl.toLowerCase().includes('back'),
+                      mobile: currentUrl.toLowerCase().includes('mobile')
+                    }"
+                    fill="outline"
                     margin-top
+                    expand="block"
                     (click)="inscription(data)">
-                    pré-inscription
+                    inscription
                   </ion-button> 
                 </ion-col>
                 <ion-col
@@ -116,13 +167,29 @@
                   sizeSm="12"
                   sizeMd="6"
                   sizeLg="6">
-                  <div *ngIf="data?.programme_workshop">
+                  <div class="prog_content_right" *ngIf="data?.programme_workshop">
                     <h2 [ngClass]="{
                       text: true,
                       front: currentUrl.toLowerCase().includes('front'),
                       back: currentUrl.toLowerCase().includes('back'),
                       mobile: currentUrl.toLowerCase().includes('mobile')
                     }">Programme</h2>
+                    <!-- <div class="programme">
+                      <h3><span>1.</span>Présentation de Node et de son écosystème</h3>
+                      <h3><span>2.</span>Présentation de Node et de son écosystème</h3>
+                      <h3>MEAN.js, mais qu’est-ce?</h3>
+                      <ul>
+                        <li>- MongoDB, Express, Angular, Node.js -> du JavaScript à tous les étages</li>
+                        <li>- Explication de l’architecture dans son ensemble</li>
+                        <li>- Focus sur la partie back-end</li>
+                      </ul>
+
+                      <h3><span>10.</span>Un exemple simple de «Hello world!» avec nodejs</h3>
+                      <ul>
+                          <li>- Un seul fichier</li>
+                          <li>- Instancier un serveur</li>
+                      </ul>
+                    </div> -->
                     <div class="programme" [innerHTML]="data?.programme_workshop|replaceBy|safeHtml "></div>
                   </div>
                 </ion-col>
@@ -137,7 +204,7 @@
                     front: currentUrl.toLowerCase().includes('front'),
                     back: currentUrl.toLowerCase().includes('back'),
                     mobile: currentUrl.toLowerCase().includes('mobile')
-                  }">Workshops similaires:</h2>  
+                  }">Autres workshops de la categorie {{currentParcour?.name }}</h2>  
                 </ion-col>
               </ion-row> 
               <ion-row margin-bottom padding-bottom>

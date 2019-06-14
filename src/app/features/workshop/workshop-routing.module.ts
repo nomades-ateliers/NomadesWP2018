@@ -20,7 +20,10 @@ const routes: Routes = [
             component: WorkshopCategoryComponent,
           },
           {
-            path: ':category/:name',
+            path: ':category/:sub'
+          },
+          {
+            path: ':category/:sub/:name',
             component: WorkshopItemComponent,
           },
         ]
