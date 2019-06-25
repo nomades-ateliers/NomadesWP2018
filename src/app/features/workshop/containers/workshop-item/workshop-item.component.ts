@@ -69,6 +69,12 @@ export class WorkshopItemComponent implements OnInit {
             console.log('XXXXX', currentParentCatID);
             this.allParentParcour = parcours.filter(p => p.parent === 0)
                                             .map(p => (p.order = +(p.order || 0), p))
+                                            .map(p => {
+                                              if (p.id === currentParentCatID) {
+                                                return {...p, order: 1000};
+                                              }
+                                              return p;
+                                            })
                                             .sort((a, b) => {
                                               return a.order - b.order;
                                             });

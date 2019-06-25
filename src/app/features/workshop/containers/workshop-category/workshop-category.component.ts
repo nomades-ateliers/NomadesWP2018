@@ -78,7 +78,16 @@ export class WorkshopCategoryComponent implements OnInit {
           // order parcours by proprety
           .sort((a, b) => a.order - b.order)
       ),
-      tap(_ => this.parcours = this.parcours.filter(p => p.parent === 0).sort((a, b) => a.order - b.order)),
+      tap(_ => this.parcours = this.parcours
+                                   .filter(p => p.parent === 0)
+                                   .map(p => {
+                                      if (p.slug === slug) {
+                                        return {...p, order: 1000};
+                                      }
+                                      return p; 
+                                    })
+                                   .sort((a, b) => a.order - b.order)
+      ),
       // tap((res: any[]) => {
       //   console.log('XXX', this.parcours);
       //   const cc = this.parcours.find(c => c.slug === this._router.url.split('/').reverse()[0]);
