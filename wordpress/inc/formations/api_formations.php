@@ -283,6 +283,14 @@ function appp_register_post_meta() {
     );
 
     register_rest_field( 'cursus', // any post type registered with API
+        'sort', // this needs to match meta key
+        array(
+            'get_callback' => 'app_get_sort_cursus',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+    register_rest_field( 'cursus', // any post type registered with API
         'choco_block1', // this needs to match meta key
         array(
             'get_callback' => 'app_get_choco_block1',
@@ -392,6 +400,11 @@ function app_get_taxMeta($tax){
     
 }
 
+function app_get_sort_cursus($tax){
+    $id = $tax[ 'id' ];
+    $term_meta = get_option( "taxonomy_term_$id" );
+    return ($term_meta) ? $term_meta['sort'] : null; 
+}
 function app_get_choco_block1($tax){
     $id = $tax[ 'id' ];
     $term_meta = get_option( "taxonomy_term_$id" );

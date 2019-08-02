@@ -41,8 +41,15 @@ function chocolat_taxonomy_custom_fields($tag) {
   // Check for existing taxonomy meta for the term you're editing  
   $t_id = $tag->term_id; // Get the ID of the term you're editing  
   $term_meta = get_option( "taxonomy_term_$t_id" ); // Do the check  
- ?>   
-
+ ?>  
+  <!-- Sort  -->
+<tr class="form-field">  
+    <th scope="row" valign="top">  
+        <label for="sort"><?php _e('Sort'); ?></label>  <br /> 
+		    <input type="text" name="term_meta[sort]" id="term_meta[sort]" size="25" value="<?php echo $term_meta['sort'] ? $term_meta['sort'] : ''; ?>"> 
+      </div>
+    </td>  
+  </tr>
   <!-- Block 1 -->
   <tr class="form-field">  
     <th scope="row" valign="top">  

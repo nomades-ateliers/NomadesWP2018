@@ -84,7 +84,7 @@ export class WorkshopCategoryComponent implements OnInit {
                                       if (p.slug === slug) {
                                         return {...p, order: 1000};
                                       }
-                                      return p; 
+                                      return p;
                                     })
                                    .sort((a, b) => a.order - b.order)
       ),
@@ -95,7 +95,8 @@ export class WorkshopCategoryComponent implements OnInit {
       //   // this.parcours = oc.push(cc);
       //   console.log('cc oc', this.parcours);
       // }),
-      tap(res => this._loadWorkshops(parcour.id)),
+      tap(_ => this._loadWorkshops(parcour.id)),
+      tap(_ => (console.log('xxxxx', this.parcours))),
       // add this to update all item with the same height size.
       tap(_ => updateHTMLElementHeight(['article'])),
       tap(_ => updateHTMLElementHeight(['h1']))
@@ -103,11 +104,11 @@ export class WorkshopCategoryComponent implements OnInit {
   }
 
   private _loadWorkshops(id: string) {
-
+    console.log('_loadWorkshops --------->', id);
     this.workshops$ = this._http.getRemoteData({path: 'workshop', slug: 'per_page=100'}).pipe(
       map(wks => wks.sort((a, b) => a.wk_position - b.wk_position)),
       // tap(w => this.workshopsLenght = w.length),
-      tap(w => console.log(w))
+      tap(w => console.log('--------->', w))
     );
   }
 

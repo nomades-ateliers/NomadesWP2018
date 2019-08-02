@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { WpApiService } from '@app/shared/services';
 
@@ -28,6 +28,8 @@ export class FrontPageComponent implements OnInit {
     );
     this.cursus$ = this._wpApi.getData({path: 'cursus', slug: ``}).pipe(
       map(res => (res.length === 1 ) ? res[0] : res),
+      map((c: any[]) => c.sort((a, b) => (+a.sort) - (+b.sort))),
+      tap(d => console.log('---', d))
     );
   }
 

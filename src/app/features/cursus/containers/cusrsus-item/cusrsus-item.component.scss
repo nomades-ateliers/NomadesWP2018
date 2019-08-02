@@ -54,12 +54,7 @@ app-cusrsus-item {
         --background: rgb(84,112,43);
         color: #fff;
     }
-    .text.front, 
-    //.chocolat.front .cursustitle, .chocolat.front h4 
-    {
-        --color: rgb(84,112,43);
-        color: rgb(84,112,43);
-    }
+
     .item-native {
         min-height:10px;
     }
@@ -97,12 +92,7 @@ app-cusrsus-item {
         --background: rgb(64,114,144);
         color: #fff;
     }
-    .text.back, 
-    // .chocolat.back .cursustitle, .chocolat.back h4 
-    {
-        --color: rgb(64,114,144);
-        color: rgb(64,114,144);
-    }
+
     .inscriptionBlock.back {
         margin-top:10px;
         background: rgba(0, 137, 215, 0.1);
@@ -134,12 +124,7 @@ app-cusrsus-item {
         --background: rgb(142,25,78);
         color: #fff;
     }
-    .text.marketing, 
-    // .chocolat.marketing .cursustitle, .chocolat.marketing h4
-    {
-        --color: rgb(142,25,78);
-        color: rgb(142,25,78);
-    }
+
     .inscriptionBlock.marketing {
         margin-top:10px;
         background: rgba(196, 0, 116, 0.1);
@@ -301,4 +286,27 @@ app-cusrsus-item {
     .itemTranslate {
         transform: translateX(-2rem);
     }
+
+    .chocolat.back {
+
+    }
+}
+
+.text.front ,
+.chocolat.front .cursustitle, .chocolat.front h4, .chocolat.front h3
+{
+    --color: rgb(84,112,43) !important;
+    color: rgb(84,112,43) !important;
+}
+.text.marketing ,
+.chocolat.marketing .cursustitle, .chocolat.marketing h4, .chocolat.marketing h3
+{
+    --color: rgb(142,25,78) !important;
+    color: rgb(142,25,78) !important;
+}
+.text.back,
+.chocolat.back .cursustitle, .chocolat.back h4, .chocolat.back h3
+{
+    --color: rgb(64,114,144) !important;
+    color: rgb(64,114,144) !important;
 }

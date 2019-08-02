@@ -19,7 +19,7 @@
         <div class="wksCat" *ngIf="data$ | async as data;">
           <div>
             <ion-row class="parcourTitleRow no-padding">
-              <ion-col class="no-padding" sizeSm="6">
+              <ion-col class="no-padding">
                 <ion-grid>
                   <ion-row *ngFor="let p of allParentParcour;">
                       <ion-col (click)="goParcour($event, p)" [ngClass]="{
@@ -36,8 +36,8 @@
                 </ion-grid>                
               </ion-col>
 
-              <ion-col sizeSm="6" class="no-padding">
-                <!-- {{workshopNavRight|json}} -->
+              <!-- TODO: show this section nav... -->
+              <!-- <ion-col sizeSm="6" class="no-padding">
                 <ion-grid>
                   <ion-row *ngFor="let wRight of workshopNavRight">
                     <ion-col [ngClass]="{
@@ -48,27 +48,14 @@
                       back_: currentUrl.toLowerCase().includes('back'),
                       mobile_: currentUrl.toLowerCase().includes('mobile')
                     }">
-                      <p class="block_title section" (click)="go($event, wRight)">{{ wRight?.title?.rendered|replaceBy }}</p>
+                      <p class="block_title section" (click)="go($event, wRight)">
+                        {{ wRight?.title?.rendered|replaceBy }}
+                      </p>
                     </ion-col>
                   </ion-row>
                 </ion-grid>
-              </ion-col>
-              <!-- <ion-col sizeSm="6" class="no-padding">
-                  <ion-grid>
-                    <ion-row *ngFor="let sub of subCat">
-                        <ion-col [ngClass]="{
-                          wkshopStyleTitleNav: true,
-                          subnav: true,
-                          active: sub?.id === data?.parcours[0],
-                          front_: currentUrl.toLowerCase().includes('front'),
-                          back_: currentUrl.toLowerCase().includes('back'),
-                          mobile_: currentUrl.toLowerCase().includes('mobile')
-                        }">
-                          <p class="block_title section">{{sub?.name|replaceBy}}</p>
-                        </ion-col>
-                    </ion-row>
-                  </ion-grid>  
               </ion-col> -->
+
             </ion-row>
   
           </div>

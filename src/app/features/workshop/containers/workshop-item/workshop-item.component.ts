@@ -58,7 +58,8 @@ export class WorkshopItemComponent implements OnInit {
         }
         // extract workshop parcour ID
         const currentParcpourID = w.parcours[0];
-
+        console.log('YYYYYYYY', currentParcpourID);
+        
         // request to wp api to get all Parcours
         this.allParcours$ = this._wpApi.getRemoteData({path: 'parcours', slug: `per_page=100`}).pipe(
           map(res => (res.length === 1 ) ? res[0] : res),
@@ -82,11 +83,25 @@ export class WorkshopItemComponent implements OnInit {
           // find corresponding current parcour by filter all parcour by id equal to workshop.parcour.id
           tap(parcours => this.currentParcour = parcours.find(p => p.id === w.parcours[0])),
           // find corresponding parent parcour by filter all parcour by id equal to current.parcour.parrent
-          tap(parcours => this.parentParcour = parcours.find(p => p.id === this.currentParcour.parent))
+          tap(parcours => this.parentParcour = parcours.find(p => p.id === this.currentParcour.parent)),
+          tap(parcours => {
+            const currentParentCatID = parcours.find(p => p.id === currentParcpourID).parent;
+            console.log('--->', currentParentCatID,
+            // wks.filter(i => i.parcours.indexOf((this.currentParcour || {}).parent) >= 0)
+            // .map(w => w.wk_nav.indexOf('oui') >= 0)
+            );
+            this.workshopNavRight = wks
+            .filter(i => (i || {}).parcours.includes(currentParentCatID))
+            // .filter(i => (i || {}).wk_nav.includes('oui'))
+            // .filter(i => i.parcours.indexOf((this.currentParcour || {}).parent) >= 0)
+            .sort((a, b) => a.wk_position - b.wk_position);
+            console.log('XXXXXX', this.workshopNavRight);
+            
+          })
         );
         // defin current item with finded workshop
         this.data$ = of(w);
-        this.workshopNavRight = wks.filter(i => (i || {}).wk_nav === 'oui');
+
         // return wks array filtered by current.parcour.id
         return wks
         .filter(i => i.parcours.includes(currentParcpourID))
