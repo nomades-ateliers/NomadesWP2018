@@ -2,10 +2,11 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { WpApiService } from '@app/shared/services';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { loadFile } from '@app/utils';
 import { LoadingController, AlertController } from '@ionic/angular';
+import { ReCaptchaV3Service, OnExecuteData } from 'ng-recaptcha';
 
 declare const grecaptcha: any;
 @Component({
@@ -24,6 +25,7 @@ export class InscriptionComponent implements OnInit {
   totalEcolage = 0;
   data$: Observable<any>;
   loader: HTMLIonLoadingElement;
+  private subscription: Subscription;
 
   constructor(
     private _router: Router,
@@ -31,7 +33,8 @@ export class InscriptionComponent implements OnInit {
     private _wpApi: WpApiService,
     private _http: WpApiService,
     private _alertCtrl: AlertController,
-    private _loadingCtrl: LoadingController
+    private _loadingCtrl: LoadingController,
+    private recaptchaV3Service: ReCaptchaV3Service,
 
   ) { }
 
@@ -54,7 +57,7 @@ export class InscriptionComponent implements OnInit {
   ionViewWillEnter() {
     // extract data from localstorage
     const workshops = JSON.parse(localStorage.getItem('nomades_workshop') || '[]');
-    const formations = JSON.parse(localStorage.getItem('nomades_formations') || '[]');
+    // const formations = JSON.parse(localStorage.getItem('nomades_formations') || '[]');
     // build form control with correct object data
     // + calculate total amount
     workshops.map(c => {
@@ -63,13 +66,13 @@ export class InscriptionComponent implements OnInit {
     });
     // patch value to the form
     this.form.patchValue({workshops});
-    formations.map(f => {
-      if (f.ecolage) {
-        this.totalEcolage = this.totalEcolage + (+f.ecolage);
-      }
-      return this.getControl('formations').push(this._formBuilder.control(f));
-    });
-    this.form.patchValue({formations});
+    // formations.map(f => {
+    //   if (f.ecolage) {
+    //     this.totalEcolage = this.totalEcolage + (+f.ecolage);
+    //   }
+    //   return this.getControl('formations').push(this._formBuilder.control(f));
+    // });
+    // this.form.patchValue({formations});
     console.log('form', this.form.value);
   }
 
@@ -91,13 +94,13 @@ export class InscriptionComponent implements OnInit {
         //   Validators.minLength(1)
         // ])
       ),
-      formations: this._formBuilder.array(
-        [],
-        // Validators.compose([
-        //   Validators.required,
-        //   Validators.minLength(1)
-        // ])
-      ),
+      // formations: this._formBuilder.array(
+      //   [],
+      //   // Validators.compose([
+      //   //   Validators.required,
+      //   //   Validators.minLength(1)
+      //   // ])
+      // ),
       ajax: ['true'],
       captcha: [''],
     });
@@ -127,12 +130,12 @@ export class InscriptionComponent implements OnInit {
         // update object data
         this.wksList = JSON.parse(localStorage.getItem('nomades_workshop') || '[]');
         break;
-      case control === 'formations':
-        // remove from localstorage
-        localStorage.setItem('nomades_formations', JSON.stringify(this.form.value.formations));
-        // update object data
-        this.wksList = JSON.parse(localStorage.getItem('nomades_formations') || '[]');
-        break;
+      // case control === 'formations':
+      //   // remove from localstorage
+      //   localStorage.setItem('nomades_formations', JSON.stringify(this.form.value.formations));
+      //   // update object data
+      //   this.wksList = JSON.parse(localStorage.getItem('nomades_formations') || '[]');
+      //   break;
       default:
         break;
     }
@@ -144,7 +147,7 @@ export class InscriptionComponent implements OnInit {
       console.log('invalid form data');
       return;
     }
-    if ((this.form.value.formations.length + this.form.value.workshops.length) <= 0) {
+    if ( this.form.value.workshops.length <= 0) {
       return console.log('invalid form data, no formations or workshops');
     }
     // to prevent multiple sending action
@@ -176,7 +179,7 @@ export class InscriptionComponent implements OnInit {
   private _sendDataForm() {
     // if(grecaptcha) grecaptcha.execute();
     console.log('send', this.form.value);
-    return this._http.sendInscription(this.form.value)
+    return this._http.sendInscriptionWorkshop(this.form.value)
     .then((res: any) => this._displayNotif(res))
     .then((res: any) => (res.result === 200) ? (this._buildForm(), res) : res)
     // display user notification error

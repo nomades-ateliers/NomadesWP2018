@@ -8,7 +8,7 @@ import { WpApiService } from '@app/shared/services';
 import { fadeAnim } from '@app/shared/animations/fade.animation';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { AlertController, LoadingController } from '@ionic/angular';
-import { loadFile } from '@app/utils';
+// import { loadFile } from '@app/utils';
 import { ReCaptchaV3Service, OnExecuteData } from 'ng-recaptcha';
 
 declare const grecaptcha: any;

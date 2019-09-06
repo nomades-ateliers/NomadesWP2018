@@ -42,6 +42,21 @@ export class WpApiService {
     ).pipe(first())
     .toPromise()
   }
+  async sendInscriptionWorkshop(data) {
+    const headers = new HttpHeaders()
+    // .set('cache-control', null)
+    // .set('X-Requested-With', null)
+    .set('Content-Type', 'application/json');
+    console.log('send request...');
+    return await this.http.post(
+      'https://nomades.ch/inc/ng-processWorkInscription.php?ajax=true',
+      data,
+      {
+        headers: headers
+      }
+    ).pipe(first())
+    .toPromise().then(res => (console.log(res), res)).catch(err => err)
+  }
 
   async sendInscription(data) {
     const headers = new HttpHeaders()
