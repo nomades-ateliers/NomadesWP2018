@@ -50,12 +50,13 @@ export class WpApiService {
         .set('Content-Type', 'application/json');
     console.log('send request...');
     return await this.http.post(
-      'https://nomades.ch/inc/ng-processFromInscription.php',
+      // 'https://nomades.ch/inc/processFromInscription.php',
+      'https://nomades.ch/inc/ng-processFromInscription.php?ajax=true',
       data,
       {
         headers: headers
       }
     ).pipe(first())
-    .toPromise()
+    .toPromise().then(res => (console.log(res), res)).catch(err => err)
   }
 }

@@ -13,6 +13,9 @@ import { AppConfigService } from '@app/app-config.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AppConfig } from '@app/app-config.token';
 
+import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module, RecaptchaModule } from 'ng-recaptcha';
+import { environment } from '@env/environment';
+
 export function AppConfigServiceFactory(config: AppConfigService): Function {
   return () => config.load();
 }
@@ -43,6 +46,8 @@ export const APP_CONFIG_PROVIDER = [
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    RecaptchaModule.forRoot(),
+    RecaptchaV3Module,
     IonicModule.forRoot({
       mode: 'md'
     })
@@ -50,9 +55,11 @@ export const APP_CONFIG_PROVIDER = [
   providers: [
     // StatusBar,
     // SplashScreen,
+    { provide: RECAPTCHA_V3_SITE_KEY, useValue: environment.recaptcha },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ...APP_CONFIG_PROVIDER
   ],
+  exports: [RecaptchaModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

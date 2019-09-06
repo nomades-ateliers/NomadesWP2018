@@ -30,6 +30,7 @@
     "@ionic/core": "4.0.0-beta.13",
     "@ionic/schematics-angular": "latest",
     "core-js": "^2.5.3",
+    "ng-recaptcha": "^5.0.0",
     "rxjs": "^6.2.2",
     "zone.js": "^0.8.26"
   },

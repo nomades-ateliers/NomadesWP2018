@@ -1,13 +1,17 @@
-import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { WpApiService } from '@app/shared/services';
 import { fadeAnim } from '@app/shared/animations/fade.animation';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { loadFile } from '@app/utils';
+import { ReCaptchaV3Service, OnExecuteData } from 'ng-recaptcha';
 
+declare const grecaptcha: any;
 
 @Component({
   selector: 'app-cusrsus-item',
@@ -16,7 +20,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   encapsulation: ViewEncapsulation.None,
   animations: [...fadeAnim]
 })
-export class CusrsusItemComponent implements OnInit {
+export class CusrsusItemComponent implements OnInit, OnDestroy {
 
   @ViewChild('fileInput') fileInput: ElementRef;
   public data$: Observable<any>;
@@ -30,6 +34,8 @@ export class CusrsusItemComponent implements OnInit {
   public backEndFormations$: Observable<any[]>;
   public marketingFormations$: Observable<any[]>;
   public incriptionForm: FormGroup;
+  public loading: HTMLIonLoadingElement;
+  private subscription: Subscription;
 
   baseUrl = [
     'https://nomades.ch/wp-content/uploads/2018/10/nomade01-.png',
@@ -40,7 +46,10 @@ export class CusrsusItemComponent implements OnInit {
     private _wpApi: WpApiService,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _alertCtrl: AlertController,
+    private _loadingCtrl: LoadingController,
+    private recaptchaV3Service: ReCaptchaV3Service,
   ) {
     console.log(this._route.snapshot.params.slug);
     this.currentRoute = this._route.snapshot.params.slug;
@@ -50,11 +59,18 @@ export class CusrsusItemComponent implements OnInit {
       email: [null, Validators.required],
       phone: [null, Validators.required],
       cv: [null, Validators.required],
-      formations: [null, Validators.required],
+      captcha: [''],
+      formations: new FormArray([], Validators.required),
     });
    }
 
   ngOnInit() {
+    this.subscription = this.recaptchaV3Service.onExecute
+    .subscribe((data: OnExecuteData) => {
+      console.log('handleRecaptchaExecute->', data);
+      // this.handleRecaptchaExecute(data.action, data.token);
+    });
+    // loadFile(this);
     this.formations$ = this._wpApi.getRemoteData({path: 'formation', slug: ``}).pipe(
       map(res => res.map(item => {item.formation_position = +item.formation_position; return item; })),
       map((res) => res.sort((a, b) => a.formation_position - b.formation_position))
@@ -84,6 +100,12 @@ export class CusrsusItemComponent implements OnInit {
     );
   }
 
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
   go(link) {
     console.log(link);
     this._router.navigate(['/cursus/' + link]);
@@ -95,8 +117,8 @@ export class CusrsusItemComponent implements OnInit {
   }
 
 
-  processWeb() {
-    // console.log(this.fileInput);
+  async processWeb() {
+    // console.log(this.fileInput, (this.fileInput.nativeElement).files[0]);
     if (this.cvDisabled) {
       return;
     }
@@ -109,18 +131,26 @@ export class CusrsusItemComponent implements OnInit {
     };
     if ((this.fileInput.nativeElement as any).files.length) {
       const file = (this.fileInput.nativeElement).files[0];
-      this.cvFileName = file.name;
       // assuming that this file has any extension
-
-      // const extension = file.name.match(/(?<=\.)\w+$/g)[0].toLowerCase();
-
-      // if (this.exts && !this.exts.includes(extension)) {
-      //   (this.fileInput.nativeElement as any).value = '';
-      //   this.disabled = false;
-      //   return this.dataToSend.emit({message: 'Error: Le format du fichier est incompatible ou non conforme.'});
-      // }
+      const extension = file.name.match(/(?<=\.)\w+$/g)[0].toLowerCase();
+      if (!['pdf'].includes(extension)) {
+        (this.fileInput.nativeElement as any).value = '';
+        // this.disabled = false;
+        const alert = await this._alertCtrl.create({
+          header: 'Erreur',
+          message: 'Error: Le format du fichier est incompatible ou non conforme.',
+          buttons: [{
+            text: 'ok'
+          }]
+        });
+        alert.present();
+        this.cvDisabled = false;
+        return;
+      }
+      this.cvFileName = file.name;
+      this.incriptionForm.get('cv').setValue(file);
       this.cvDisabled = false;
-      (this.fileInput.nativeElement as any).value = '';
+      // (this.fileInput.nativeElement as any).value = '';
     }
   }
 
@@ -145,12 +175,106 @@ export class CusrsusItemComponent implements OnInit {
     this._router.navigate(['./inscription']);
   }
 
-  sendInscription() {
-    console.log(this.incriptionForm.valid);
-    if (!this.incriptionForm.valid) {
-      return alert('formulaire non valide');
+  async checkBoxChange($event, formation, date) {
+    console.log('$event', date);
+    if ((!date || !date.value) && $event.target.checked) {
+      const alert = await this._alertCtrl.create({
+        header: 'Inscription',
+        message: `Veuillez choisir une date pour séléctionner une formation`,
+        buttons: [{text: 'ok'}
+        ]
+      });
+      const alertError = await alert.present().catch(err => err);
+      // toggle checkbox state
+      $event.target.checked = false;
+      if (alertError) console.log(alertError);
+      return;
     }
-    alert('pas encore codé... attend confirtation du changement...');
+    const formationGroup = (this.incriptionForm.get('formations') as FormArray);
+    // add formation logic:
+    const index = formationGroup.controls.findIndex(c => c.value.id === formation.id);
+    // find existing and remove formation
+    if (index >= 0) {
+      formationGroup.removeAt(index)
+      // console.log('existing removed...', this.incriptionForm.value);
+    };
+    // if formation is selected...
+    if ($event.detail.checked) {
+      // insert new item in form
+      formationGroup.insert(0, new FormGroup({
+        id: new FormControl(formation.id),
+        name: new FormControl(formation.title.rendered),
+        price: new FormControl(formation.formation_price),
+        date: new FormControl(date.value)
+      }));
+    }
+    this.incriptionForm.markAsDirty();
+    // console.log('result', this.incriptionForm.value);
+  }
+
+  async clickSend(captchaRef) {
+    // create loader
+    this.loading = await this._loadingCtrl.create({
+      message: 'envoi de votre inscription...',
+      duration: 10000
+    });
+    await this.loading.present();
+    // execute invisible captcha v3
+    captchaRef.execute();
+  }
+
+  submit(e) {
+    console.log('submit callback reCAPTCHA', e);
+    if (!e) return;
+    // patch captcha value to form data
+    this.incriptionForm.patchValue({captcha: e});
+    // then request send data to backend
+    this.sendInscription();
+  }
+
+  async sendInscription() {
+    // close loader if exist
+    if (this.loading) this.loading.dismiss();
+    // create empty prop for all alert message
+    let ionAlert: HTMLIonAlertElement;
+    // handle form errors
+    if (!this.incriptionForm.valid) {
+      // crearte error alert
+      ionAlert = await this._alertCtrl.create({
+        message: 'formulaire non valide',
+        buttons: [{
+          text: 'ok'
+        }]
+      });
+      // display and stop script
+      if (ionAlert) await ionAlert.present();
+      return;
+    }
+    // request backend with form data valid
+    const response = await this._wpApi.sendInscription(this.incriptionForm.value);
+    // handle response status
+    if (response.result === 200) {
+      // create success alert
+      ionAlert = await this._alertCtrl.create({
+        message: 'Votre inscription à été envoyée.',
+        buttons: [{
+          text: 'ok'
+        }]
+      });
+    }
+    else {
+      // create error alert
+      ionAlert = await this._alertCtrl.create({
+        header: 'Erreur',
+        message: `Votre inscription n'a pas été envoyée. Veuillez nous contacter par téléphone.`,
+        buttons: [{
+          text: 'ok'
+        }]
+      });
+    }
+    // display alert
+    if (ionAlert) await ionAlert.present();
+    // reset inscription form
     this.incriptionForm.reset();
   }
 }

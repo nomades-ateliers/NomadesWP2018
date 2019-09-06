@@ -252,37 +252,37 @@
           : (currentRoute.includes('front'))
             ? (backEndFormations$|async)
             : (marketingFormations$|async) as dataToList;">
-          <ion-row align-items-center no-margin no-padding *ngFor="let f of (currentRoute.includes('front'))
-          ? (frontEndFormations$|async)
-          : (currentRoute.includes('back'))
-            ? (backEndFormations$|async)
-            : (marketingFormations$|async)">
-            <ion-col no-padding sizeXs="12" sizeMd="6">
-              <ion-item class="itemTranslate" no-margin lines="none">
-                <ion-label [ngClass]="{
-                  'text': true,
-                  'front': currentRoute.includes('front'),
-                  'back': currentRoute.includes('back'),
-                  'marketing': currentRoute.includes('marketing')
-                }">{{f?.title?.rendered|replaceBy}}</ion-label>
-                <ion-checkbox #checkboxItem slot="start"></ion-checkbox>
-              </ion-item>
-            </ion-col>
-            <ion-col padding-horizontal sizeXs="12" sizeMd="3">
-              <!-- <pre>{{f|json}}</pre> -->
-              <ion-select placeholder="Dates" [ngClass]="{
-                'selectInscription': true
-              }" interface="popover">
-                <ion-select-option>du {{f?.date_formation_du}} au {{f?.date_formation_au}}</ion-select-option>
-                <ion-select-option *ngIf="f?.date_formation_du2">du {{f?.date_formation_du2}} au {{f?.date_formation_au2}}</ion-select-option>
-              </ion-select>
-            </ion-col>
-            <ion-col padding-horizontal sizeXs="12" sizeMd="3">
-              <span *ngIf="!checkboxItem.checked">Écolage</span>
-              <span *ngIf="checkboxItem.checked">CHF {{f?.formation_price}}.-</span>
-            </ion-col>
-          </ion-row>
           <form [formGroup]="incriptionForm">
+            <ion-row formArrayName="formations" align-items-center no-margin no-padding *ngFor="let i = index; let f of (currentRoute.includes('front'))
+            ? (frontEndFormations$|async)
+            : (currentRoute.includes('back'))
+              ? (backEndFormations$|async)
+              : (marketingFormations$|async)" >
+              <ion-col no-padding sizeXs="12" sizeMd="6">
+                <ion-item class="itemTranslate" no-margin lines="none">
+                  <ion-label [ngClass]="{
+                    'text': true,
+                    'front': currentRoute.includes('front'),
+                    'back': currentRoute.includes('back'),
+                    'marketing': currentRoute.includes('marketing')
+                  }">{{f?.title?.rendered|replaceBy}}</ion-label>
+                  <ion-checkbox (ionChange)="checkBoxChange($event, f, date)" #checkboxItem slot="start"></ion-checkbox>
+                </ion-item>
+              </ion-col>
+              <ion-col padding-horizontal sizeXs="12" sizeMd="3">
+                <!-- <pre>{{f|json}}</pre> -->
+                <ion-select #date placeholder="Dates" [ngClass]="{
+                  'selectInscription': true
+                }" interface="popover">
+                  <ion-select-option>du {{f?.date_formation_du}} au {{f?.date_formation_au}}</ion-select-option>
+                  <ion-select-option *ngIf="f?.date_formation_du2">du {{f?.date_formation_du2}} au {{f?.date_formation_au2}}</ion-select-option>
+                </ion-select>
+              </ion-col>
+              <ion-col padding-horizontal sizeXs="12" sizeMd="3">
+                <span *ngIf="!checkboxItem.checked">Écolage</span>
+                <span *ngIf="checkboxItem.checked">CHF {{f?.formation_price}}.-</span>
+              </ion-col>
+            </ion-row>
             <ion-row no-padding [ngClass]="{
               'inscriptionBlock': true,
               'front': currentRoute.includes('front'),
@@ -336,7 +336,7 @@
   
    
                     <ion-col sizeMd="10" padding-horizontal>
-                      <input #fileInput [hidden]="true" (change)="processWeb()" type="file">
+                      <input #fileInput [hidden]="true" name="files[]" (change)="processWeb()" type="file">
 
                       <ion-button [disabled]="cvDisabled" (click)="openFile()" [ngClass]="{
                         'btnInscription': true,
@@ -346,15 +346,31 @@
                       }" >Pièce jointe: CV * </ion-button> <span margin-left padding-horizontal>{{cvFileName}}</span>
                     </ion-col>
                     <ion-col sizeMd="2" >
+                      <!-- <div id='recaptcha' class="g-recaptcha"
+                        data-sitekey="6LdZQnUUAAAAADEBOR-Y2LTtnT1m6CYrrt9qJ7u5"
+                        data-callback="onSubmit"
+                        data-size="invisible"></div> -->
                       
-                      <ion-button class="ion-float-right" [ngClass]="{
+                      <!-- <ion-button class="ion-float-right" [ngClass]="{
                         'btnInscription': true,
                         'front': currentRoute.includes('front'),
                         'back': currentRoute.includes('back'),
                         'marketing': currentRoute.includes('marketing')
-                      }" (click)="sendInscription()">
+                      }" (click)="submitForm()">
                         Envoyer
-                      </ion-button>
+                      </ion-button> -->
+                      <re-captcha
+                      #captchaRef="reCaptcha"
+                      siteKey="6LdZQnUUAAAAADEBOR-Y2LTtnT1m6CYrrt9qJ7u5"
+                      size="invisible"
+                      (resolved)="$event && submit($event)"
+                    ></re-captcha>
+                    <ion-button class="ion-float-right" [ngClass]="{
+                      'btnInscription': true,
+                      'front': currentRoute.includes('front'),
+                      'back': currentRoute.includes('back'),
+                      'marketing': currentRoute.includes('marketing')
+                    }" (click)="clickSend(captchaRef)">Submit</ion-button>
                     </ion-col>
                   </ion-row>
                 </ion-grid>
