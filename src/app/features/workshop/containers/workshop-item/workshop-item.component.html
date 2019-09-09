@@ -205,9 +205,9 @@
                     <article class="related" (click)="go($event, wk)">
                       <h2 [ngClass]="{
                         text: true,
-                        front: currentUrl.split('workshops/')[1].split('/')[0].toLowerCase().includes('front'),
-                        back: currentUrl.split('workshops/')[1].split('/')[0].toLowerCase().includes('back'),
-                        mobile: currentUrl.split('workshops/')[1].split('/')[0].toLowerCase().includes('mobile')
+                        front: currentUrl.split('workshop/')[1].split('/')[0].toLowerCase().includes('front'),
+                        back: currentUrl.split('workshop/')[1].split('/')[0].toLowerCase().includes('back'),
+                        mobile: currentUrl.split('workshop/')[1].split('/')[0].toLowerCase().includes('mobile')
                       }" [innerHtml]="(wk?.titre_deux_ligne || wk?.title.rendered) | replaceBy"></h2>
                       <p>
                         Dates: {{ wk?.date_session_1_du }} - {{ wk?.date_session_1_au }}

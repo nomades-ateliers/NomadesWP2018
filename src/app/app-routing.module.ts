@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'index', loadChildren: './features/front-page/front-page.module#FrontPageModule'},
   { path: 'formations', loadChildren: './features/formations/formations.module#FormationsModule'},
   { path: 'workshops', loadChildren: './features/workshop/workshop.module#WorkshopModule'},
+  { path: 'workshop', loadChildren: './features/workshop/workshop.module#WorkshopModule'},
   { path: 'cursus', loadChildren: './features/cursus/cursus.module#CursusModule'},
   { path: 'blog', loadChildren: './features/blog/blog.module#BlogModule'},
   { path: 'page', loadChildren: './features/page/page.module#PageModule'},
@@ -17,7 +18,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(
+    routes,
+    // { enableTracing: true }
+  )],
   exports: [RouterModule],
 })
 export class AppRoutingModule { }

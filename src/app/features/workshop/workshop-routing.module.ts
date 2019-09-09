@@ -5,31 +5,37 @@ import { WorkshopIndexComponent } from '@app/features/workshop/containers/worksh
 import { WorkshopItemComponent } from '@app/features/workshop/containers/workshop-item/workshop-item.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    children: [
-      {
-        path: '',
-        component: WorkshopIndexComponent,
-      },
-      {
-        path: '',
-        children: [
-          {
-            path: ':category',
-            component: WorkshopCategoryComponent,
-          },
-          {
-            path: ':category/:sub'
-          },
-          {
-            path: ':category/:sub/:name',
-            component: WorkshopItemComponent,
-          },
-        ]
-      }
-    ]
-  },
+    {
+      path: '',
+      children: [
+        {
+          path: '',
+          component: WorkshopIndexComponent,
+        },
+        {
+          path: ':category',
+          children: [
+            {
+              path: '',
+              component: WorkshopCategoryComponent,
+            },
+            {
+              path: ':sub',
+              children: [
+                // {
+                //   path: '',
+                //   redirectTo: './workshops',
+                // },
+                {
+                  path: ':name',
+                  component: WorkshopItemComponent,
+                }
+              ]
+            },
+          ]
+        },
+      ],
+    }
 ];
 
 @NgModule({

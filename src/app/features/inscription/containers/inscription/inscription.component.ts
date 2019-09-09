@@ -7,6 +7,7 @@ import { map, tap } from 'rxjs/operators';
 import { loadFile } from '@app/utils';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { ReCaptchaV3Service, OnExecuteData } from 'ng-recaptcha';
+import { environment } from '@env/environment';
 
 declare const grecaptcha: any;
 @Component({
@@ -25,7 +26,7 @@ export class InscriptionComponent implements OnInit {
   totalEcolage = 0;
   data$: Observable<any>;
   loader: HTMLIonLoadingElement;
-  private subscription: Subscription;
+  public captchaKey = environment.recaptcha;
 
   constructor(
     private _router: Router,

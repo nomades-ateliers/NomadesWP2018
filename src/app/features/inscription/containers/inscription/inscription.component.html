@@ -181,7 +181,7 @@
                 <ion-row>
                   <ion-col>
                     <div id='recaptcha' class="g-recaptcha"
-                      data-sitekey="6LdZQnUUAAAAADEBOR-Y2LTtnT1m6CYrrt9qJ7u5"
+                      [attr.data-sitekey]="captchaKey"
                       data-callback="onSubmit"
                       data-size="invisible"></div>
                     <ion-button [disabled]="!(form.dirty === true && form.valid === true)" (click)="submit()" >Envoyer inscription</ion-button>

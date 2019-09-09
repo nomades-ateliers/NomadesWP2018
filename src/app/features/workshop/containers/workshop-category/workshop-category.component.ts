@@ -52,7 +52,7 @@ export class WorkshopCategoryComponent implements OnInit {
   displayDetail(slug, item) {
 
     const { category } = this._route.snapshot.params;
-    const url = '/workshops/' + category + '/' + slug + '/' + item.slug;
+    const url = '/workshop/' + category + '/' + slug + '/' + item.slug;
     console.log('go-> ', url);
     this._router.navigate([url]);
   }

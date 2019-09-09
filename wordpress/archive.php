@@ -16,7 +16,7 @@
 get_header(); ?>
 
 		<main id="main" class="site-main">
-XXXXXX
+
 		<?php
 		if ( have_posts() ) : ?>
 

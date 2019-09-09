@@ -5,6 +5,7 @@ import { AlertController, LoadingController } from '@ionic/angular';
 import { loadFile } from '@app/utils';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from '@env/environment';
 
 declare const grecaptcha: any;
 
@@ -31,6 +32,7 @@ export class ContactPageComponent implements OnInit {
       delay: 5000,
     },
   };
+  public captchaKey = environment.recaptcha;
 
   constructor(
     private readonly _formBuilder: FormBuilder,

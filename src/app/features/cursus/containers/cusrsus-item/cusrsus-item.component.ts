@@ -10,8 +10,7 @@ import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@ang
 import { AlertController, LoadingController } from '@ionic/angular';
 // import { loadFile } from '@app/utils';
 import { ReCaptchaV3Service, OnExecuteData } from 'ng-recaptcha';
-
-declare const grecaptcha: any;
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-cusrsus-item',
@@ -36,6 +35,7 @@ export class CusrsusItemComponent implements OnInit, OnDestroy {
   public incriptionForm: FormGroup;
   public loading: HTMLIonLoadingElement;
   private subscription: Subscription;
+  public captchaKey = environment.recaptcha;
 
   baseUrl = [
     'https://nomades.ch/wp-content/uploads/2018/10/nomade01-.png',
