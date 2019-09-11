@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, APP_INITIALIZER, InjectionToken } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, APP_INITIALIZER, InjectionToken, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouteReuseStrategy } from '@angular/router';
@@ -15,6 +15,7 @@ import { AppConfig } from '@app/app-config.token';
 
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module, RecaptchaModule } from 'ng-recaptcha';
 import { environment } from '@env/environment';
+import { GlobalErrorHandler } from './app-error-handler.service';
 
 export function AppConfigServiceFactory(config: AppConfigService): Function {
   return () => config.load();
@@ -57,6 +58,7 @@ export const APP_CONFIG_PROVIDER = [
     // SplashScreen,
     { provide: RECAPTCHA_V3_SITE_KEY, useValue: environment.recaptcha },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {provide: ErrorHandler, useClass: GlobalErrorHandler},
     ...APP_CONFIG_PROVIDER
   ],
   exports: [RecaptchaModule],

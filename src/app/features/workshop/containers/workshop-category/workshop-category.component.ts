@@ -98,8 +98,6 @@ export class WorkshopCategoryComponent implements OnInit {
       tap(_ => this._loadWorkshops(parcour.id)),
       tap(_ => (console.log('xxxxx', this.parcours))),
       // add this to update all item with the same height size.
-      tap(_ => updateHTMLElementHeight(['article'])),
-      tap(_ => updateHTMLElementHeight(['h1']))
     );
   }
 
@@ -108,8 +106,15 @@ export class WorkshopCategoryComponent implements OnInit {
     this.workshops$ = this._http.getRemoteData({path: 'workshop', slug: 'per_page=100'}).pipe(
       map(wks => wks.sort((a, b) => a.wk_position - b.wk_position)),
       // tap(w => this.workshopsLenght = w.length),
-      tap(w => console.log('--------->', w))
+      tap(w => console.log('--------->', w)),
+      tap(w => (w.length > 0) ? this._resizerDOM(): null)
     );
+  }
+
+  private _resizerDOM() {
+    updateHTMLElementHeight(['h1']);
+    updateHTMLElementHeight(['.article-bg']);
+    updateHTMLElementHeight(['article']);
   }
 
   get category() {

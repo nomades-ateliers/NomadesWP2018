@@ -86,6 +86,7 @@ export class ContactPageComponent implements OnInit {
     this._sendDataForm();
     // rebuild form with initial data
     this._buildForm();
+    this.form.reset();
   }
 
   private _sendDataForm() {

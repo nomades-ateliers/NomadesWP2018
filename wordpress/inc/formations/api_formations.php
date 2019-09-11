@@ -271,7 +271,22 @@ function appp_register_post_meta() {
             'schema'          => null,
         )
     );
-
+    register_rest_field( 'workshop', // any post type registered with API
+        'workshop_subtitle', // this needs to match meta key
+        array(
+            'get_callback'    => 'appp_get_meta',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
+    register_rest_field( 'workshop', // any post type registered with API
+        'workshop_seances', // this needs to match meta key
+        array(
+            'get_callback'    => 'appp_get_meta',
+            'update_callback' => null,
+            'schema'          => null,
+        )
+    );
     
     register_rest_field( 'parcours', // any post type registered with API
         'order', // this needs to match meta key

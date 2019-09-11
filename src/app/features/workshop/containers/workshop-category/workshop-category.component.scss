@@ -5,9 +5,64 @@ app-workshop-category {
     }
    
     article {
-      min-height: 130px;
-      height: 100%;
-      transition: all 250ms ease !important;
+      background: none!important;
+      padding: 0rem !important;
+      transition: all 250ms ease !important; 
+      border: none !important;
+      margin-bottom: 2rem !important;
+
+      .article-bg {
+        h2 {
+          font-size: 1.1rem !important;
+        }
+        // text-transform: initial;
+        // font-size: initial;
+        // letter-spacing: initial; 
+        // color: initial; 
+        background: #f1f1f1;
+        padding: 0.5rem 0.5rem 1.5rem;
+        // margin: 1rem 0;
+        border: solid 1px #f1f1f1;
+
+        span {
+          font-size: 1.1rem;
+          // font-weight: lighter;
+          padding-bottom: 3rem;
+          color: initial;
+        }
+      }
+      div {
+        padding: 0 0.5rem;
+        font-weight: lighter;
+
+        p {
+          line-height: 1.3rem;
+        }
+        .darker {
+          font-weight: 400;
+          color: #656565;
+        }
+      }
+    }
+    article.mobile {
+      .article-bg:hover {
+        border: solid 1px rgb(202,130,42);
+      }
+    }
+    article.back {
+      .article-bg:hover {
+        border: solid 1px rgb(64,114,144);
+      }
+    }
+    article.front {
+      .article-bg:hover {
+        border: solid 1px rgb(84,112,43);
+      }
+    }
+    article.marketing {
+      .article-bg:hover {
+        border: solid 1px rgb(142,25,78);
+      }
     }
     h1 {
       font-size: 1.2rem;
@@ -18,8 +73,8 @@ app-workshop-category {
       letter-spacing: initial;
     }
     h2 {
-      font-size: 1rem;
       font-weight: 400;
+      margin-top: 0.25rem;
     }
     p {
       font-weight: 300;

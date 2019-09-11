@@ -54,25 +54,27 @@
                     <!-- LOOP ALL ITEMS WITH SAME CAT ID -->
                     <article [ngClass]="{
                           text: true,
-                          front: c?.name.toLowerCase().includes('front'),
-                          back: c?.name.toLowerCase().includes('back'),
-                          mobile: c?.name.toLowerCase().includes('mobile'),
-                          marketing: c?.name.toLowerCase().includes('marketing')
+                          front: currentUrl.toLowerCase().includes('front'),
+                          back: currentUrl.toLowerCase().includes('back'),
+                          mobile: currentUrl.toLowerCase().includes('mobile'),
+                          marketing: currentUrl.toLowerCase().includes('marketing')
                       }" 
                       (click)="displayDetail(d?.slug, workshop)"
                       *ngFor="let workshop of (workshops)">
-                      <div>
+                      <div class="article-bg">
                         <h2 [ngClass]="{
                               text: true,
                               front: c?.name.toLowerCase().includes('front'),
                               back: c?.name.toLowerCase().includes('back'),
                               mobile: c?.name.toLowerCase().includes('mobile'),
                               marketing: c?.name.toLowerCase().includes('marketing')
-                          }" [innerHtml]="(workshop?.titre_deux_ligne || workshop?.title.rendered) | replaceBy"></h2>
-                        <p *ngIf="workshop?.date_session_1_du && workshop?.date_session_1_au">
-                          Dates: {{ workshop?.date_session_1_du }} - {{ workshop?.date_session_1_au }}
-                          <!-- <br/>
-                          <span [innerHtml]="workshop?.desc_resume_workshop"></span> -->
+                          }" [innerHtml]="workshop?.title.rendered | replaceBy"></h2>
+                        <span>{{workshop?.workshop_subtitle}}</span>
+                      </div>
+                      <div>
+                        <p>
+                          <span><span class="darker">Durée:</span> {{workshop?.workshop_seances}} <br/></span>
+                          <span><span class="darker">Date:</span> {{ workshop?.date_session_1_du }} - {{ workshop?.date_session_1_au }}</span>
                         </p>
                       </div>
                     </article>

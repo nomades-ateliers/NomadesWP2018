@@ -42,7 +42,7 @@ export const updateHTMLElementHeight = (selectors: string[]) => {
         // or if items.length <= 0 (unfinded elements)
         if (items.length <= 0 || maxHeight === 0) {
           // see below why using setTimeout()...
-          setTimeout(_=> updateHTMLElementHeight([s]), 1500);
+          setTimeout(_=> updateHTMLElementHeight([s]), 2000);
           return;
         }
         // if all elements is resizing, finaly 

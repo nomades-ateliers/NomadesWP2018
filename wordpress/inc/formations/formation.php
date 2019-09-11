@@ -354,7 +354,9 @@ if(isset( $_POST['nonce_global_workshop'] ) || wp_verify_nonce( $_POST['nonce_gl
      update_post_meta( $post_id, 'public_workshop', $_POST['public_workshop']);
  if( isset( $_POST['workshop_subtitle'] ) )
      update_post_meta( $post_id, 'workshop_subtitle', $_POST['workshop_subtitle']);
-                     
+ if( isset( $_POST['workshop_seances'] ) )
+     update_post_meta( $post_id, 'workshop_seances', $_POST['workshop_seances']);
+                         
 
 } // OK pour le nonce workshop
 

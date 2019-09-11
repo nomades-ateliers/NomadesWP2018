@@ -11,6 +11,9 @@ import { AlertController, LoadingController } from '@ionic/angular';
 // import { loadFile } from '@app/utils';
 import { ReCaptchaV3Service, OnExecuteData } from 'ng-recaptcha';
 import { environment } from '@env/environment';
+import { loadFile } from '@app/utils';
+
+declare const grecaptcha: any;
 
 @Component({
   selector: 'app-cusrsus-item',
@@ -49,7 +52,7 @@ export class CusrsusItemComponent implements OnInit, OnDestroy {
     private _fb: FormBuilder,
     private _alertCtrl: AlertController,
     private _loadingCtrl: LoadingController,
-    private recaptchaV3Service: ReCaptchaV3Service,
+    // private recaptchaV3Service: ReCaptchaV3Service,
   ) {
     console.log(this._route.snapshot.params.slug);
     this.currentRoute = this._route.snapshot.params.slug;
@@ -65,12 +68,12 @@ export class CusrsusItemComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit() {
-    this.subscription = this.recaptchaV3Service.onExecute
-    .subscribe((data: OnExecuteData) => {
-      console.log('handleRecaptchaExecute->', data);
-      // this.handleRecaptchaExecute(data.action, data.token);
-    });
-    // loadFile(this);
+    // this.subscription = this.recaptchaV3Service.onExecute
+    // .subscribe((data: OnExecuteData) => {
+    //   console.log('handleRecaptchaExecute->', data);
+    //   // this.handleRecaptchaExecute(data.action, data.token);
+    // });
+    loadFile(this);
     this.formations$ = this._wpApi.getRemoteData({path: 'formation', slug: ``}).pipe(
       map(res => res.map(item => {item.formation_position = +item.formation_position; return item; })),
       map((res) => res.sort((a, b) => a.formation_position - b.formation_position))
@@ -132,19 +135,22 @@ export class CusrsusItemComponent implements OnInit, OnDestroy {
     if ((this.fileInput.nativeElement as any).files.length) {
       const file = (this.fileInput.nativeElement).files[0];
       // assuming that this file has any extension
-      const extension = file.name.match(/(?<=\.)\w+$/g)[0].toLowerCase();
-      if (!['pdf'].includes(extension)) {
+      // const extension = file.name.match(/(?<=\.)\w+$/g)[0].toLowerCase();
+      // if (!['pdf'].includes(extension)) {
+      if (!file.name.toLowerCase().includes('pdf')) {
         (this.fileInput.nativeElement as any).value = '';
         // this.disabled = false;
         const alert = await this._alertCtrl.create({
           header: 'Erreur',
-          message: 'Error: Le format du fichier est incompatible ou non conforme.',
+          message: 'Error: Le format du fichier est incompatible ou non conforme. Uniquement des fichier PDF.',
           buttons: [{
             text: 'ok'
           }]
         });
         alert.present();
         this.cvDisabled = false;
+        this.cvFileName = '';
+        this.incriptionForm.get('cv').setValue(null);
         return;
       }
       this.cvFileName = file.name;
@@ -212,15 +218,36 @@ export class CusrsusItemComponent implements OnInit, OnDestroy {
     // console.log('result', this.incriptionForm.value);
   }
 
-  async clickSend(captchaRef) {
+  async clickSend(captchaRef = null) {
+    if (!this.incriptionForm.valid) {
+      const ionAlert = await this._alertCtrl.create({
+        message: `Formulaire d'inscription non valide.`
+      });
+      await ionAlert.present();
+      return;
+    }
     // create loader
     this.loading = await this._loadingCtrl.create({
       message: 'envoi de votre inscription...',
-      duration: 10000
+      // duration: 20000
     });
     await this.loading.present();
     // execute invisible captcha v3
-    captchaRef.execute();
+    if (captchaRef) captchaRef.execute();
+    if (!captchaRef) grecaptcha.execute();
+    console.log('captchaRef', captchaRef);
+    // prevent error when captchaRef.execute()
+    // never return callback...
+    setTimeout(async (_) => {
+      if (this.loading) {
+        await this.loading.dismiss();
+        this.loading = null;
+        const ionAlert = await this._alertCtrl.create({
+          message: `Erreur lors de l'envois de votre inscription. Veuiller re-ressayer ou contacter le secrétariat.`
+        });
+        ionAlert.present();
+      }
+    }, 20000);
   }
 
   submit(e) {
@@ -234,7 +261,7 @@ export class CusrsusItemComponent implements OnInit, OnDestroy {
 
   async sendInscription() {
     // close loader if exist
-    if (this.loading) this.loading.dismiss();
+    if (this.loading) (this.loading.dismiss(), this.loading = null);
     // create empty prop for all alert message
     let ionAlert: HTMLIonAlertElement;
     // handle form errors

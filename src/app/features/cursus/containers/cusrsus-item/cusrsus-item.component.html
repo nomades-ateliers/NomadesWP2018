@@ -361,16 +361,20 @@
                       </ion-button> -->
                       <re-captcha
                       #captchaRef="reCaptcha"
-                      siteKey="captchaKey"
+                      [siteKey]="captchaKey"
                       size="invisible"
                       (resolved)="$event && submit($event)"
                     ></re-captcha>
+                    <!-- <div id='recaptcha' class="g-recaptcha"
+                      [attr.data-sitekey]="captchaKey"
+                      data-callback="submit"
+                      data-size="invisible"></div> -->
                     <ion-button class="ion-float-right" [ngClass]="{
                       'btnInscription': true,
                       'front': currentRoute.includes('front'),
                       'back': currentRoute.includes('back'),
                       'marketing': currentRoute.includes('marketing')
-                    }" (click)="clickSend(captchaRef)">Submit</ion-button>
+                    }" (click)="clickSend()">Submit</ion-button>
                     </ion-col>
                   </ion-row>
                 </ion-grid>

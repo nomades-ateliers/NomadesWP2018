@@ -51,6 +51,12 @@ function workshop_subtitle() {
 }
 add_action( 'add_meta_boxes', 'workshop_subtitle' );
 
+// nombre de seance de la formation
+function workshop_seances() {
+    add_meta_box( 'workshop_seances', 'Nombre de séances de la formation', 'metbox_workshop_seances', 'workshop', 'normal', 'high' );
+}
+add_action( 'add_meta_boxes', 'workshop_seances' );
+
 
 // general workshop // special workshop
 function workshop_globale() {
@@ -247,13 +253,12 @@ function metbox_wk_complet( $post ) {
 function metbox_wk_deux_lignes( $post ) {
 
   wp_nonce_field( 'my_nonce_deux_lignes', 'nonce_deux_lignes' ); ?>
- 
+<!--  
   <p><em>Si ce champ est rempli, il devient le titre du workshop, sinon, c'est le titre global</em></p>
   <p class="block_admin_pm grand titre_niveau">
      <label for="titre_deux_ligne"> Titre sur deux lignes (mettre la balise br) :</label>
-
        <input type="text" id="titre_deux_ligne" style="width:100%;" name="titre_deux_ligne" value="<?php echo wpshed_get_custom_field( 'titre_deux_ligne' ); ?>" />
- </p>
+ </p> -->
 
 
  <?php
@@ -291,4 +296,13 @@ function metbox_workshop_subtitle( $post ) {
 
 
 <?php
+}
+
+
+function metbox_workshop_seances( $post ) {
+    wp_nonce_field( 'my_nonce_workshop_seances', 'nonce_workshop_seances' ); ?>
+    <p class="block_admin_pm grand titre_niveau">
+       <label for="workshop_seances">Nombre de seances</label> <input type="text" id="workshop_seances" name="workshop_seances" value="<?php echo wpshed_get_custom_field( 'workshop_seances' ); ?>" />
+    </p>
+   <?php
 }
