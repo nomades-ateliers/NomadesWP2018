@@ -11,12 +11,16 @@ app-contact-page {
                 display: inline-block;
             }
         }
+        img {
+            min-width: 214px;
+        }
     }
     .contactContainer {
         form {
             background: #333;   
             padding: 1rem 0;            
         }
+
 
         ion-label { 
             color: #fff;

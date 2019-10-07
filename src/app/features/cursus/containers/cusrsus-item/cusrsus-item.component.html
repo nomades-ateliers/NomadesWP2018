@@ -266,14 +266,14 @@
                     'back': currentRoute.includes('back'),
                     'marketing': currentRoute.includes('marketing')
                   }">{{f?.title?.rendered|replaceBy}}</ion-label>
-                  <ion-checkbox (ionChange)="checkBoxChange($event, f, date)" #checkboxItem slot="start"></ion-checkbox>
+                  <ion-checkbox #checkBox (ionChange)="checkBoxChange($event, f, date)" #checkboxItem slot="start"></ion-checkbox>
                 </ion-item>
               </ion-col>
               <ion-col padding-horizontal sizeXs="12" sizeMd="3">
                 <!-- <pre>{{f|json}}</pre> -->
-                <ion-select #date placeholder="Dates" [ngClass]="{
+                <ion-select #date placeholder="Dates" (ionChange)="dateChange($event, f, checkBox)" [ngClass]="{
                   'selectInscription': true
-                }" interface="popover">
+                }" interface="popover" >
                   <ion-select-option>du {{f?.date_formation_du}} au {{f?.date_formation_au}}</ion-select-option>
                   <ion-select-option *ngIf="f?.date_formation_du2">du {{f?.date_formation_du2}} au {{f?.date_formation_au2}}</ion-select-option>
                 </ion-select>
@@ -359,12 +359,12 @@
                       }" (click)="submitForm()">
                         Envoyer
                       </ion-button> -->
-                      <re-captcha
+                      <!-- <re-captcha
                       #captchaRef="reCaptcha"
                       [siteKey]="captchaKey"
                       size="invisible"
                       (resolved)="$event && submit($event)"
-                    ></re-captcha>
+                    ></re-captcha> -->
                     <!-- <div id='recaptcha' class="g-recaptcha"
                       [attr.data-sitekey]="captchaKey"
                       data-callback="submit"

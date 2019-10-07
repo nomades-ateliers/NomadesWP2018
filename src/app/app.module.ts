@@ -47,8 +47,8 @@ export const APP_CONFIG_PROVIDER = [
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    RecaptchaModule.forRoot(),
-    RecaptchaV3Module,
+    // RecaptchaModule.forRoot(),
+    // RecaptchaV3Module,
     IonicModule.forRoot({
       mode: 'md'
     })
@@ -56,12 +56,14 @@ export const APP_CONFIG_PROVIDER = [
   providers: [
     // StatusBar,
     // SplashScreen,
-    { provide: RECAPTCHA_V3_SITE_KEY, useValue: environment.recaptcha },
+    // { provide: RECAPTCHA_V3_SITE_KEY, useValue: environment.recaptcha },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {provide: ErrorHandler, useClass: GlobalErrorHandler},
     ...APP_CONFIG_PROVIDER
   ],
-  exports: [RecaptchaModule],
+  exports: [
+    // RecaptchaModule
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

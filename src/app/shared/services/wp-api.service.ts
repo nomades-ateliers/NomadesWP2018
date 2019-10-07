@@ -63,13 +63,18 @@ export class WpApiService {
         // .set('cache-control', null)
         // .set('X-Requested-With', null)
         .set('Content-Type', 'application/json');
-    console.log('send request...');
+    const formData: FormData = new FormData();
+    Object.keys(data).forEach(key => (key !== 'cv') ? formData.append(key, data[key]) : null);
+    formData.append('cv', data.cv, data.cv.name);
+    console.log('send request...', formData);
+    // return await {result: 200};
     return await this.http.post(
       // 'https://nomades.ch/inc/processFromInscription.php',
       'https://nomades.ch/inc/ng-processFromInscription.php?ajax=true',
-      data,
+      formData, // data,
       {
-        headers: headers
+        headers: headers,
+        // reportProgress: true,
       }
     ).pipe(first())
     .toPromise().then(res => (console.log(res), res)).catch(err => err)

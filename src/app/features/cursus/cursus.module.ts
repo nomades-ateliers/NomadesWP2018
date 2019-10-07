@@ -4,14 +4,14 @@ import { CursusRoutingModule } from './cursus-routing.module';
 import { CusrsusItemComponent } from './containers/cusrsus-item/cusrsus-item.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RecaptchaModule } from 'ng-recaptcha';
+// import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   imports: [
     SharedModule,
     ReactiveFormsModule,
     CursusRoutingModule,
-    RecaptchaModule
+    // RecaptchaModule
   ],
   declarations: [CusrsusItemComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

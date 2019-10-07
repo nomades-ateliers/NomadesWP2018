@@ -31,7 +31,12 @@
             <ion-col sizeXs="12" sizeMd="9">
               <ion-input
                 ngDefaultControl
-                formControlName="email" required></ion-input>                
+                formControlName="email" required></ion-input>    
+              <input
+                hidden="true"
+                class="confirmation_input"
+                ngDefaultControl
+                formControlName="email_confirmation"/>            
             </ion-col>
           </ion-row>
           <ion-row>
@@ -54,10 +59,21 @@
                 formControlName="message"></ion-textarea>
             </ion-col>
           </ion-row>
-          <div id='recaptcha' class="g-recaptcha"
+          <ion-row>
+            <ion-col></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-text color="light">Recevoir une copie</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-checkbox formControlName="copy"></ion-checkbox>
+            </ion-col>
+          </ion-row>
+          <!-- <div id='recaptcha' class="g-recaptcha"
             [attr.data-sitekey]="captchaKey"
             data-callback="onSubmit"
-            data-size="invisible"></div>
+            data-size="invisible"></div> -->
           <div padding>
             <ion-button
               [disabled]="!(form.dirty === true && form.valid === true)"
@@ -103,6 +119,9 @@
     </p>
     <p>
       <span>MANIFESTE / ASSOCIATION NOMADES.ATELIERS </span> <a href="https://nomades.ch/manifest-nomades.pdf" target="_blank" title="Manifeste Nomades">Télécharger le manifest</a> 
+    </p>
+    <p>
+      <span> Certifié EduQua par la Société Générale de Surveillance depuis 2004 </span> <a href="https://nomades.ch/eduqua.pdf" target="_blank" title="Certificat EduQua Nomades">Consulter le Certificat</a> 
     </p>
   </div>
 </div>

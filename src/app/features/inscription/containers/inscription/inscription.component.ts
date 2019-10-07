@@ -4,9 +4,9 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { WpApiService } from '@app/shared/services';
 import { Observable, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { loadFile } from '@app/utils';
+// import { loadFile } from '@app/utils';
 import { LoadingController, AlertController } from '@ionic/angular';
-import { ReCaptchaV3Service, OnExecuteData } from 'ng-recaptcha';
+// import { ReCaptchaV3Service, OnExecuteData } from 'ng-recaptcha';
 import { environment } from '@env/environment';
 
 declare const grecaptcha: any;
@@ -35,14 +35,14 @@ export class InscriptionComponent implements OnInit {
     private _http: WpApiService,
     private _alertCtrl: AlertController,
     private _loadingCtrl: LoadingController,
-    private recaptchaV3Service: ReCaptchaV3Service,
+    // private recaptchaV3Service: ReCaptchaV3Service,
 
   ) { }
 
   ngOnInit() {
     this.currentUrl = this._router.url;
     // load JS file
-    loadFile(this);
+    // loadFile(this);
     this._buildForm();
     this.data$ = this._wpApi.getData({path: 'pages', slug: `slug=inscription`}).pipe(
       map(res => (res.length === 1 ) ? res[0] : res),
@@ -84,6 +84,7 @@ export class InscriptionComponent implements OnInit {
       naissance: ['', Validators.compose([Validators.minLength(2)])],
       profession: [''],
       email: ['', Validators.compose([Validators.required, Validators.email])],
+      email_confirmation: [null],
       adresse: [''],
       message_pre_inscription: [''],
       cp: [''],
@@ -159,7 +160,8 @@ export class InscriptionComponent implements OnInit {
     // to prevent multiple sending action
     this.form.markAsPristine();
     // validation recaptcha
-    grecaptcha.execute();
+    // grecaptcha.execute();
+    this.onSubmit('nomades' + this.form.value.captcha);
   }
 
   async onSubmit(e) {

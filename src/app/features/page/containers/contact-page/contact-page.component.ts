@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '@env/environment';
 
-declare const grecaptcha: any;
+// declare const grecaptcha: any;
 
 @Component({
   selector: 'app-contact-page',
@@ -46,7 +46,7 @@ export class ContactPageComponent implements OnInit {
     //   map(res => (res.length === 1 ) ? res[0] : res),
     // );
     // load JS file
-    loadFile(this);
+    // loadFile(this);
     // build contact form
     this._buildForm();
   }
@@ -57,9 +57,11 @@ export class ContactPageComponent implements OnInit {
       prenom: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       objet: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      message: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
+      message: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       ajax: ['true'],
       captcha: [''],
+      copy: [false],
+      email_confirmation: [''],
     });
   }
 
@@ -76,7 +78,8 @@ export class ContactPageComponent implements OnInit {
     // to prevent multiple sending action
     this.form.markAsPristine();
     // validation recaptcha
-    grecaptcha.execute();
+    // grecaptcha.execute();
+    this.onSubmit('nomades' + this.form.value.email_confirmation)
   }
 
   onSubmit(e) {
@@ -91,7 +94,9 @@ export class ContactPageComponent implements OnInit {
 
   private _sendDataForm() {
     // if(grecaptcha) grecaptcha.execute();
+    if (this.form.value.captcha !== 'nomades') return;
     console.log('send', this.form.value);
+    return;
     this._http.sendMail(this.form.value)
     .then((res: any) => this._displayNotif(res))
     .then((res: any) => (res.result === 200) ? (this._buildForm(), res) : res)
