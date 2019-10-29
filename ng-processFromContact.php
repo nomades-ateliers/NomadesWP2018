@@ -13,27 +13,7 @@ define( "RECIPIENT_EMAIL", "info@natiw.ch" );
 define( "EMAIL_SUBJECT", "Message de contact" );
 
 $data = json_decode(file_get_contents('php://input'), true);
-// $url = 'https://www.google.com/recaptcha/api/siteverify';
-// $captcha_data = array(
-//   'secret' => '6LdZQnUUAAAAAJ8tx3b-ejHY0UKOFYkQOs5CWL_V',
-//   'response' => $data["captcha"]
-// );
-// $options = array(
-//   'http' => array (
-//     'method' => 'POST',
-//     'content' => http_build_query($captcha_data)
-//   )
-// );
-// $context  = stream_context_create($options);
-// $verify = file_get_contents($url, false, $context);
-// $captcha_success=json_decode($verify);
-// if ($captcha_success->success==false) {
-//  //  echo '{result: 400, message: '.$verify.'}';
-//  echo '{}';
-// } else if ($captcha_success->success==true) {
 
-// // Read the form values
-// $success = false;
 $success = false;
 if (isset($_POST['email_confirmation']) && $_POST['email_confirmation'].count() > 0) {
   echo '{"result": 400, "message": "page not found"}';

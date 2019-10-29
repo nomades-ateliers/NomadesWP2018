@@ -9,28 +9,6 @@ define( "RECIPIENT_NAME", "Ateliers Nomades" );
 define( "RECIPIENT_EMAIL", "info@nomades.ch" );
 define( "EMAIL_SUBJECT", "Message de contact" );
 
-// $data =  $_POST;//use this to use JSON json_decode(file_get_contents('php://input'), true);
-// $response = $data["g-recaptcha-response"];
-// $url = 'https://www.google.com/recaptcha/api/siteverify';
-// $data = array(
-//   'secret' => '6LeAHWEUAAAAACrrris7tyX37kNO1ZW45QkfaXYZ',
-//   'response' => $data["g-recaptcha-response"]
-// );
-// $options = array(
-//   'http' => array (
-//     'method' => 'POST',
-//     'content' => http_build_query($data)
-//   )
-// );
-// $context  = stream_context_create($options);
-// $verify = file_get_contents($url, false, $context);
-// $captcha_success=json_decode($verify);
-// if ($captcha_success->success==false) {
-  
-// } else if ($captcha_success->success==true) {
-
-// // Read the form values
-// $success = false;
 $success = false;
 if (isset($_POST['email_confirmation']) && $_POST['email_confirmation'].count() > 0) {
   echo '{"result": 400, "message": "page not found"}';
