@@ -71,6 +71,7 @@
                           front: currentUrl.toLowerCase().includes('front'),
                           back: currentUrl.toLowerCase().includes('back'),
                           mobile: currentUrl.toLowerCase().includes('mobile'),
+                          marketing: currentUrl.toLowerCase().includes('marketing'),
                           active: true
                         }">
                     <header>
@@ -102,7 +103,8 @@
                       text: true,
                       front: currentUrl.toLowerCase().includes('front'),
                       back: currentUrl.toLowerCase().includes('back'),
-                      mobile: currentUrl.toLowerCase().includes('mobile')
+                      mobile: currentUrl.toLowerCase().includes('mobile'),
+                      marketing: currentUrl.toLowerCase().includes('marketing')
                     }">Public</h2>
                      
                     <div class="detailListItem" [innerHTML]="data?.public_workshop|replaceBy|safeHtml "></div>    
@@ -112,7 +114,8 @@
                       text: true,
                       front: currentUrl.toLowerCase().includes('front'),
                       back: currentUrl.toLowerCase().includes('back'),
-                      mobile: currentUrl.toLowerCase().includes('mobile')
+                      mobile: currentUrl.toLowerCase().includes('mobile'),
+                      marketing: currentUrl.toLowerCase().includes('marketing')
                     }">Prochaines dates</h2>
                     <div class="detailListItem">
                       <p><span>{{data?.date_session_1_du}} - {{data?.date_session_1_au}}</span></p>                      
@@ -123,7 +126,8 @@
                       text: true,
                       front: currentUrl.toLowerCase().includes('front'),
                       back: currentUrl.toLowerCase().includes('back'),
-                      mobile: currentUrl.toLowerCase().includes('mobile')
+                      mobile: currentUrl.toLowerCase().includes('mobile'),
+                      marketing: currentUrl.toLowerCase().includes('marketing')
                     }">Durée et horaires</h2>
                     <div class="detailListItem" [innerHTML]="data?.desc_resume_workshop|replaceBy|safeHtml"></div>    
                   </div>
@@ -132,14 +136,16 @@
                       text: true,
                       front: currentUrl.toLowerCase().includes('front'),
                       back: currentUrl.toLowerCase().includes('back'),
-                      mobile: currentUrl.toLowerCase().includes('mobile')
+                      mobile: currentUrl.toLowerCase().includes('mobile'),
+                      marketing: currentUrl.toLowerCase().includes('marketing')
                     }">Écolage</h2>
                     <div class="detailListItem"><p>CHF <span [innerHTML]="data?.ecolage_wk|replaceBy|safeHtml"></span>.-</p></div>                 
                   </div>
                   <ion-button [ngClass]="{
                       front: currentUrl.toLowerCase().includes('front'),
                       back: currentUrl.toLowerCase().includes('back'),
-                      mobile: currentUrl.toLowerCase().includes('mobile')
+                      mobile: currentUrl.toLowerCase().includes('mobile'),
+                      marketing: currentUrl.toLowerCase().includes('marketing')
                     }"
                     fill="outline"
                     margin-top
@@ -159,7 +165,8 @@
                       text: true,
                       front: currentUrl.toLowerCase().includes('front'),
                       back: currentUrl.toLowerCase().includes('back'),
-                      mobile: currentUrl.toLowerCase().includes('mobile')
+                      mobile: currentUrl.toLowerCase().includes('mobile'),
+                      marketing: currentUrl.toLowerCase().includes('marketing')
                     }">Programme</h2>
                     <!-- <div class="programme">
                       <h3><span>1.</span>Présentation de Node et de son écosystème</h3>
@@ -190,7 +197,8 @@
                     text: true,
                     front: currentUrl.toLowerCase().includes('front'),
                     back: currentUrl.toLowerCase().includes('back'),
-                    mobile: currentUrl.toLowerCase().includes('mobile')
+                    mobile: currentUrl.toLowerCase().includes('mobile'),
+                    marketing: currentUrl.toLowerCase().includes('marketing')
                   }">Autres Workshops de la catégorie {{currentParcour?.name }}</h2>  
                 </ion-col>
               </ion-row> 
@@ -207,7 +215,8 @@
                         text: true,
                         front: currentUrl.split('workshop/')[1].split('/')[0].toLowerCase().includes('front'),
                         back: currentUrl.split('workshop/')[1].split('/')[0].toLowerCase().includes('back'),
-                        mobile: currentUrl.split('workshop/')[1].split('/')[0].toLowerCase().includes('mobile')
+                        mobile: currentUrl.split('workshop/')[1].split('/')[0].toLowerCase().includes('mobile'),
+                        marketing: currentUrl.split('workshop/')[1].split('/')[0].toLowerCase().includes('marketing')
                       }" [innerHtml]="(wk?.titre_deux_ligne || wk?.title.rendered) | replaceBy"></h2>
                       <p>
                         Dates: {{ wk?.date_session_1_du }} - {{ wk?.date_session_1_au }}
