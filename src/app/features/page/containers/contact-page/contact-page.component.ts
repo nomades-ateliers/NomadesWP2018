@@ -42,6 +42,17 @@ export class ContactPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (!document.querySelector('#google')) {
+      const s = document.createElement('script');
+      s.id = 'google';
+      s.src = 'https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit';
+      document.body.appendChild(s);
+    }
+    window['onloadCallback'] = () => {
+      grecaptcha.render('html_element', {
+        'sitekey' : '6LdZQnUUAAAAADEBOR-Y2LTtnT1m6CYrrt9qJ7u5'
+      });
+    };
     // this.data$ = this._http.getData({path: 'pages', slug: `slug=contact`}).pipe(
     //   map(res => (res.length === 1 ) ? res[0] : res),
     // );
@@ -79,7 +90,7 @@ export class ContactPageComponent implements OnInit {
     this.form.markAsPristine();
     // validation recaptcha
     // grecaptcha.execute();
-    this.onSubmit('nomades' + this.form.value.email_confirmation)
+    this.onSubmit('nomades' + this.form.value.email_confirmation || '')
   }
 
   onSubmit(e) {
@@ -96,7 +107,7 @@ export class ContactPageComponent implements OnInit {
     // if(grecaptcha) grecaptcha.execute();
     if (this.form.value.captcha !== 'nomades') return;
     console.log('send', this.form.value);
-    return;
+    // return;
     this._http.sendMail(this.form.value)
     .then((res: any) => this._displayNotif(res))
     .then((res: any) => (res.result === 200) ? (this._buildForm(), res) : res)

@@ -13,8 +13,32 @@ define( "RECIPIENT_NAME", "Ateliers Nomades" );
 define( "RECIPIENT_EMAIL", "info@natiw.ch" );
 define( "EMAIL_SUBJECT", "Pré-inscription depuis le site nomade" );
 
+$json = file_get_contents('php://input');
+$data = json_decode($json, true);
 
-$data = json_decode(file_get_contents('php://input'), true);
+// var_dump('-------------');
+// var_dump($data);
+// var_dump('-------------');
+
+// $url = 'https://www.google.com/recaptcha/api/siteverify';
+// $captcha_data = array(
+//   'secret' => '6LdZQnUUAAAAAJ8tx3b-ejHY0UKOFYkQOs5CWL_V',
+//   'response' => $data["captcha"]
+// );
+// $options = array(
+//   'http' => array (
+//     'method' => 'POST',
+//     'content' => http_build_query($captcha_data)
+//   )
+// );
+// $context  = stream_context_create($options);
+// $verify = file_get_contents($url, false, $context);
+// $captcha_success=json_decode($verify);
+// if ($captcha_success->success==false) {
+//  echo '{result: 400, message: "captcha error", stack: '.$verify.'}';
+// //  echo '{}';
+// } else if ($captcha_success->success==true) {
+
 
 // Read the form values
 $success = false;
@@ -89,12 +113,13 @@ if (($prenom && $nom && $email)) {
   $mail->IsHTML(true);
   $mail->SMTPAuth = true;
   $mail->SMTPDebug = 0;
-	$mail->Host = "mail.infomaniak.com"; // SMTP server
-	$mail->Username = "info@nomades.ch"; 
-	$mail->Password = "foh1OhY5me"; 
+
+  $mail->Host = "mail.infomaniak.com"; // SMTP server
+  $mail->Username = "natacha.aka@nomades.ch"; 
+  $mail->Password = "q9*0tzXdT?j0OO1O2kké"; 
   // $mail->AddAddress(RECIPIENT_EMAIL);
-  //  $mail->AddAddress(RECIPIENT_EMAIL);
-   $mail->AddAddress('nicolas@nomades.ch');
+   $mail->AddAddress(RECIPIENT_EMAIL);
+   // $mail->AddAddress('nicolas@nomades.ch');
   // $mail->AddBCC('contact@pm-vial.com', 'Pierre-Marie vial');
   //$mail->AddBCC('damien@levelstudio.ch', 'Damien');
   $mail->Subject  = EMAIL_SUBJECT;

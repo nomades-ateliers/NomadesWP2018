@@ -71,7 +71,8 @@ export class WpApiService {
     return await this.http.post(
       // 'https://nomades.ch/inc/processFromInscription.php',
       'https://nomades.ch/inc/ng-processFromInscription.php?ajax=true',
-      formData, // data,
+      // formData,
+      data,
       {
         headers: headers,
         // reportProgress: true,
