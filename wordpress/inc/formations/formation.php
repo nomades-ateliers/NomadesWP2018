@@ -412,7 +412,9 @@ if(isset( $_POST['nonce_wk_nav'] ) || wp_verify_nonce( $_POST['nonce_wk_nav'], '
 
 
 if(isset( $_POST['nonce_globale_projet'] ) || wp_verify_nonce( $_POST['nonce_globale_projet'], 'my_nonce_globale_projet' ) ){
-
+  if( isset( $_POST['order_projet'] ) )
+    update_post_meta( $post_id, 'order_projet', $_POST['order_projet']);
+   
   if( isset( $_POST['lien_projet'] ) )
  update_post_meta( $post_id, 'lien_projet', $_POST['lien_projet']);
 

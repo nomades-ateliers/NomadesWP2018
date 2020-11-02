@@ -15,7 +15,7 @@ export class FrontPageComponent implements OnInit {
 
   public data$: Observable<any>;
   public cursus$: Observable<any>;
-  baseUrl = 'https://nomades.ch/wp-content/uploads/2018/10/nomade02-.png';
+  baseUrl = 'https://nomades.ch/wp-content/uploads/2018/10/nomades01_rouge2.gif';
 
   constructor(
     private _wpApi: WpApiService,

@@ -24,6 +24,62 @@
 			</footer><!-- footer#colophon -->
 		</div><!-- .server_reading -->
 	</app-root>
+  <!-- Simple pop-up dialog box -->
+  <!-- <button id="openBtn">open</button> -->
+  <dialog id="dialog">
+		<style>
+			dialog img#go {
+				max-width: 400px;
+				display: block;
+				margin: 2rem auto;
+				cursor: pointer;
+			}
+		</style>
+		<h1>nomades e-learning</h1>
+		<img id="go" src="./images/Cafetiere_tasses-only.png">
+		<p>
+			Les formations nomades.ateliers certifiantes ainsi que les workshops<br/> 
+			peuvent être suivis dorenavant d'une manière interactive</br> 
+			sur notre platforme Moodle
+		</p>
+		<p>
+			Cliquez sur la cafetière
+		</p>
+  </dialog>
+  <script>
+    function displayModal() {
+      // var openBtn = document.getElementById('openBtn');
+      var cancelButton = document.getElementById('cancel');
+      var goButton = document.getElementById('go');
+			var dialog = document.querySelector('dialog');
+			
+      // openBtn.addEventListener('click', function() {
+				// open modal
+        dialog.showModal();
+      // });
+      dialog.addEventListener('click', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+        dialog.close();
+      });
+      goButton.addEventListener('click', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				dialog.close();
+				window.open('https://nomades-ateliers.onschool.ch', '_blank');
+      });
+		};
+		// auto display modal
+		document.onreadystatechange = () => {
+			if (document.readyState === 'complete') {
+				// document ready
+				setTimeout(() => {
+					displayModal();
+				}, 1000);
+			}
+		};
+	</script>
+	<!-- default wp footer -->
 	<?php wp_footer();?>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1217843-1"></script>

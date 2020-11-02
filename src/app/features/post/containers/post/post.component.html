@@ -5,7 +5,7 @@
       <article  *ngIf="post?.type === 'post';else demoCustomPostType">
         <figure>
           <picture>
-            <img [src]="post?.featured_image_src_large" alt="{{post?.title?.rendered}}" title="{{post?.title?.rendered}}">
+            <img [src]="post?.featured_image_src_default" alt="{{post?.title?.rendered}}" title="{{post?.title?.rendered}}">
           </picture>
         </figure>
         <header class="entry-header">
@@ -20,7 +20,7 @@
         <!-- custome post type -->
         <figure>
           <picture>
-            <img [src]="post?.featured_image_src_large" alt="{{post?.title?.rendered}}" title="{{post?.title?.rendered}}">
+            <img [src]="post?.featured_image_src_default" alt="{{post?.title?.rendered}}" title="{{post?.title?.rendered}}">
           </picture>
         </figure>
         <h1 [innerHTML]="post?.title?.rendered"></h1>

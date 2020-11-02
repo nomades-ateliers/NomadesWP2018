@@ -41,8 +41,8 @@ export class CusrsusItemComponent implements OnInit, OnDestroy {
   // public captchaKey = environment.recaptcha;
 
   baseUrl = [
-    'https://nomades.ch/wp-content/uploads/2018/10/nomade01-.png',
-    'https://nomades.ch/wp-content/uploads/2018/10/nomade03-.png',
+    'https://nomades.ch/wp-content/uploads/2018/10/nomades03_vert_01.gif',
+    'https://nomades.ch/wp-content/uploads/2018/10/nomades02_bleu3.gif',
   ];
 
   constructor(

@@ -118,6 +118,17 @@ function getProjetLink() {
 	// print_r(wp_api_theming_get_post_terms( $a ));
 	return $b;
 }
+function getProjetOrder() {
+	global $post;
+	$get_all_meta_values = get_post_custom($post->ID);
+	return $get_all_meta_values["order_projet"][0];
+
+	// global $post;
+	// $a = $post->ID;
+	// $b = get_option('order_projet');
+	// // print_r(wp_api_theming_get_post_terms( $a ));
+	// return $b;
+}
 // add function to wp-api
 add_action( 'rest_api_init', function () {
   // add Menu endpoint
@@ -192,6 +203,11 @@ add_action( 'rest_api_init', function () {
 	}
 	register_rest_field( array( 'projet', 'page' ), 'link_projet', 		array(
 		'get_callback'    => 'getProjetLinkWork',
+		'update_callback' => null,
+		'schema'          => null,
+	) );
+	register_rest_field( array( 'projet', 'page' ), 'order_projet', 		array(
+		'get_callback'    => 'getProjetOrder',
 		'update_callback' => null,
 		'schema'          => null,
 	) );

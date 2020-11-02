@@ -34,4 +34,7 @@ export class MenuNavComponent implements OnInit {
     this.router.navigate([url]);
   }
 
+  external(url: string) {
+    window.open(url, '_blank');
+  }
 }

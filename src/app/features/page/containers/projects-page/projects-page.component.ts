@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { WpApiService } from '@app/shared/services';
 import { Observable } from 'rxjs';
 import { fadeAnim } from '@app/shared/animations/fade.animation';
+import { tap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-projects-page',
@@ -19,7 +20,9 @@ export class ProjectsPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.projects$ = this._http.getRemoteData({path: 'projet', slug: 'per_page=12'});
+    this.projects$ = this._http.getRemoteData({path: 'projet', slug: 'per_page=12'}).pipe(
+      map((res: any[]) => res.sort((a, b) => a.order_projet - b.order_projet))
+    );
   }
 
   debug(projet) {

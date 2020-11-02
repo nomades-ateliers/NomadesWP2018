@@ -9,10 +9,10 @@
             sizeMd="4"
             sizeLg="4"
             *ngFor="let projet of projects">
-            <article >
+            <article class="p-ord-{{projet?.order_projet}}">
               <a rel="noopener" href="{{ projet?.link_projet }}" target="_blank">
                 <figure>
-                  <img src="{{ projet?.featured_image_src_medium  }}" alt="">
+                  <img src="{{ projet?.featured_image_src_default  }}" alt="">
                   <figcaption>
                     <h3>{{ projet?.title?.rendered }}</h3>
                     <time>{{ projet?.project_year }}</time>

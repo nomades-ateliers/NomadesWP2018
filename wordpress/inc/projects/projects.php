@@ -63,6 +63,10 @@ function metbox_projet_globale($post){
                   <h3> Infos : </h3>
 
                   <p>
+                      <label>Ordre de classement</label>
+                      <input type="number" placeholder="0" size="100" name="order_projet" value="<?php echo wpshed_get_custom_field('order_projet'); ?>">
+                  </p>
+                  <p>
                       <label>Lien vers le projet en ligne</label>
                       <input type="text" placeholder="http://www..." size="100" name="lien_projet" value="<?php echo wpshed_get_custom_field('lien_projet'); ?>">
                   </p>

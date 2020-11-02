@@ -27,9 +27,9 @@ export class WorkshopItemComponent implements OnInit {
   public workshopNavRight: any;
   public currentUrl: any;
   public baseUrl = [
-    'https://nomades.ch/wp-content/uploads/2018/10/nomade04-.png', // vert
-    'https://nomades.ch/wp-content/uploads/2018/11/nomade05_jaune-png.png', // default => TODO: replace by yellow
-    'https://nomades.ch/wp-content/uploads/2018/10/nomade03-.png' // bleu
+    'https://nomades.ch/wp-content/uploads/2018/10/nomades03_vert_01.gif', // vert
+    'https://nomades.ch/wp-content/uploads/2018/11/nomades04_jaune1.gif', // default => TODO: replace by yellow
+    'https://nomades.ch/wp-content/uploads/2018/10/nomades02_bleu3.gif' // bleu
   ];
   public currentSubCat: any;
 

@@ -19,7 +19,7 @@ declare const grecaptcha: any;
 export class InscriptionComponent implements OnInit {
 
   currentUrl: any;
-  baseUrl = 'https://nomades.ch/wp-content/uploads/2018/10/nomade02-.png';
+  baseUrl = 'https://nomades.ch/wp-content/uploads/2018/10/nomades01_rouge2.gif';
   form: FormGroup;
   wksList: any[];
   formationsList: any[];

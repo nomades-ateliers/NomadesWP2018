@@ -37,6 +37,14 @@ function add_thumbnail_to_JSON() {
   );
   // project post type
     register_rest_field('projet',
+    'featured_image_src_default', //NAME OF THE NEW FIELD TO BE ADDED - you can call this anything
+    array(
+        'get_callback'    => 'get_image_src_default',
+        'update_callback' => null,
+        'schema'          => null,
+    )
+    );
+    register_rest_field('projet',
     'featured_image_src_large', //NAME OF THE NEW FIELD TO BE ADDED - you can call this anything
     array(
         'get_callback'    => 'get_image_src_large',
@@ -71,5 +79,9 @@ function get_image_src_medium( $object, $field_name, $request ) {
 }
 function get_image_src_large( $object, $field_name, $request ) {
 	$feat_img_array = wp_get_attachment_image_src($object['featured_media'], 'large', true);
+	return $feat_img_array[0];
+}
+function get_image_src_default( $object, $field_name, $request ) {
+	$feat_img_array = wp_get_attachment_image_src($object['featured_media'], 'full');
 	return $feat_img_array[0];
 }

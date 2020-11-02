@@ -16,7 +16,7 @@ export class WorkshopIndexComponent implements OnInit {
 
   public data$: Observable<any>;
   public currentUrl: any;
-  baseUrl = 'https://nomades.ch/wp-content/uploads/2018/10/nomade02-.png';
+  baseUrl = 'https://nomades.ch/wp-content/uploads/2018/10/nomades01_rouge2.gif';
 
   constructor(
     private _router: Router,
